@@ -3,16 +3,16 @@ package main.java.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.control.TextField;
 
 
 
 
 
 
-public class LoginPageController extends Controller {
+public class RegistrationPageController extends Controller {
 
     @FXML private TextField textFieldOf_username;
     
@@ -27,7 +27,7 @@ public class LoginPageController extends Controller {
 
 
 
-    // usato da pulsante "Show/Hide Password" (occhio/occhio sbarrato)
+    // usato da pulsante "Show/Hide Password" (occhio/occhio sbarrato) : NON DI PASSWORD DI CONFERMA
     @FXML private void showOrHide_password () {
         //! metodo che mostra o nasconde la password a seconda dello stato attuale della password (mostrata o non mostrata)        
         if (!isPasswordShown) {
@@ -46,29 +46,30 @@ public class LoginPageController extends Controller {
     
     }
 
-    // usato da passwordField ad ogni variazione di testo
+    // usato da passwordField ad ogni variazione di testo : NON DI PASSWORD DI CONFERMA
     @FXML private void update_labelOf_passwordShower () {
         //! metodo che aggiorna il testo della label che mostra la password
         labelOf_passwordShower.setText(passwordField.getText());
     }
 
 
-
+    
     // usato da pulsante "X" e pulsante "Cancel"
     @FXML private void close_window () {
         //! metodo che chiude il programma
         System.exit(0);
     }
 
-    // usato da pulsante "Register"
-    @FXML private void show_registrationPage () {
-        //! metodo che mostra la pagina di registrazione
-        main.show_registrationPage();
+    // usato da pulsante "Go Back to Login"
+    @FXML private void show_loginPage () {
+        //! metodo che visualizza la pagina di login
+        main.show_loginPage();
     }
 
-    // todo usato da pulsante "Login"
-    @FXML private void login () {
-        //! metodo che effettua il login dell'utente
+
+    // todo usato da pulsante "Complete" (registration)
+    @FXML private void register () {
+        //! metodo che completa la registrazione
     }
 
 }

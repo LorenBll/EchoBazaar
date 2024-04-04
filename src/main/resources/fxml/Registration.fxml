@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/loginPage.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.LoginPageController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/loginPage.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.RegistrationPageController">
    <left>
       <AnchorPane prefHeight="610.0" prefWidth="411.0" style="-fx-background-color: #6b3640;" BorderPane.alignment="CENTER">
          <children>
@@ -41,7 +41,7 @@
                   <Font name="Arial" size="20.0" />
                </font>
             </PasswordField>
-            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="513.0" mnemonicParsing="false" onAction="#show_loginPage" prefHeight="39.0" prefWidth="457.0" styleClass="buttons" text="Back to Login" textAlignment="CENTER">
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="513.0" mnemonicParsing="false" onAction="#show_loginPage" prefHeight="39.0" prefWidth="457.0" styleClass="buttons" text="Not New? Go Back to Login" textAlignment="CENTER">
                <font>
                   <Font name="Arial Bold" size="20.0" />
                </font>
@@ -66,7 +66,7 @@
                   <Font name="Arial" size="20.0" />
                </font>
             </TextField>
-            <Label alignment="CENTER" layoutX="101.0" layoutY="113.0" prefHeight="46.0" prefWidth="314.0" text="EchoBazaar Register">
+            <Label alignment="CENTER" layoutX="58.0" layoutY="112.0" prefHeight="46.0" prefWidth="395.0" text="EchoBazaar Registration">
                <font>
                   <Font name="Arial Bold" size="30.0" />
                </font>
@@ -83,7 +83,6 @@
                   <Image url="@../images/iconOf_password.png" />
                </image>
             </ImageView>
-            <Label fx:id="labelOf_passwordShower" focusTraversable="false" layoutX="222.0" layoutY="337.0" prefHeight="17.0" prefWidth="208.0" visible="false" />
             <Button fx:id="uselessID_1" layoutX="431.0" layoutY="304.0" mnemonicParsing="false" onAction="#showOrHide_password" prefHeight="37.0" prefWidth="36.0" styleClass="buttonWithImage">
                <graphic>
                   <ImageView fx:id="imageOf_showOrHide_password" fitHeight="31.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
@@ -95,18 +94,19 @@
             </Button>
             <Button fx:id="uselessID_11" layoutX="471.0" layoutY="3.0" mnemonicParsing="false" onAction="#close_window" prefHeight="37.0" prefWidth="36.0" styleClass="buttonWithImage">
                <graphic>
-                  <ImageView fitHeight="28.0" fitWidth="117.0" onMouseClicked="#close_window" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="28.0" fitWidth="117.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/iconOf_closeWindow.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="467.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="457.0" styleClass="buttons" text="Complete Reigstration" textAlignment="CENTER">
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="467.0" mnemonicParsing="false" onAction="#register" prefHeight="39.0" prefWidth="457.0" styleClass="buttons" text="Confirm &amp; Complete" textAlignment="CENTER">
                <font>
                   <Font name="Arial Bold" size="20.0" />
                </font>
             </Button>
+            <Label fx:id="labelOf_passwordShower" layoutX="223.0" layoutY="341.0" prefHeight="17.0" prefWidth="209.0" visible="false" />
          </children>
       </AnchorPane>
    </right>

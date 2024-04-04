@@ -1,28 +1,27 @@
 package main.java;
 
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.net.URL;
 import javafx.scene.input.KeyCode;
 import javafx.scene.Node;
-import javafx.event.EventHandler;
 
 import main.java.controllers.*;
 
+
+
+
+
+
 public class Main extends Application {
     
-    private Stage primaryStage;
-    private BorderPane mainLayout;
+    private Stage primaryStage;     // finestra principale
+    private BorderPane mainLayout;  // layout principale (cosa viene visualizzato nella finestra principale)
 
 
 
@@ -30,6 +29,7 @@ public class Main extends Application {
 
 
     public void start ( Stage primaryStage ) {
+        //! metodo che viene chiamato all'avvio dell'applicazione : vengono inizializzate le impostazioni della finestra principale e viene visualizzata la pagina di login
 
         this.primaryStage = primaryStage;
         
@@ -40,29 +40,19 @@ public class Main extends Application {
         this.primaryStage.getIcons().add(new Image("/main/resources/images/iconOf_echoBazaar.png")); // icona della finestra (mostrata nella barra delle applicazioni)
         
         show_loginPage();
-        
-        //. key listener per annullare il focus quando si preme il tasto ESC
-        mainLayout.setOnKeyPressed(event -> {
-            
-            if (event.getCode() == KeyCode.ESCAPE) {
-                Node focusedNode = mainLayout.getScene().getFocusOwner();
-                if (focusedNode != mainLayout)
-                    focusedNode.getParent().requestFocus(); // annulla il focus
-            }
-        
-        });
     
     }
 
     public void show_loginPage () {
+        //! metodo che visualizza la pagina di login
         try {
-
-            cancel_defaultFocus();
-
+            
+            start_defaultFocusCancelerListener(); // annulla il focus di default riassegnandolo alla finestra principale
+            
             // caricamento del file fxml del login
             URL locationOf_fxml = getClass().getResource("/main/resources/fxml/Login.fxml");
             FXMLLoader loader = new FXMLLoader(locationOf_fxml);
-            this.mainLayout = loader.load();
+            this.mainLayout = loader.load(); // caricamento del layout del login da visualizzare nella finestra principale
 
             // visualizzazione della scena contenente il layout del login
             Scene scene = new Scene(mainLayout);
@@ -73,7 +63,39 @@ public class Main extends Application {
             controller.set_main(this);
 
             primaryStage.show();
-    
+
+
+            
+            set_keybinds(); // setta i vari keybinds
+
+        } catch (Exception e) { e.printStackTrace(); }
+    }
+
+    public void show_registrationPage () {
+        //! metodo che visualizza la pagina di registrazione
+        try {
+
+            start_defaultFocusCancelerListener(); // annulla il focus di default riassegnandolo alla finestra principale
+            
+            // caricamento del file fxml della registrazione
+            URL locationOf_fxml = getClass().getResource("/main/resources/fxml/Registration.fxml");
+            FXMLLoader loader = new FXMLLoader(locationOf_fxml);
+            this.mainLayout = loader.load(); // caricamento del layout della registrazione da visualizzare nella finestra principale
+
+            // visualizzazione della scena contenente il layout della registrazione
+            Scene scene = new Scene(mainLayout);
+            primaryStage.setScene(scene);
+
+            // settaggio del controller della pagina di registrazione
+            RegistrationPageController controller = loader.getController();
+            controller.set_main(this);
+
+            primaryStage.show();
+
+
+
+            set_keybinds(); // setta i vari keybinds
+
         } catch (Exception e) { e.printStackTrace(); }
     }
 
@@ -82,6 +104,7 @@ public class Main extends Application {
 
 
 
+    // === METODI DI UTILITÀ AKA DA NON MODIFICARE ===
     public Stage get_primaryStage () {
         return this.primaryStage;
     }
@@ -90,25 +113,29 @@ public class Main extends Application {
         return this.mainLayout;
     }
     
-    public void cancel_defaultFocus () {
-        primaryStage.setOnShown(e -> primaryStage.getScene().getRoot().requestFocus()); // focus sulla finestra principale per annullare il focus di default
+    public void start_defaultFocusCancelerListener () {
+        //! metodo che annulla il focus di default riassegnandolo alla finestra principale
+        primaryStage.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene != null) {
+                newScene.getRoot().requestFocus();
+            }
+        });
     }
 
-        class WindowButtons extends HBox {
+    public void set_keybinds () {
+        //! metodo che setta i vari keybinds
 
-        public WindowButtons() {
-            Button closeBtn = new Button("X");
-
-            closeBtn.setOnAction(new EventHandler<ActionEvent>() {
-
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    Platform.exit();
-                }
-            });
-
-            this.getChildren().add(closeBtn);
-        }
+        //. key listener
+        mainLayout.setOnKeyPressed(event -> {
+        
+            // per annullare il focus quando si preme il tasto ESC
+            if (event.getCode() == KeyCode.ESCAPE) {
+                Node focusedNode = mainLayout.getScene().getFocusOwner();
+                if (focusedNode != mainLayout)
+                    focusedNode.getParent().requestFocus(); // annulla il focus
+            }
+        
+        });
     }
 
     public static void main ( String[] args ) { launch(args); }

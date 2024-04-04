@@ -41,7 +41,7 @@
                   <Font name="Arial" size="20.0" />
                </font>
             </PasswordField>
-            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="513.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="457.0" styleClass="buttons" text="Register" textAlignment="CENTER">
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="513.0" mnemonicParsing="false" onAction="#show_registrationPage" prefHeight="39.0" prefWidth="457.0" styleClass="buttons" text="New? Register Now" textAlignment="CENTER">
                <font>
                   <Font name="Arial Bold" size="20.0" />
                </font>
@@ -95,14 +95,14 @@
             </Button>
             <Button fx:id="uselessID_11" layoutX="471.0" layoutY="3.0" mnemonicParsing="false" onAction="#close_window" prefHeight="37.0" prefWidth="36.0" styleClass="buttonWithImage">
                <graphic>
-                  <ImageView fitHeight="28.0" fitWidth="117.0" onMouseClicked="#close_window" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="28.0" fitWidth="117.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/iconOf_closeWindow.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="467.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="457.0" styleClass="buttons" text="Login" textAlignment="CENTER">
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="467.0" mnemonicParsing="false" onAction="#login" prefHeight="39.0" prefWidth="457.0" styleClass="buttons" text="Login" textAlignment="CENTER">
                <font>
                   <Font name="Arial Bold" size="20.0" />
                </font>
