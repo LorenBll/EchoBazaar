@@ -1,0 +1,21 @@
+.textfields {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-padding: 0 0 0 0;
+}
+
+.buttons {
+    -fx-background-color: #6b3640;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-padding: 0 0 0 0;
+
+    -fx-background-radius: 20;
+
+    -fx-text-fill: #e7d388;
+}
+
+.inputlines {
+    -fx-stroke: #6b3640;
+}
