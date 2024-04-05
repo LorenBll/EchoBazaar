@@ -6,6 +6,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.RadioButton;
 
 
 
@@ -21,6 +22,9 @@ public class RegistrationPageController extends Controller {
     @FXML private PasswordField passwordField;
     @FXML private Label labelOf_passwordShower;
     @FXML private ImageView imageOf_showOrHide_password; // immagine che verrà mostrata all'interno del pulsante
+
+    @FXML private RadioButton radioButtonOf_accountTypeSelection_customer;
+    @FXML private RadioButton radioButtonOf_accoutnTypeSelection_vendor;
 
 
 

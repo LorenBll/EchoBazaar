@@ -26,3 +26,10 @@
     -fx-border-width: 0;
     -fx-padding: 0 0 0 0;
 }
+
+/* radio-button .radio is the circle */
+.radio-button .radio {
+    -fx-border-color: transparent;
+    -fx-background-color: #6b3640;
+    -fx-mark-color: #e7d388;
+}

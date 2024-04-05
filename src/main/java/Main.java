@@ -10,7 +10,6 @@ import javafx.stage.StageStyle;
 import java.net.URL;
 import javafx.scene.input.KeyCode;
 import javafx.scene.Node;
-
 import main.java.controllers.*;
 
 
@@ -28,15 +27,16 @@ public class Main extends Application {
 
 
 
+    // usato di default all'inizio del programma
     public void start ( Stage primaryStage ) {
-        //! metodo che viene chiamato all'avvio dell'applicazione : vengono inizializzate le impostazioni della finestra principale e viene visualizzata la pagina di login
+        //! metodo che inizializza la finestra principale, ne setta le impostazioni e visualizza la pagina di login
 
         this.primaryStage = primaryStage;
         
         //. settaggio impostazioni della finestra principale
         this.primaryStage.setTitle("EchoBazaar");
         this.primaryStage.setResizable(false);
-        this.primaryStage.initStyle(StageStyle.UNDECORATED); // rimuove i bordi della finestra (barra del titolo, pulsanti di chiusura, ecc.)
+        this.primaryStage.initStyle(StageStyle.UNDECORATED); // rimuove i bordi della finestra (barra del titolo, pulsanti di chiusura, ecc.) >>> non si può spostare la finestra
         this.primaryStage.getIcons().add(new Image("/main/resources/images/iconOf_echoBazaar.png")); // icona della finestra (mostrata nella barra delle applicazioni)
         
         show_loginPage();
@@ -48,7 +48,7 @@ public class Main extends Application {
         try {
             
             start_defaultFocusCancelerListener(); // annulla il focus di default riassegnandolo alla finestra principale
-            
+
             // caricamento del file fxml del login
             URL locationOf_fxml = getClass().getResource("/main/resources/fxml/Login.fxml");
             FXMLLoader loader = new FXMLLoader(locationOf_fxml);
@@ -76,7 +76,7 @@ public class Main extends Application {
         try {
 
             start_defaultFocusCancelerListener(); // annulla il focus di default riassegnandolo alla finestra principale
-            
+
             // caricamento del file fxml della registrazione
             URL locationOf_fxml = getClass().getResource("/main/resources/fxml/Registration.fxml");
             FXMLLoader loader = new FXMLLoader(locationOf_fxml);
