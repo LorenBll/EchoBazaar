@@ -19,7 +19,7 @@ import main.java.controllers.*;
 
 public class Main extends Application {
     
-    private Stage primaryStage;     // finestra principale
+    private Stage primaryStage;   // finestra principale
     private BorderPane mainLayout;  // layout principale (cosa viene visualizzato nella finestra principale)
 
 

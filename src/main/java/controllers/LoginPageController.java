@@ -6,6 +6,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import main.java.auth.CryptingEngine;
 
 
 
@@ -32,6 +33,7 @@ public class LoginPageController extends Controller {
         //! metodo che mostra o nasconde la password a seconda dello stato attuale della password (mostrata o non mostrata)        
         if (!isPasswordShown) {
             labelOf_passwordShower.setVisible(true);
+            passwordField.setVisible(false);
             isPasswordShown = true;
 
             imageOf_showOrHide_password.setImage(new Image("/main/resources/images/iconOf_hidePassword.png")); // cambia l'icona del pulsante in "nascondi password"
@@ -40,7 +42,13 @@ public class LoginPageController extends Controller {
         }
         
         labelOf_passwordShower.setVisible(false);
+        passwordField.setVisible(true);
         isPasswordShown = false;
+
+        // il passwordField richiede il focous senza però selezionare il testo e sposta il cursore alla fine del testo
+        passwordField.requestFocus();
+        passwordField.deselect();
+        passwordField.end();
         
         imageOf_showOrHide_password.setImage(new Image("/main/resources/images/iconOf_showPassword.png")); // cambia l'icona del pulsante in "mostra password"
     
@@ -69,6 +77,20 @@ public class LoginPageController extends Controller {
     // todo usato da pulsante "Login"
     @FXML private void login () {
         //! metodo che effettua il login dell'utente
+
+        //. recupero delle credenziali inserite dall'utente
+        String username = textFieldOf_username.getText();
+        String password = passwordField.getText();
+
+        //todo controllo delle credenziali --> recupera lo username dal file di testo e confronta la password inserita con quella salvata
+        String insertedPassword = CryptingEngine.encrypt_string(password);
+    
+    }
+
+    // todo usato da pulsante "Forgot Password?"
+    @FXML private void show_forgotPasswordPage () {
+        //! metodo che mostra la pagina di recupero password
+        
     }
 
 }

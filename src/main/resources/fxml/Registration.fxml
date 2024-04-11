@@ -38,54 +38,54 @@
    <right>
       <AnchorPane prefHeight="610.0" prefWidth="511.0" BorderPane.alignment="CENTER">
          <children>
-            <PasswordField fx:id="passwordField" layoutX="223.0" layoutY="297.0" onKeyTyped="#update_labelOf_passwordShower" prefHeight="29.0" prefWidth="206.0" promptText="Passoword" styleClass="textfields">
+            <PasswordField fx:id="passwordField" layoutX="210.0" layoutY="297.0" onKeyTyped="#update_labelOf_passwordShower" prefHeight="29.0" prefWidth="206.0" promptText="Password" styleClass="textfields" AnchorPane.leftAnchor="210.0" AnchorPane.topAnchor="297.0">
                <font>
                   <Font name="Arial" size="20.0" />
                </font>
             </PasswordField>
-            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="513.0" mnemonicParsing="false" onAction="#show_loginPage" prefHeight="39.0" prefWidth="457.0" styleClass="buttons" text="Not New? Go Back to Login" textAlignment="CENTER">
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="513.0" mnemonicParsing="false" onAction="#show_loginPage" prefHeight="39.0" prefWidth="457.0" styleClass="buttons" text="Not New? Go Back to Login" textAlignment="CENTER" AnchorPane.rightAnchor="26.0">
                <font>
                   <Font name="Arial Bold" size="20.0" />
                </font>
             </Button>
-            <Button layoutX="29.0" layoutY="559.0" mnemonicParsing="false" onAction="#close_window" prefHeight="37.0" prefWidth="456.0" styleClass="buttons" text="Cancel" textAlignment="CENTER">
+            <Button layoutX="28.0" layoutY="563.0" mnemonicParsing="false" onAction="#close_window" prefHeight="37.0" prefWidth="456.0" styleClass="buttons" text="Cancel" textAlignment="CENTER" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="26.0">
                <font>
                   <Font name="Arial Bold" size="20.0" />
                </font>
             </Button>
-            <Label layoutX="100.0" layoutY="299.0" prefHeight="26.0" prefWidth="97.0" text="Password">
+            <Label layoutX="103.0" layoutY="299.0" prefHeight="26.0" prefWidth="97.0" text="Password" AnchorPane.leftAnchor="103.0" AnchorPane.topAnchor="299.0">
                <font>
                   <Font name="Arial Bold" size="20.0" />
                </font>
             </Label>
-            <Label layoutX="100.0" layoutY="237.0" prefHeight="24.0" prefWidth="98.0" text="Username">
+            <Label layoutX="102.0" layoutY="240.0" prefHeight="24.0" prefWidth="98.0" text="Username" AnchorPane.leftAnchor="102.0" AnchorPane.topAnchor="240.0">
                <font>
                   <Font name="Arial Bold" size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="textFieldOf_username" layoutX="223.0" layoutY="235.0" prefHeight="28.0" prefWidth="241.0" promptText="Username" styleClass="textfields">
+            <TextField fx:id="textFieldOf_username" layoutX="209.0" layoutY="238.0" prefHeight="28.0" prefWidth="241.0" promptText="Username" styleClass="textfields" AnchorPane.leftAnchor="209.0" AnchorPane.topAnchor="238.0">
                <font>
                   <Font name="Arial" size="20.0" />
                </font>
             </TextField>
-            <Label alignment="CENTER" layoutX="58.0" layoutY="112.0" prefHeight="46.0" prefWidth="395.0" text="EchoBazaar Registration">
+            <Label alignment="CENTER" layoutX="58.0" layoutY="112.0" prefHeight="46.0" prefWidth="395.0" text="EchoBazaar Registration" AnchorPane.leftAnchor="58.0" AnchorPane.topAnchor="112.0">
                <font>
                   <Font name="Arial Bold" size="30.0" />
                </font>
             </Label>
-            <Line endX="139.0" fill="RED" layoutX="325.0" layoutY="265.0" startX="-100.0" strokeWidth="3.0" styleClass="inputlines" />
-            <Line endX="104.0" fill="RED" layoutX="325.0" layoutY="325.0" startX="-100.0" strokeWidth="3.0" styleClass="inputlines" />
-            <ImageView fitHeight="31.0" fitWidth="28.0" layoutX="47.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true">
+            <Line endX="139.0" fill="RED" layoutX="276.0" layoutY="262596.0" startX="-100.0" strokeWidth="3.0" styleClass="inputlines" AnchorPane.bottomAnchor="342.0" AnchorPane.leftAnchor="210.5" AnchorPane.rightAnchor="58.0" AnchorPane.topAnchor="264.5" />
+            <Line endX="104.0" fill="RED" layoutX="277.0" layoutY="321.0" startX="-100.0" strokeWidth="3.0" styleClass="inputlines" AnchorPane.leftAnchor="209.5" AnchorPane.topAnchor="323.5" />
+            <ImageView fitHeight="31.0" fitWidth="28.0" layoutX="62.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="62.0" AnchorPane.topAnchor="237.0">
                <image>
                   <Image url="@../images/iconOf_user.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="31.0" fitWidth="28.0" layoutX="48.0" layoutY="296.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="31.0" fitWidth="28.0" layoutX="62.0" layoutY="298.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="62.0" AnchorPane.topAnchor="298.0">
                <image>
                   <Image url="@../images/iconOf_password.png" />
                </image>
             </ImageView>
-            <Button fx:id="uselessID_1" layoutX="431.0" layoutY="294.0" mnemonicParsing="false" onAction="#showOrHide_password" prefHeight="37.0" prefWidth="36.0" styleClass="buttonWithImage">
+            <Button fx:id="uselessID_1" layoutX="417.0" layoutY="293.0" mnemonicParsing="false" onAction="#showOrHide_password" prefHeight="37.0" prefWidth="36.0" styleClass="buttonWithImage" AnchorPane.leftAnchor="417.0" AnchorPane.topAnchor="293.0">
                <graphic>
                   <ImageView fx:id="imageOf_showOrHide_password" fitHeight="31.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -103,13 +103,16 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="467.0" mnemonicParsing="false" onAction="#register" prefHeight="39.0" prefWidth="457.0" styleClass="buttons" text="Confirm &amp; Complete" textAlignment="CENTER">
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="467.0" mnemonicParsing="false" onAction="#register" prefHeight="39.0" prefWidth="457.0" styleClass="buttons" text="Confirm &amp; Complete" textAlignment="CENTER" AnchorPane.rightAnchor="26.0">
                <font>
                   <Font name="Arial Bold" size="20.0" />
                </font>
             </Button>
-            <Label fx:id="labelOf_passwordShower" layoutX="223.0" layoutY="341.0" prefHeight="17.0" prefWidth="209.0" visible="false" />
-            <RadioButton fx:id="radioButtonOf_accountTypeSelection_customer" layoutX="223.0" layoutY="353.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="106.0" selected="true" styleClass="radioButtons" text="Customer">
+            <Label fx:id="labelOf_passwordShower" layoutX="209.0" layoutY="301.0" onMouseClicked="#showOrHide_password" prefHeight="17.0" prefWidth="209.0" visible="false" AnchorPane.leftAnchor="209.0" AnchorPane.topAnchor="301.0">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font></Label>
+            <RadioButton fx:id="radioButtonOf_accountTypeSelection_customer" layoutX="199.0" layoutY="350.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="106.0" selected="true" styleClass="radioButtons" text="Customer" AnchorPane.topAnchor="350.0">
                <font>
                   <Font name="Arial Bold" size="15.0" />
                </font>
@@ -117,12 +120,12 @@
                   <ToggleGroup fx:id="selectionOf_accountType" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="radioButtonOf_accoutnTypeSelection_vendor" layoutX="360.0" layoutY="353.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="106.0" styleClass="radioButtons" text="Vendor" toggleGroup="$selectionOf_accountType">
+            <RadioButton fx:id="radioButtonOf_accoutnTypeSelection_vendor" layoutX="336.0" layoutY="350.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="106.0" styleClass="radioButtons" text="Vendor" toggleGroup="$selectionOf_accountType" AnchorPane.topAnchor="350.0">
                <font>
                   <Font name="Arial Bold" size="15.0" />
                </font>
             </RadioButton>
-            <Label layoutX="100.0" layoutY="350.0" prefHeight="26.0" prefWidth="62.0" text="Type">
+            <Label layoutX="103.0" layoutY="347.0" prefHeight="26.0" prefWidth="62.0" text="Type" AnchorPane.topAnchor="347.0">
                <font>
                   <Font name="Arial Bold" size="20.0" />
                </font>
