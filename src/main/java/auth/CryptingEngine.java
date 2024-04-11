@@ -6,7 +6,7 @@ import java.security.MessageDigest;
 
 public class CryptingEngine {
     
-    public static String crypt_string ( String password ) {
+    public static String encrypt_string ( String password ) {
         //! metodo che cripta la password fornita in input
         
         try {
@@ -38,7 +38,7 @@ public class CryptingEngine {
     public static boolean compare ( String password , String hashedPassword ) {
         //! metodo che confronta la password in input con la password criptata in input
         
-        boolean isPasswordCorrect = crypt_string(password).equals(hashedPassword);
+        boolean isPasswordCorrect = encrypt_string(password).equals(hashedPassword);
         return isPasswordCorrect;
     
     }
