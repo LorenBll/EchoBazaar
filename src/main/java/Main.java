@@ -11,6 +11,7 @@ import java.net.URL;
 import javafx.scene.input.KeyCode;
 import javafx.scene.Node;
 import main.java.controllers.*;
+import main.java.model.DataHandler;
 
 
 
@@ -22,6 +23,7 @@ public class Main extends Application {
     private Stage primaryStage;   // finestra principale
     private BorderPane mainLayout;  // layout principale (cosa viene visualizzato nella finestra principale)
 
+    public DataHandler dataHandler; // gestore dei dati (salvataggio, caricamento, ecc.)
 
 
 
@@ -30,6 +32,9 @@ public class Main extends Application {
     // usato di default all'inizio del programma
     public void start ( Stage primaryStage ) {
         //! metodo che inizializza la finestra principale, ne setta le impostazioni e visualizza la pagina di login
+
+        DataHandler dataHandler = new DataHandler(); // inizializzazione del data manager
+        this.dataHandler = dataHandler;
 
         this.primaryStage = primaryStage;
         
@@ -42,6 +47,8 @@ public class Main extends Application {
         show_loginPage();
     
     }
+
+
 
     public void show_loginPage () {
         //! metodo che visualizza la pagina di login
@@ -99,6 +106,34 @@ public class Main extends Application {
         } catch (Exception e) { e.printStackTrace(); }
     }
 
+    public void show_passwordResetPage () {
+        //! metodo che visualizza la pagina di recupero password
+        try {
+            
+            start_defaultFocusCancelerListener(); // annulla il focus di default riassegnandolo alla finestra principale
+
+            // caricamento del file fxml del recupero password
+            URL locationOf_fxml = getClass().getResource("/main/resources/fxml/PasswordReset.fxml");
+            FXMLLoader loader = new FXMLLoader(locationOf_fxml);
+            this.mainLayout = loader.load(); // caricamento del layout del recupero password da visualizzare nella finestra principale
+
+            // visualizzazione della scena contenente il layout del recupero password
+            Scene scene = new Scene(mainLayout);
+            primaryStage.setScene(scene);
+
+            // settaggio del controller della pagina di recupero password
+            PasswordResetPageController controller = loader.getController();
+            controller.set_main(this);
+
+            primaryStage.show();
+
+
+
+            set_keybinds(); // setta i vari keybinds
+
+        } catch (Exception e) { e.printStackTrace(); }
+    }
+    
 
 
 
@@ -125,18 +160,18 @@ public class Main extends Application {
     public void set_keybinds () {
         //! metodo che setta i vari keybinds
 
-        //. key listener
+        // se premo ESC annulla il focus
         mainLayout.setOnKeyPressed(event -> {
-        
-            // per annullare il focus quando si preme il tasto ESC
             if (event.getCode() == KeyCode.ESCAPE) {
                 Node focusedNode = mainLayout.getScene().getFocusOwner();
                 if (focusedNode != mainLayout)
-                    focusedNode.getParent().requestFocus(); // annulla il focus
+                    focusedNode.getParent().requestFocus();
             }
-        
         });
+
     }
+
+
 
     public static void main ( String[] args ) { launch(args); }
     

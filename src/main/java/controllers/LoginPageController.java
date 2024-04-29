@@ -6,7 +6,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import main.java.auth.CryptingEngine;
+import javafx.application.Platform;
 
 
 
@@ -16,17 +16,37 @@ import main.java.auth.CryptingEngine;
 public class LoginPageController extends Controller {
 
     @FXML private TextField textFieldOf_username;
+    @FXML private Label labelOf_error; // label che mostra un messaggio di errore
     
     //. attributi relativi all'input della password
     public boolean isPasswordShown = false;
     @FXML private PasswordField passwordField;
     @FXML private Label labelOf_passwordShower;
     @FXML private ImageView imageOf_showOrHide_password; // immagine che verrà mostrata all'interno del pulsante
+    @FXML private Label labelOf_wrongPassword; // label che mostra un messaggio di errore se la password è sbagliata
 
 
 
 
 
+
+    @Override @FXML public void initialize () {
+
+        // se premo invio mentre sono nel campo di testo dello username, passo al campo di testo della password
+        textFieldOf_username.setOnKeyPressed(e -> {
+            if (e.getCode().toString().equals("ENTER")) {
+                passwordField.requestFocus();
+            }
+        });
+
+        // se premo invio mentre sono nel campo di testo della password, effettuo il login
+        passwordField.setOnKeyPressed(e -> {
+            if (e.getCode().toString().equals("ENTER")) {
+                login();
+            }
+        });
+
+    }
 
     // usato da pulsante "Show/Hide Password" (occhio/occhio sbarrato)
     @FXML private void showOrHide_password () {
@@ -74,23 +94,73 @@ public class LoginPageController extends Controller {
         main.show_registrationPage();
     }
 
-    // todo usato da pulsante "Login"
+    // usato da pulsante "Login"
     @FXML private void login () {
         //! metodo che effettua il login dell'utente
 
-        //. recupero delle credenziali inserite dall'utente
-        String username = textFieldOf_username.getText();
-        String password = passwordField.getText();
+        //. controllo che l'username non sia vuoto
+        if (textFieldOf_username.getText().equals("")) {
+            show_error("Username cannot be empty.");
+            return;
+        }
 
-        //todo controllo delle credenziali --> recupera lo username dal file di testo e confronta la password inserita con quella salvata
-        String insertedPassword = CryptingEngine.encrypt_string(password);
+        //. controllo che la password non sia vuota
+        if (passwordField.getText().equals("")) {
+            show_error("Password cannot be empty.");
+            return;
+        }
+
+        String inputtedUsername = textFieldOf_username.getText();
+        String inputtedPassword = passwordField.getText();
+
+        //. effettuo il login
+        boolean loginResult = main.dataHandler.login(inputtedUsername, inputtedPassword);
+        if (loginResult) {
+            // se il login è andato a buon fine, mostro la pagina principale
+            // todo main.show_mainPage();
+            System.out.println("Login successful."); // tocheck
+            return;
+        }
+
+        // se il login non è andato a buon fine, mostro un messaggio di errore
+        show_error("Wrong username or password.");
+        
     
     }
 
-    // todo usato da pulsante "Forgot Password?"
-    @FXML private void show_forgotPasswordPage () {
+    // usato da pulsante "Forgot Password?"
+    @FXML private void show_passwordRecoveryPage () {
         //! metodo che mostra la pagina di recupero password
+
+        // mostro un informazione che dice che la funzionalità non è ancora stata implementata
+        main.show_passwordResetPage();
+
+    }
         
+
+
+
+
+
+    // === METODI DI UTILITÀ AKA DA NON MODIFICARE ===
+    private void show_error ( String error ) {
+        //! metodo che mostra un messaggio di errore
+        
+        Platform.runLater(() -> {
+            labelOf_error.setText(error);
+
+            // faccio partire un timer che aspetta 3 secondi
+            new java.util.Timer().schedule(
+                    new java.util.TimerTask() {
+                        @Override
+                        public void run() {
+                            Platform.runLater(() -> labelOf_error.setText(""));
+                        }
+                    },
+                    3000
+            );
+        });
+
     }
 
 }

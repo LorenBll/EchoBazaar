@@ -6,14 +6,14 @@ import java.security.MessageDigest;
 
 public class CryptingEngine {
     
-    public static String encrypt_string ( String password ) {
-        //! metodo che cripta la password fornita in input
+    public static String encrypt_string ( String string ) {
+        //! metodo che cripta la string fornita in input
         
         try {
             
             //. digestione (aka hashing) della password in input
-            MessageDigest messageDigester = MessageDigest.getInstance("SHA-256"); // crea un oggetto MessageDigest che implementa l'algoritmo di hashing SHA-256
-            messageDigester.update(password.getBytes()); // aggiorna il messaggio digester con la password in input
+            MessageDigest messageDigester = MessageDigest.getInstance("SHA-1"); // crea un oggetto MessageDigest che implementa l'algoritmo di hashing SHA-256
+            messageDigester.update(string.getBytes()); // aggiorna il messaggio digester con la password in input
             byte[] binaryArrayOf_cryptedPassword = messageDigester.digest(); // array di byte che rappresenta la password criptata
             
             //. conversione dell'array di byte contenente la stringa criptata in una stringa vera e propria

@@ -18,7 +18,7 @@ public abstract class Controller {
 
     
     @FXML public void initialize () {
-        // questo è scritto in in questa classe astratta per evitare di doverlo scrivere
+        // questo metodo è scritto in questa classe astratta per evitare di doverlo scrivere
         // in ogni controller che estende questa classe che lo riconterrebbe vuoto. 
     }
 
