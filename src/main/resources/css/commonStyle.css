@@ -51,3 +51,11 @@
     -fx-border-color: #6b3640;
     -fx-border-width: 0 3 0 0;
 }
+
+/* classe per i tooltip */
+.tooltip {
+    -fx-background-color: #6b3640;
+    -fx-text-fill: #e7d388;
+    -fx-font-size: 15;
+    -fx-font-family: "Arial";
+}

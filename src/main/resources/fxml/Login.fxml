@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -95,6 +96,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <tooltip>
+                  <Tooltip contentDisplay="CENTER" graphicTextGap="3.0" text="Show/Hide Password" />
+               </tooltip>
             </Button>
             <Button fx:id="uselessID_11" layoutX="471.0" layoutY="3.0" mnemonicParsing="false" onAction="#close_window" prefHeight="37.0" prefWidth="36.0" styleClass="buttonWithImage">
                <graphic>

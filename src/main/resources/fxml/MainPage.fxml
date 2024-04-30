@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -115,8 +116,11 @@
                               </ImageView>
                            </graphic>
                            <FlowPane.margin>
-                              <Insets left="10.0" />
+                              <Insets left="5.0" />
                            </FlowPane.margin>
+                           <tooltip>
+                              <Tooltip text="User Settings" />
+                           </tooltip>
                         </Button>
                         <Button mnemonicParsing="false" prefWidth="39.0" styleClass="buttonWithImage">
                            <graphic>
@@ -127,8 +131,11 @@
                               </ImageView>
                            </graphic>
                            <FlowPane.margin>
-                              <Insets left="15.0" right="15.0" />
+                              <Insets left="20.0" right="20.0" />
                            </FlowPane.margin>
+                           <tooltip>
+                              <Tooltip text="Deposit Money" />
+                           </tooltip>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#logout" styleClass="buttonWithImage">
                            <graphic>
@@ -139,8 +146,11 @@
                               </ImageView>
                            </graphic>
                            <FlowPane.margin>
-                              <Insets right="10.0" />
+                              <Insets right="5.0" />
                            </FlowPane.margin>
+                           <tooltip>
+                              <Tooltip contentDisplay="CENTER" graphicTextGap="3.0" text="Logout" />
+                           </tooltip>
                         </Button>
                      </children>
                   </FlowPane>
@@ -177,6 +187,9 @@
                            <GridPane.margin>
                               <Insets left="7.5" right="7.5" />
                            </GridPane.margin>
+                           <tooltip>
+                              <Tooltip contentDisplay="CENTER" graphicTextGap="3.0" text="Your Username" />
+                           </tooltip>
                         </Label>
                         <Label fx:id="labelOf_balance" prefHeight="23.0" prefWidth="126.0" text="balance" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
@@ -185,6 +198,9 @@
                            <GridPane.margin>
                               <Insets left="7.5" right="7.5" />
                            </GridPane.margin>
+                           <tooltip>
+                              <Tooltip contentDisplay="CENTER" graphicTextGap="3.0" text="Your Balance on EchoBazaar" />
+                           </tooltip>
                         </Label>
                      </children>
                   </GridPane>
