@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.Scanner;
 import main.java.auth.CryptingEngine;
+import main.java.Main;
 
 
 
@@ -69,7 +70,7 @@ public class DataHandler {
 
 
 
-    public boolean login ( String username , String inputtedPassword ) {
+    public boolean login ( String username , String inputtedPassword , Main main ) {
         //! metodo che effettua il login dell'utente
 
         //. controllo se l'utente è un customer e faccio il login
@@ -83,6 +84,7 @@ public class DataHandler {
 
             // se ho trovato l'utente, controllo la password
             if ( currentCustomer.get_username().equals(username) && currentCustomer.get_encryptedPassword().equals(encryptedPassword) ) {
+                main.loggedInCustomer = currentCustomer; // setto l'utente loggato
                 return true;
             }
             
@@ -96,6 +98,7 @@ public class DataHandler {
         }
 
         // todo : . controllo se l'utente è un vendor e faccio il login
+        // todo : ricordarsi di settare il vendor loggato
 
         return false;
     

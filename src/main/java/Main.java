@@ -12,6 +12,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.Node;
 import main.java.controllers.*;
 import main.java.model.DataHandler;
+import main.java.model.users.Customer;
 
 
 
@@ -21,9 +22,12 @@ import main.java.model.DataHandler;
 public class Main extends Application {
     
     private Stage primaryStage;   // finestra principale
-    private BorderPane mainLayout;  // layout principale (cosa viene visualizzato nella finestra principale)
+    private BorderPane mainLayout;  // layout principale (cosa viene visualizzato nella finestra principale). tutte le pagine hanno come base questo layout
 
     public DataHandler dataHandler; // gestore dei dati (salvataggio, caricamento, ecc.)
+    public Customer loggedInCustomer = null; // cliente loggato (null se nessuno è loggato)
+    // todo public Vendor loggedInVendor = null; // venditore loggato (null se nessuno è loggato)
+
 
 
 
@@ -133,6 +137,41 @@ public class Main extends Application {
 
         } catch (Exception e) { e.printStackTrace(); }
     }
+
+
+
+
+
+
+    public void show_mainPage () {
+        //! metodo che visualizza la pagina principale
+        try {
+            
+            start_defaultFocusCancelerListener(); // annulla il focus di default riassegnandolo alla finestra principale
+
+            // caricamento del file fxml della pagina principale
+            URL locationOf_fxml = getClass().getResource("/main/resources/fxml/MainPage.fxml");
+            FXMLLoader loader = new FXMLLoader(locationOf_fxml);
+            this.mainLayout = loader.load(); // caricamento del layout della pagina principale da visualizzare nella finestra principale
+
+
+            // visualizzazione della scena contenente il layout della pagina principale
+            Scene scene = new Scene(mainLayout);
+            primaryStage.setScene(scene);
+
+            // settaggio del controller della pagina principale
+            MainPageController controller = loader.getController();
+            controller.set_main(this);
+            controller.setup();
+
+            primaryStage.show();
+
+
+
+            set_keybinds(); // setta i vari keybinds
+
+        } catch (Exception e) { e.printStackTrace(); }
+    }
     
 
 
@@ -146,6 +185,22 @@ public class Main extends Application {
     
     public BorderPane get_mainLayout () {
         return this.mainLayout;
+    }
+
+    public void minimize_window () {
+        //! metodo che minimizza la finestra
+        primaryStage.setIconified(true);
+    }
+
+    public void enter_fullscreen () {
+        //! metodo che massimizza la finestra
+        primaryStage.setFullScreenExitHint(""); // rimuove il messaggio di uscita dalla modalità fullscreen
+        primaryStage.setFullScreen(true);
+    }
+
+    public void exit_fullscreen () {
+        //! metodo che minimizza la finestra
+        primaryStage.setFullScreen(false);
     }
     
     public void start_defaultFocusCancelerListener () {

@@ -114,11 +114,10 @@ public class LoginPageController extends Controller {
         String inputtedPassword = passwordField.getText();
 
         //. effettuo il login
-        boolean loginResult = main.dataHandler.login(inputtedUsername, inputtedPassword);
+        boolean loginResult = main.dataHandler.login(inputtedUsername, inputtedPassword, main);
         if (loginResult) {
             // se il login è andato a buon fine, mostro la pagina principale
-            // todo main.show_mainPage();
-            System.out.println("Login successful."); // tocheck
+            main.show_mainPage();
             return;
         }
 
@@ -132,7 +131,6 @@ public class LoginPageController extends Controller {
     @FXML private void show_passwordRecoveryPage () {
         //! metodo che mostra la pagina di recupero password
 
-        // mostro un informazione che dice che la funzionalità non è ancora stata implementata
         main.show_passwordResetPage();
 
     }

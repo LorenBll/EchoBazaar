@@ -27,9 +27,27 @@
     -fx-padding: 0 0 0 0;
 }
 
-/* radio-button .radio is the circle */
+/* radio-button .radio è il cerchio che indica la selezione del radiobutton */
 .radio-button .radio {
     -fx-border-color: transparent;
     -fx-background-color: #6b3640;
     -fx-mark-color: #e7d388;
+}
+
+/* la barra di gestione della finestra (minimizza, massimizza, chiudi) deve avere il bordo inferiore di colore #6b3640 */
+.window-handling-bar {
+    -fx-border-color: #6b3640;
+    -fx-border-width: 0 0 3 0;
+}
+
+/* bordo in alto di colore #6b3640 */
+.user-infoAndOperations {
+    -fx-border-color: #6b3640;
+    -fx-border-width: 3 0 0 0;
+}
+
+/* bordo laterale destro di colore #6b3640 */
+.sidebar {
+    -fx-border-color: #6b3640;
+    -fx-border-width: 0 3 0 0;
 }
