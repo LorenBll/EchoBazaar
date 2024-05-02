@@ -97,8 +97,7 @@ public class DataHandler {
         
         }
 
-        // todo : . controllo se l'utente è un vendor e faccio il login
-        // todo : ricordarsi di settare il vendor loggato
+        // todo : . controllo se l'utente è un vendor e faccio il login : ricordarsi di settare il vendor loggato
 
         return false;
     
@@ -130,7 +129,7 @@ public class DataHandler {
 
 
     // === METODI PER GESTIRE I DATI DEI CUSTOMER ===
-    public boolean add_customer ( Customer customer ) {
+    public boolean register_customer ( Customer customer ) {
         //! metodo che aggiunge un customer alla lista e aggiorna il file
 
         //. controllo che non ci sia un customer con lo stesso username
@@ -160,7 +159,7 @@ public class DataHandler {
     
     }
 
-    public void remove_customer ( String username ) {
+    public void delete_customer ( String username ) {
         //! metodo che rimuove un customer dalla lista e aggiorna il file
         for ( Customer c : customers ) {
             if ( c.get_username().equals( username ) ) {
@@ -171,8 +170,40 @@ public class DataHandler {
         }
     }
 
+    public boolean update_customer ( String ID , String newUsername , String newPassword ) {
+    
+        //. controllo che non ci sia un customer con lo stesso username e ID diverso 
+        for ( Customer c : customers ) {
+            if ( c.get_username().equals( newUsername) && !c.get_ID().equals( ID ) ) {
+                return false;
+            }
+        }
+
+        // todo : . controllo che non ci sia un vendor con lo stesso username
+
+        //. cerco il customer da aggiornare e lo aggiorno
+        for ( Customer c : customers ) {
+            if ( c.get_ID().equals( ID ) ) {
+                
+                if ( !newUsername.equals("") ) 
+                    c.set_username(newUsername);
+                if ( !newPassword.equals("") )
+                    c.set_encryptedPassword( CryptingEngine.encrypt_string(newPassword) );
+
+                update_customerFile();
+                return true;
+            }
+        }
+
+        return false;
+
+    }
+
     public void update_customerFile () {
         //! metodo che aggiorna il file dei customer con i dati presenti nella lista
+
+        //. ordino i customer in ordine alfabetico per username
+        customers.sort((c1, c2) -> c1.get_username().compareTo(c2.get_username()));
 
         //. converto i customer in HashMap
         ArrayList<HashMap<String, String>> customersMap = new ArrayList<HashMap<String, String>>();
@@ -207,7 +238,7 @@ public class DataHandler {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 String[] customerData = scanner.nextLine().split(",");
-                Customer customer = new Customer(customerData[0], customerData[1], customerData[2], Float.parseFloat(customerData[3]));
+                Customer customer = new Customer(customerData[0], customerData[1], customerData[2], Float.parseFloat(customerData[3]) );
                 customers.add(customer);
             }
             scanner.close();
@@ -224,6 +255,6 @@ public class DataHandler {
 
 
 
-    // === METODI PER GESTIRE I DATI DEI VENDOR ===
+    //todo === METODI PER GESTIRE I DATI DEI VENDOR ===
 
 }

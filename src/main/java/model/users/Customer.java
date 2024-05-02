@@ -65,6 +65,18 @@ public class Customer {
         return this.balance;
     }
 
+    public void deposit ( float amount ) {
+        this.balance += amount;
+    }
+
+    public boolean withdraw ( float amount ) {
+        if ( this.balance - amount >= 0 ) {
+            this.balance -= amount;
+            return true;
+        }
+        return false;
+    }
+
 
 
     public void set_username ( String newUsername ) {

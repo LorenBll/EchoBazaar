@@ -117,6 +117,24 @@ public class RegistrationPageController extends Controller {
             return;
         }
 
+        // controllo che lo username non contenga spazi
+        if (textFieldOf_username.getText().contains(" ")) {
+            show_error("Username cannot contain spaces.");
+            return;
+        }
+
+        // controllo che lo username non sia più lungo di 15 caratteri
+        if (textFieldOf_username.getText().length() > 15) {
+            show_error("Username cannot be longer than 15 characters.");
+            return;
+        }
+
+        // controllo che la password non sia più lunga di 15 caratteri
+        if (passwordField.getText().length() > 15) {
+            show_error("Password cannot be longer than 15 characters.");
+            return;
+        }
+
         String chosenUsername = textFieldOf_username.getText();
         String chosenPassword = passwordField.getText();
         String encryptedPassword = CryptingEngine.encrypt_string(chosenPassword);
@@ -125,7 +143,7 @@ public class RegistrationPageController extends Controller {
         if (isCustomer) {
         
             Customer newCustomer = new Customer(chosenUsername, encryptedPassword);
-            if (!main.dataHandler.add_customer(newCustomer)) {
+            if (!main.dataHandler.register_customer(newCustomer)) {
                 show_error("Username already taken.");
                 return;
             }

@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import java.net.URL;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.Node;
 import main.java.controllers.*;
 import main.java.model.DataHandler;
@@ -142,15 +143,23 @@ public class Main extends Application {
 
 
 
-
-    public void show_mainPage () {
+    public void show_userPage () {
         //! metodo che visualizza la pagina principale
+        if (loggedInCustomer != null) {
+            show_customerPage();
+            return;
+        }
+        // todo show_vendorPage();
+    }
+
+    public void show_customerPage () {
+        //! metodo che visualizza la pagina principale del cliente
         try {
             
             start_defaultFocusCancelerListener(); // annulla il focus di default riassegnandolo alla finestra principale
 
             // caricamento del file fxml della pagina principale
-            URL locationOf_fxml = getClass().getResource("/main/resources/fxml/MainPage.fxml");
+            URL locationOf_fxml = getClass().getResource("/main/resources/fxml/CustomerPage.fxml");
             FXMLLoader loader = new FXMLLoader(locationOf_fxml);
             this.mainLayout = loader.load(); // caricamento del layout della pagina principale da visualizzare nella finestra principale
 
@@ -160,7 +169,7 @@ public class Main extends Application {
             primaryStage.setScene(scene);
 
             // settaggio del controller della pagina principale
-            MainPageController controller = loader.getController();
+            CustomerPageController controller = loader.getController();
             controller.set_main(this);
             controller.setup();
 
@@ -223,6 +232,8 @@ public class Main extends Application {
                     focusedNode.getParent().requestFocus();
             }
         });
+
+        primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
 
     }
 

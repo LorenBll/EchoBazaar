@@ -9,7 +9,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/commonStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.LoginPageController">
@@ -72,8 +71,6 @@
                   <Font name="Arial Bold" size="30.0" />
                </font>
             </Label>
-            <Line endX="139.0" fill="RED" layoutX="276.0" layoutY="259.0" startX="-100.0" strokeWidth="3.0" styleClass="inputlines" AnchorPane.bottomAnchor="342.0" AnchorPane.leftAnchor="210.5" AnchorPane.rightAnchor="58.0" AnchorPane.topAnchor="264.5" />
-            <Line endX="104.0" fill="RED" layoutX="277.0" layoutY="321.0" startX="-100.0" strokeWidth="3.0" styleClass="inputlines" AnchorPane.leftAnchor="209.5" AnchorPane.topAnchor="323.5" />
             <ImageView fitHeight="31.0" fitWidth="28.0" layoutX="48.0" layoutY="231.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="62.0" AnchorPane.topAnchor="237.0">
                <image>
                   <Image url="@../images/iconOf_user.png" />

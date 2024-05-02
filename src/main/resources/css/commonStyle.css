@@ -1,7 +1,23 @@
+/* classe per i tooltip */
+.tooltip {
+    -fx-background-color: #6b3640;
+    -fx-text-fill: #e7d388;
+    -fx-font-size: 15;
+    -fx-font-family: "Arial";
+}
+
 .textfields {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-border-width: 0;
+    -fx-padding: 0 0 0 0;
+}
+
+.textfields:focused {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;;
+    -fx-border-width: 0 0 2.5 0;
+    -fx-border-color: #6b3640;
     -fx-padding: 0 0 0 0;
 }
 
@@ -36,26 +52,25 @@
 
 /* la barra di gestione della finestra (minimizza, massimizza, chiudi) deve avere il bordo inferiore di colore #6b3640 */
 .window-handling-bar {
-    -fx-border-color: #6b3640;
+    -fx-border-color: lightgray;
     -fx-border-width: 0 0 3 0;
-}
-
-/* bordo in alto di colore #6b3640 */
-.user-infoAndOperations {
-    -fx-border-color: #6b3640;
-    -fx-border-width: 3 0 0 0;
 }
 
 /* bordo laterale destro di colore #6b3640 */
 .sidebar {
-    -fx-border-color: #6b3640;
+    -fx-border-color: lightgray;
     -fx-border-width: 0 3 0 0;
 }
 
-/* classe per i tooltip */
-.tooltip {
-    -fx-background-color: #6b3640;
-    -fx-text-fill: #e7d388;
-    -fx-font-size: 15;
-    -fx-font-family: "Arial";
+
+.view {
+    -fx-background-color: #f4f4f4;
+    -fx-border-color: lightgray;
+    -fx-border-width: 0 0 0 0;
+}
+
+.stackpane {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0 0 0 0;
 }

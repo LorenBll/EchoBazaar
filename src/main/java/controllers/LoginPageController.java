@@ -117,7 +117,7 @@ public class LoginPageController extends Controller {
         boolean loginResult = main.dataHandler.login(inputtedUsername, inputtedPassword, main);
         if (loginResult) {
             // se il login è andato a buon fine, mostro la pagina principale
-            main.show_mainPage();
+            main.show_userPage();
             return;
         }
 
