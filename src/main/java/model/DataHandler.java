@@ -238,7 +238,7 @@ public class DataHandler {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 String[] customerData = scanner.nextLine().split(",");
-                Customer customer = new Customer(customerData[0], customerData[1], customerData[2], Float.parseFloat(customerData[3]) );
+                Customer customer = new Customer( customerData[0], customerData[1], customerData[2], Float.parseFloat(customerData[3]) );
                 customers.add(customer);
             }
             scanner.close();
