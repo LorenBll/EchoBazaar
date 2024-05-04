@@ -1,5 +1,6 @@
 package main.java.model.users;
 
+import java.util.ArrayList;
 import main.java.auth.CryptingEngine;
 
 
@@ -7,45 +8,51 @@ import main.java.auth.CryptingEngine;
 
 
 
-public class Customer {
+public class Vendor {
     
     private String ID;
     private String username;
-    private String encryptedPassword;   
+    private String encryptedPassword;
     private float balance;
 
+    private ArrayList<String> productsID;
 
 
 
 
-    
+
+
     private String generate_ID () {
-        //! metodo che genera un ID univoco per il cliente
+        //! metodo che genera un ID univoco per il venditore
         // non viene effettuato il controllo sull'unicità dell'ID generato perché è molto improbabile che si generino due ID uguali:
-            // richiederebbe che due customer si registrino esattamente nello stesso millisecondo e con lo stesso username 
+            // richiederebbe che due venditori si registrino esattamente nello stesso millisecondo e con lo stesso username 
             // (inoltre EchoBazaar funziona in locale e non ha un server connesso a internet, quindi è inverificabile)
         
-        return CryptingEngine.encrypt_string( "C" + this.username + String.valueOf( System.currentTimeMillis() ) );
+        return CryptingEngine.encrypt_string( "V" + this.username + String.valueOf( System.currentTimeMillis() ) );
 
     }
-    
-    // costruttore per la registrazione di un nuovo cliente
-    public Customer ( String username , String encryptedPassword ) {
+
+    // costruttore per la registrazione di un nuovo venditore
+    public Vendor ( String username , String encryptedPassword ) {
 
         this.username = username;
         this.ID = generate_ID();
         this.encryptedPassword = encryptedPassword;
         this.balance = 5;
 
+        this.productsID = new ArrayList<String>();
+
     }
 
-    // costruttore per la creazione di un oggetto Customer a partire dai dati presenti nel pseudo-database
-    public Customer ( String username , String ID , String encryptedPassword , float balance ) {
+    // costruttore per la creazione di un oggetto Vendor a partire dai dati presenti nel pseudo-database
+    public Vendor ( String username , String ID , String encryptedPassword , float balance , ArrayList<String> productsID ) {
 
         this.username = username;
         this.ID = ID;
         this.encryptedPassword = encryptedPassword;
         this.balance = balance;
+
+        this.productsID = productsID;
 
     }
 
@@ -67,6 +74,12 @@ public class Customer {
         return this.balance;
     }
 
+    public ArrayList<String> get_productsID () {
+        return this.productsID;
+    }
+
+
+
     public void deposit ( float amount ) {
         this.balance += amount;
     }
@@ -79,7 +92,7 @@ public class Customer {
         return false;
     }
 
-
+    
 
     public void set_username ( String newUsername ) {
         this.username = newUsername;
@@ -88,5 +101,13 @@ public class Customer {
     public void set_encryptedPassword ( String newPassword ) {
         this.encryptedPassword = newPassword;
     }
+
+
+
+    public void add_productID ( String productID ) {
+        this.productsID.add( productID );
+    }
+
+
 
 }

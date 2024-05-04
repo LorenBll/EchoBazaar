@@ -18,33 +18,33 @@ import javafx.application.Platform;
 
 
 
-public class CustomerPageController extends Controller {
+public class VendorPageController extends Controller {
 
     //. barra di gestione della finestra (minimizza, chiudi e fullscreen)
     public boolean isFullscreen = false; // indica se la finestra è in modalità fullscreen o no
     @FXML private ImageView imageOf_fullscreenOperations;
 
-    //. riquadro delle informazioni relative al customer loggato e delle funzioni basilari che può svolgere
+    //. riquadro delle informazioni relative al vendor loggato e delle funzioni basilari che può svolgere
     @FXML private Label labelOf_username;
     @FXML private Label labelOf_balance;
     @FXML private FlowPane flowpaneOf_commonFunctions;
 
     
     //. riquadro in cui verrano mostrate le varie viste
-    @FXML private StackPane stackpaneOf_customerViews;
+    @FXML private StackPane stackpaneOf_vendorViews;
     
     // vista di benvenuto
     @FXML private FlowPane flowpaneOf_welcome;
 
     // vista delle impostazioni
-    boolean isCustomerPasswordShown = false;
+    boolean isVendorPasswordShown = false;
     int counterOfDeleteAccount = 0;
     @FXML private FlowPane flowpaneOf_settings;
-    @FXML private Label labelOf_customerID;
-    @FXML private TextField textfieldOf_customerUsername;
-    @FXML private PasswordField passwordfieldOf_customerPassword;
-    @FXML private ImageView imageOf_showOrHide_customerPassword;
-    @FXML private Label labelOf_customerPasswordShower;
+    @FXML private Label labelOf_vendorID;
+    @FXML private TextField textfieldOf_vendorUsername;
+    @FXML private PasswordField passwordfieldOf_vendorPassword;
+    @FXML private ImageView imageOf_showOrHide_vendorPassword;
+    @FXML private Label labelOf_vendorPasswordShower;
     @FXML private Label labelOf_settingsWarning;
     @FXML private Button buttonOf_settingsDeleteAccount;
 
@@ -60,10 +60,10 @@ public class CustomerPageController extends Controller {
     public void setup () {
         //! metodo che viene chiamato dal main quando la finestra è stata caricata ed il main settato >>> con l'initialize non funziona perché il main non è ancora settato 
 
-        String shortenedBalance = shorten_balance( main.loggedInCustomer.get_balance() );
+        String shortenedBalance = shorten_balance( main.loggedInVendor.get_balance() );
 
-        // setto le informazioni del customer loggato
-        labelOf_username.setText( main.loggedInCustomer.get_username() );
+        // setto le informazioni del vendor loggato
+        labelOf_username.setText( main.loggedInVendor.get_username() );
         labelOf_balance.setText( shortenedBalance + "$" );
 
         main.get_primaryStage().setFullScreenExitKeyCombination(null); // rimuove la combinazione di tasti per uscire dalla modalità fullscreen
@@ -96,17 +96,17 @@ public class CustomerPageController extends Controller {
         counterOfDeleteAccount = 0;
         buttonOf_settingsDeleteAccount.setText("Delete Account");
         flowpaneOf_settings.toFront();
-        labelOf_customerID.setText( main.loggedInCustomer.get_ID() );
+        labelOf_vendorID.setText( main.loggedInVendor.get_ID() );
 
         // se sono sul focus del textfield dello username e premo invio, passo al passwordField
-        textfieldOf_customerUsername.setOnKeyPressed( e -> {
+        textfieldOf_vendorUsername.setOnKeyPressed( e -> {
             if (e.getCode().toString().equals("ENTER")) {
-                passwordfieldOf_customerPassword.requestFocus();
+                passwordfieldOf_vendorPassword.requestFocus();
             }
         });
 
         // se sono sul focus del passwordField e premo invio, salvo le impostazioni
-        passwordfieldOf_customerPassword.setOnKeyPressed( e -> {
+        passwordfieldOf_vendorPassword.setOnKeyPressed( e -> {
             if (e.getCode().toString().equals("ENTER")) {
                 save_settings();
             }
@@ -115,10 +115,10 @@ public class CustomerPageController extends Controller {
     }
 
     @FXML private void copy_ID () {
-        //! metodo che copia l'ID del customer negli appunti
+        //! metodo che copia l'ID del vendor negli appunti
         
         ClipboardContent content = new ClipboardContent();
-        content.putString( main.loggedInCustomer.get_ID() );
+        content.putString( main.loggedInVendor.get_ID() );
         Clipboard.getSystemClipboard().setContent(content);
 
     }
@@ -126,40 +126,40 @@ public class CustomerPageController extends Controller {
     // usato da pulsante "Show/Hide Password" (occhio/occhio sbarrato)
     @FXML private void showOrHide_password () {
         //! metodo che mostra o nasconde la password a seconda dello stato attuale della password (mostrata o non mostrata)        
-        if (!isCustomerPasswordShown) {
-            labelOf_customerPasswordShower.setVisible(true);
-            passwordfieldOf_customerPassword.setVisible(false);
-            isCustomerPasswordShown = true;
+        if (!isVendorPasswordShown) {
+            labelOf_vendorPasswordShower.setVisible(true);
+            passwordfieldOf_vendorPassword.setVisible(false);
+            isVendorPasswordShown = true;
 
-            imageOf_showOrHide_customerPassword.setImage(new Image("/main/resources/images/iconOf_hidePassword.png")); // cambia l'icona del pulsante in "nascondi password"
+            imageOf_showOrHide_vendorPassword.setImage(new Image("/main/resources/images/iconOf_hidePassword.png")); // cambia l'icona del pulsante in "nascondi password"
         
             return;
         }
         
-        labelOf_customerPasswordShower.setVisible(false);
-        passwordfieldOf_customerPassword.setVisible(true);
-        isCustomerPasswordShown = false;
+        labelOf_vendorPasswordShower.setVisible(false);
+        passwordfieldOf_vendorPassword.setVisible(true);
+        isVendorPasswordShown = false;
 
         // il passwordField richiede il focous senza però selezionare il testo e sposta il cursore alla fine del testo
-        passwordfieldOf_customerPassword.requestFocus();
-        passwordfieldOf_customerPassword.deselect();
-        passwordfieldOf_customerPassword.end();
+        passwordfieldOf_vendorPassword.requestFocus();
+        passwordfieldOf_vendorPassword.deselect();
+        passwordfieldOf_vendorPassword.end();
         
-        imageOf_showOrHide_customerPassword.setImage(new Image("/main/resources/images/iconOf_showPassword.png")); // cambia l'icona del pulsante in "mostra password"
+        imageOf_showOrHide_vendorPassword.setImage(new Image("/main/resources/images/iconOf_showPassword.png")); // cambia l'icona del pulsante in "mostra password"
     
     }
 
     // usato da passwordField ad ogni variazione di testo
-    @FXML private void update_labelOf_customerPasswordShower () {
-        //! metodo che aggiorna costantemente il labelOf_customerPasswordShower
-        labelOf_customerPasswordShower.setText( passwordfieldOf_customerPassword.getText() );
+    @FXML private void update_labelOf_vendorPasswordShower () {
+        //! metodo che aggiorna costantemente il labelOf_vendorPasswordShower
+        labelOf_vendorPasswordShower.setText( passwordfieldOf_vendorPassword.getText() );
     }
 
     @FXML private void save_settings () {
-        //! metodo che salva le impostazioni del customer
+        //! metodo che salva le impostazioni del vendor
         
-        String newUsername = textfieldOf_customerUsername.getText();
-        String newPassword = passwordfieldOf_customerPassword.getText();
+        String newUsername = textfieldOf_vendorUsername.getText();
+        String newPassword = passwordfieldOf_vendorPassword.getText();
 
         if (newUsername.equals("") && newPassword.equals("")) {
             show_settingsWarning("No Changes Were Made.");
@@ -169,7 +169,7 @@ public class CustomerPageController extends Controller {
         // controllo che lo username non contenga caratteri speciali: |!@#$%^&*()+{}:"<>?|[];',.
         boolean containsSpecialCharacters = false;
         for (char c : "|!@#$%^&*()+{}:\"<>?|[];',.".toCharArray()) {
-            if (textfieldOf_customerUsername.getText().contains(String.valueOf(c))) {
+            if (textfieldOf_vendorUsername.getText().contains(String.valueOf(c))) {
                 containsSpecialCharacters = true;
                 break;
             }
@@ -191,7 +191,7 @@ public class CustomerPageController extends Controller {
             return;
         }
 
-        boolean resultOf_saveSettings = main.dataHandler.update_customer( main.loggedInCustomer.get_ID(), newUsername, newPassword );
+        boolean resultOf_saveSettings = main.dataHandler.update_vendor( main.loggedInVendor.get_ID(), newUsername, newPassword );
         if (!resultOf_saveSettings) {
             show_settingsWarning("Username Already Taken.");
             return;
@@ -199,16 +199,16 @@ public class CustomerPageController extends Controller {
 
         reset_settingsView();
         show_settingsWarning("Settings Saved.");
-        labelOf_username.setText( main.loggedInCustomer.get_username() );
+        labelOf_username.setText( main.loggedInVendor.get_username() );
 
     }
 
     // usato da pulsante "Reset"
     @FXML private void reset_settingsView () {
         //! metodo che resetta la vista delle impostazioni
-        textfieldOf_customerUsername.setText( "" );
-        passwordfieldOf_customerPassword.setText( "" );
-        if (isCustomerPasswordShown)
+        textfieldOf_vendorUsername.setText( "" );
+        passwordfieldOf_vendorPassword.setText( "" );
+        if (isVendorPasswordShown)
             showOrHide_password();
         // cancello il focus che altrimenti rimarrebbe, per il metodo showOrHide_password(), sul passwordField
         flowpaneOf_settings.requestFocus();
@@ -216,7 +216,7 @@ public class CustomerPageController extends Controller {
 
     // usato da pulsante "Delete Account"
     @FXML private void delete_account () {
-        //! metodo che elimina l'account del customer loggato
+        //! metodo che elimina l'account del vendor loggato
 
         counterOfDeleteAccount++;
         if (counterOfDeleteAccount < 2) {
@@ -244,9 +244,9 @@ public class CustomerPageController extends Controller {
 
             return;
         }
-        main.dataHandler.delete_customer( main.loggedInCustomer.get_username() );
+        main.dataHandler.delete_vendor( main.loggedInVendor.get_username() );
         counterOfDeleteAccount = 0;
-        main.loggedInCustomer = null;
+        main.loggedInVendor = null;
         main.show_loginPage();
 
     }
@@ -300,9 +300,9 @@ public class CustomerPageController extends Controller {
         main.loggedInVendor.deposit( money );
 
         textfieldOf_moneyQuantity.setText("");  
-        labelOf_balance.setText( shorten_balance( main.loggedInCustomer.get_balance() ) + "$" );
+        labelOf_balance.setText( shorten_balance( main.loggedInVendor.get_balance() ) + "$" );
 
-        main.dataHandler.update_customerFile();
+        main.dataHandler.update_vendorFile();
 
     }
 
@@ -326,9 +326,9 @@ public class CustomerPageController extends Controller {
         }
 
         textfieldOf_moneyQuantity.setText("");
-        labelOf_balance.setText( shorten_balance( main.loggedInCustomer.get_balance() ) + "$" );
+        labelOf_balance.setText( shorten_balance( main.loggedInVendor.get_balance() ) + "$" );
 
-        main.dataHandler.update_customerFile();
+        main.dataHandler.update_vendorFile();
 
     }
 
@@ -368,7 +368,7 @@ public class CustomerPageController extends Controller {
     
     @FXML private void logout () {
         //! metodo che effettua il logout
-        main.loggedInCustomer = null;
+        main.loggedInVendor = null;
         main.show_loginPage();
     }
     

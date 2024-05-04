@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.RadioButton;
 import main.java.auth.CryptingEngine;
 import main.java.model.users.Customer;
+import main.java.model.users.Vendor;
 import javafx.application.Platform;
 
 
@@ -123,6 +124,19 @@ public class RegistrationPageController extends Controller {
             return;
         }
 
+        // controllo che lo username non contenga caratteri speciali: |!@#$%^&*()+{}:"<>?|[];',.
+        boolean containsSpecialCharacters = false;
+        for (char c : "|!@#$%^&*()+{}:\"<>?|[];',.".toCharArray()) {
+            if (textFieldOf_username.getText().contains(String.valueOf(c))) {
+                containsSpecialCharacters = true;
+                break;
+            }
+        }
+        if (containsSpecialCharacters) {
+            show_error("Username can't contain special characters.");
+            return;
+        }
+
         // controllo che lo username non sia più lungo di 15 caratteri
         if (textFieldOf_username.getText().length() > 15) {
             show_error("Username cannot be longer than 15 characters.");
@@ -150,7 +164,13 @@ public class RegistrationPageController extends Controller {
         
         }
         else {
-            // todo : implementare la registrazione di un vendor
+            
+            Vendor newVendor = new Vendor(chosenUsername, encryptedPassword);
+            if (!main.dataHandler.register_vendor(newVendor)) {
+                show_error("Username already taken.");
+                return;
+            }
+
         }
         show_loginPage();
 

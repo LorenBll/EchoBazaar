@@ -14,6 +14,7 @@ import javafx.scene.Node;
 import main.java.controllers.*;
 import main.java.model.DataHandler;
 import main.java.model.users.Customer;
+import main.java.model.users.Vendor;
 
 
 
@@ -27,7 +28,7 @@ public class Main extends Application {
 
     public DataHandler dataHandler; // gestore dei dati (salvataggio, caricamento, ecc.)
     public Customer loggedInCustomer = null; // cliente loggato (null se nessuno è loggato)
-    // todo public Vendor loggedInVendor = null; // venditore loggato (null se nessuno è loggato)
+    public Vendor loggedInVendor = null; // venditore loggato (null se nessuno è loggato)
 
 
 
@@ -149,7 +150,7 @@ public class Main extends Application {
             show_customerPage();
             return;
         }
-        // todo show_vendorPage();
+        show_vendorPage();
     }
 
     public void show_customerPage () {
@@ -162,7 +163,6 @@ public class Main extends Application {
             URL locationOf_fxml = getClass().getResource("/main/resources/fxml/CustomerPage.fxml");
             FXMLLoader loader = new FXMLLoader(locationOf_fxml);
             this.mainLayout = loader.load(); // caricamento del layout della pagina principale da visualizzare nella finestra principale
-
 
             // visualizzazione della scena contenente il layout della pagina principale
             Scene scene = new Scene(mainLayout);
@@ -181,6 +181,35 @@ public class Main extends Application {
 
         } catch (Exception e) { e.printStackTrace(); }
     }
+
+    public void show_vendorPage () {
+        //! metodo che visualizza la pagina principale del venditore
+        try {
+            
+            start_defaultFocusCancelerListener(); // annulla il focus di default riassegnandolo alla finestra principale
+
+            // caricamento del file fxml della pagina principale
+            URL locationOf_fxml = getClass().getResource("/main/resources/fxml/VendorPage.fxml");
+            FXMLLoader loader = new FXMLLoader(locationOf_fxml);
+            this.mainLayout = loader.load(); // caricamento del layout della pagina principale da visualizzare nella finestra principale
+
+            // visualizzazione della scena contenente il layout della pagina principale
+            Scene scene = new Scene(mainLayout);
+            primaryStage.setScene(scene);
+
+            // settaggio del controller della pagina principale
+            VendorPageController controller = loader.getController();
+            controller.set_main(this);
+            controller.setup();
+
+            primaryStage.show();
+
+
+
+            set_keybinds(); // setta i vari keybinds
+
+        } catch (Exception e) { e.printStackTrace(); }
+    }   
     
 
 
