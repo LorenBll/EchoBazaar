@@ -10,14 +10,14 @@ import main.java.auth.CryptingEngine;
 public class Product {
     
     private String vendorID;        // ID del venditore >>> non è necessario avere un riferimento diretto al venditore, basta l'ID
-    
     private String ID;
+
     private String name;
     private String description;
     private String pathOf_image;
 
     private float sellingPrice;
-    private int stock;
+    private int currentStock;
     
     private boolean autoRestock;    // se true, il prodotto viene automaticamente rifornito rifornito quando il numero di pezzi disponibili scende sotto minStock
     private int minStock;           // se autoRestock è true, minStock indica il numero minimo di pezzi che devono essere sempre disponibili
@@ -25,7 +25,6 @@ public class Product {
 
     private boolean isClone;        // se true, il prodotto è un clone di un altro prodotto
     private String sourceID;        // ID del prodotto di origine (se il prodotto è un clone di un altro prodotto)
-    private float sourcePrice;      // prezzo del prodotto di origine (se il prodotto è un clone di un altro prodotto)
 
 
 
@@ -43,8 +42,9 @@ public class Product {
     }
 
     // costruttore per la registrazione di un nuovo prodotto
-    public Product ( String vendorID , String name , String description , String pathOf_image , float sellingPrice , int currentStock , boolean autoRestock , int minStock , int restockAmount , boolean isClone , String sourceID , float sourcePrice ) {
-
+    public Product ( String vendorID , String name , String description , String pathOf_image , float sellingPrice , int currentStock , boolean autoRestock , int minStock , int restockAmount , boolean isClone , String sourceID ) {
+        //! le variabili importanti sono vendorID, name, description, sellingPrice, currentStock
+        
         this.vendorID = vendorID;
         this.name = name;
         this.ID = generate_ID();
@@ -57,32 +57,26 @@ public class Product {
         this.description = description;
         this.sellingPrice = sellingPrice;
         
-        this.stock = currentStock;
+        this.currentStock = currentStock;
 
         if (autoRestock == true) {
             this.autoRestock = true;
             this.minStock = minStock;
             this.restockAmount = restockAmount;
+            this.isClone = isClone; // se autoRestock è true, isClone deve essere true
+            this.sourceID = sourceID;
         } else {
             this.autoRestock = false;
             this.minStock = 0;
             this.restockAmount = 0;
-        }
-        
-        if (isClone == true) {
-            this.isClone = true;
-            this.sourceID = sourceID;
-            this.sourcePrice = sourcePrice;
-        } else {
             this.isClone = false;
             this.sourceID = null;
-            this.sourcePrice = 0;
         }
 
     }
 
     // costruttore per la creazione di un oggetto Product a partire dai dati presenti nel pseudo-database
-    public Product ( String ID , String vendorID , String name , String description , String pathOf_image , float sellingPrice , int currentStock , boolean autoRestock , int minStock , int restockAmount , boolean isClone , String sourceID , float sourcePrice ) {
+    public Product ( String ID , String vendorID , String name , String description , String pathOf_image , float sellingPrice , int currentStock , boolean autoRestock , int minStock , int restockAmount , boolean isClone , String sourceID ) {
 
         this.ID = ID;
         this.vendorID = vendorID;
@@ -90,13 +84,12 @@ public class Product {
         this.description = description;
         this.pathOf_image = pathOf_image;
         this.sellingPrice = sellingPrice;
-        this.stock = currentStock;
+        this.currentStock = currentStock;
         this.autoRestock = autoRestock;
         this.minStock = minStock;
         this.restockAmount = restockAmount;
         this.isClone = isClone;
         this.sourceID = sourceID;
-        this.sourcePrice = sourcePrice;
 
     }
 
@@ -126,8 +119,8 @@ public class Product {
         return this.sellingPrice;
     }
 
-    public int get_stock () {
-        return this.stock;
+    public int get_currentStock () {
+        return this.currentStock;
     }
 
     public boolean get_autoRestock () {
@@ -150,10 +143,6 @@ public class Product {
         return this.sourceID;
     }
 
-    public float get_sourcePrice () {
-        return this.sourcePrice;
-    }
-
 
 
     public void set_name ( String newName ) {
@@ -172,8 +161,8 @@ public class Product {
         this.sellingPrice = newSellingPrice;
     }
 
-    public void set_stock ( int newStock ) {
-        this.stock = newStock;
+    public void set_currentStock ( int newStock ) {
+        this.currentStock = newStock;
     }
 
     public void set_autoRestock ( boolean newAutoRestock ) {
@@ -196,9 +185,6 @@ public class Product {
         this.sourceID = newSourceID;
     }
 
-    public void set_sourcePrice ( float newSourcePrice ) {
-        this.sourcePrice = newSourcePrice;
-    }
 
 
 

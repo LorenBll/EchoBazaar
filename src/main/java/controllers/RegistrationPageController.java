@@ -126,7 +126,7 @@ public class RegistrationPageController extends Controller {
 
         // controllo che lo username non contenga caratteri speciali: |!@#$%^&*()+{}:"<>?|[];',.
         boolean containsSpecialCharacters = false;
-        for (char c : "|!@#$%^&*()+{}:\"<>?|[];',.".toCharArray()) {
+        for (char c : "\\|!@#$%^&*()+{}:\"<>?|[];',.".toCharArray()) {
             if (textFieldOf_username.getText().contains(String.valueOf(c))) {
                 containsSpecialCharacters = true;
                 break;

@@ -112,6 +112,13 @@ public class CustomerPageController extends Controller {
             }
         });
 
+        // se sono sul focus del textfield della password e premo invio, salvo le impostazioni
+        labelOf_customerPasswordShower.setOnKeyPressed( e -> {
+            if (e.getCode().toString().equals("ENTER")) {
+                save_settings();
+            }
+        });
+
     }
 
     @FXML private void copy_ID () {
@@ -168,7 +175,7 @@ public class CustomerPageController extends Controller {
 
         // controllo che lo username non contenga caratteri speciali: |!@#$%^&*()+{}:"<>?|[];',.
         boolean containsSpecialCharacters = false;
-        for (char c : "|!@#$%^&*()+{}:\"<>?|[];',.".toCharArray()) {
+        for (char c : "\\|!@#$%^&*()+{}:\"<>?|[];',.".toCharArray()) {
             if (textfieldOf_customerUsername.getText().contains(String.valueOf(c))) {
                 containsSpecialCharacters = true;
                 break;

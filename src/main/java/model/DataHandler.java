@@ -19,7 +19,7 @@ public class DataHandler {
 
     private ArrayList<Customer> customers = new ArrayList<Customer>();
     private ArrayList<Vendor> vendors = new ArrayList<Vendor>();
-    // todo private ArrayList<Product> products = new ArrayList<Product>();
+    private ArrayList<Product> products = new ArrayList<Product>();
 
 
 
@@ -59,7 +59,7 @@ public class DataHandler {
         
             load_customers();
             load_vendors();
-            //todo load_products();
+            load_products();
 
         } 
         catch (Exception e) {
@@ -392,10 +392,16 @@ public class DataHandler {
             vendorMap.put("encryptedPassword", v.get_encryptedPassword());
             vendorMap.put("balance", String.valueOf( v.get_balance() ));
             
-            // converto l'ArrayList di productsID in una stringa separata da pipe
-            String productsID = "[" + String.join("|", v.get_productsID()) + "]";
-            vendorMap.put("productsID", productsID);
+            //. converto l'ArrayList di productsID in una stringa separata da pipe
+            String productsID = "";
+            for ( String productID : v.get_productsID() ) {
+                productsID += productID + "|";
+            }
             
+            productsID = "[" + productsID;
+            productsID = productsID.substring(0, productsID.length() - 1); // rimuovo l'ultimo pipe, che si trova alla fine della stringa
+            productsID += "]";
+            vendorMap.put("productsID", productsID);
             vendorsMap.add(vendorMap);
         }
 
@@ -422,15 +428,21 @@ public class DataHandler {
             while (scanner.hasNextLine()) {
                 String[] vendorData = scanner.nextLine().split(",");
 
-                // converto la stringa di productsID in un ArrayList
-                String unconverted_productsID = vendorData[4].substring(1, vendorData[4].length() - 1);
-                System.out.println(unconverted_productsID);
-                String[] productsID = unconverted_productsID.split("|");
+                //. converto la stringa di productsID in un ArrayList
+                String unconverted_productsID = vendorData[4].substring(1, vendorData[4].length() - 1);  // rimuovo le parentesi quadre
+
+                String[] productsID = {};
+                if ( unconverted_productsID.length() == 0 ) {
+                    unconverted_productsID = "";
+                } else {
+                    productsID = unconverted_productsID.split("\\|"); // splitto la stringa in base al pipe
+                }
+
                 ArrayList<String> converted_productsID = new ArrayList<String>();
                 for ( String productID : productsID ) {
                     converted_productsID.add(productID);
                 }
-
+  
                 Vendor vendor = new Vendor( vendorData[0], vendorData[1], vendorData[2], Float.parseFloat(vendorData[3]), converted_productsID );
                 vendors.add(vendor);
             }
@@ -447,6 +459,179 @@ public class DataHandler {
 
 
 
-    //tocheck === METODI PER GESTIRE I DATI DEI PRODUCT ===
+    // === METODI PER GESTIRE I DATI DEI PRODUCT ===
+    public void register_product ( Product newProduct , Main main ) {
+        //! metodo che aggiunge un product alla lista e aggiorna il file
+
+        //. non è necessario controllare se esiste giù un product con lo stesso nome o ID perché sarebbe limitante per i venditori
+
+        // inserisco il product nella lista in ordine alfabetico per name
+        int currentIndex = 0;
+        for ( Product p : products ) {
+            if ( p.get_name().compareTo( newProduct.get_name() ) > 0 ) {
+                products.add(currentIndex, newProduct);
+                main.loggedInVendor.add_productID( newProduct.get_ID() );
+                update_vendorFile();
+                update_productFile();
+                return;
+            }
+            currentIndex++;
+        }
+        
+        // se non ho inserito il product in nessun punto, lo inserisco alla fine
+        products.add(newProduct);
+        
+        main.loggedInVendor.add_productID( newProduct.get_ID() );
+        update_vendorFile();
+        update_productFile();
+        
+    }
+
+    public void delete_product ( String ID ) { // non uso il nome perché non è per forza univoco
+        //! metodo che rimuove un product dalla lista e aggiorna il file
+        for ( Product p : products ) {
+            if ( p.get_ID().equals( ID ) ) {
+                products.remove(p);
+                update_productFile();
+                return;
+            }
+        }
+    }
+
+    public void update_product ( String ID , String newName , String newDescription , String newPathOf_image , float newSellingPrice , int newCurrentStock , boolean autoRestock , int newMinStock , int newRestockAmount , boolean isClone , String newSourceID ) {
+        //! metodo che aggiorna i dati relativi ad un product
+    
+        //. cerco il product da aggiornare e lo aggiorno
+        for ( Product p : products ) {
+            if ( p.get_ID().equals( ID ) ) {
+                
+                if ( !newName.equals("") ) 
+                    p.set_name(newName);
+                if ( !newDescription.equals("") )
+                    p.set_description(newDescription);
+                if ( !newPathOf_image.equals("") )
+                    p.set_pathOf_image(newPathOf_image);
+                if ( newSellingPrice != 0 )
+                    p.set_sellingPrice(newSellingPrice);
+                if ( newCurrentStock != 0 )
+                    p.set_currentStock(newCurrentStock);
+                
+                if ( autoRestock == true ) {
+                    p.set_autoRestock(true);
+                    p.set_minStock(newMinStock);
+                    p.set_restockAmount(newRestockAmount);
+                } else {
+                    p.set_autoRestock(false);
+                    p.set_minStock(0);
+                    p.set_restockAmount(0);
+                }
+                
+                if ( isClone == true ) {
+                    p.set_isClone(true);
+                    p.set_sourceID(newSourceID);
+                } else {
+                    p.set_isClone(false);
+                    p.set_sourceID(null);
+                }
+
+                update_productFile();
+                return;
+            }
+        }
+
+    }
+
+    public void update_productFile () {
+        //! metodo che aggiorna il file dei product con i dati presenti nella lista
+
+        //. ordino i product in ordine alfabetico per name
+        products.sort((p1, p2) -> p1.get_name().compareTo(p2.get_name()));
+
+        //. converto i product in HashMap
+        ArrayList<HashMap<String, String>> productsMap = new ArrayList<HashMap<String, String>>();
+        for ( Product p : products ) {
+            HashMap<String, String> productMap = new HashMap<String, String>();
+            productMap.put("ID", p.get_ID());
+            productMap.put("vendorID", p.get_vendorID());
+            productMap.put("name", p.get_name());
+
+            // rimuovo tutti gli acapo dalla stringa description
+            productMap.put("description", p.get_description());
+            productMap.get("description").replaceAll("\n", "\\|");
+
+            productMap.put("pathOf_image", p.get_pathOf_image());
+            productMap.put("sellingPrice", String.valueOf( p.get_sellingPrice() ));
+            productMap.put("currentStock", String.valueOf( p.get_currentStock() ));
+            productMap.put("autoRestock", String.valueOf( p.get_autoRestock() ));
+            productMap.put("minStock", String.valueOf( p.get_minStock() ));
+            productMap.put("restockAmount", String.valueOf( p.get_restockAmount() ));
+            productMap.put("isClone", String.valueOf( p.get_isClone() ));
+            productMap.put("sourceID", p.get_sourceID());
+            productsMap.add(productMap);
+        }
+
+        //. scrivo i product nel file, uno per riga
+        try {
+            FileWriter writer = new FileWriter("src/main/resources/data/products.txt");
+            for ( HashMap<String, String> productMap : productsMap ) {
+                writer.write( productMap.get("ID") + "," + productMap.get("vendorID") + "," + productMap.get("name") + ",\"" + productMap.get("description") + "\"," + productMap.get("pathOf_image") + "," + productMap.get("sellingPrice") + "," + productMap.get("currentStock") + "," + productMap.get("autoRestock") + "," + productMap.get("minStock") + "," + productMap.get("restockAmount") + "," + productMap.get("isClone") + "," + productMap.get("sourceID") + "\n" );
+            }
+            writer.close();
+        } 
+        catch (Exception e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+    }
+
+    public void load_products () {
+        //! metodo che carica i dati dei product dal file
+
+        try {
+            File file = new File("src/main/resources/data/products.txt");
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                String[] productData = scanner.nextLine().split(",");
+                
+                String productID = productData[0];
+                String vendorID = productData[1];
+                String name = productData[2];
+
+                // rimuovo i doppi apici dalla stringa description e sostituisco i pipe con acapo
+                String description = productData[3];
+                description = description.substring(1, description.length() - 1);
+                description = description.replaceAll("\\|", "\n");
+
+                String pathOf_image = productData[4];
+                float sellingPrice = Float.parseFloat(productData[5]);
+                int currentStock = Integer.parseInt(productData[6]);
+                boolean autoRestock = Boolean.parseBoolean(productData[7]);
+                int minStock = Integer.parseInt(productData[8]);
+                int restockAmount = Integer.parseInt(productData[9]);
+                boolean isClone = Boolean.parseBoolean(productData[10]);
+                String sourceID = productData[11];
+
+                Product product = new Product( productID, vendorID, name, description, pathOf_image, sellingPrice, currentStock, autoRestock, minStock, restockAmount, isClone, sourceID );
+                products.add(product);
+            }
+            scanner.close();
+        } 
+        catch (Exception e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+    }
+
+    public boolean isProductIDValid ( String ID ) {
+        //! metodo che controlla se un ID è valido
+        for ( Product p : products ) {
+            if ( p.get_ID().equals( ID ) ) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

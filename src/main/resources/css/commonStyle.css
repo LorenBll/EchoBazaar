@@ -74,3 +74,21 @@
     -fx-border-color: transparent;
     -fx-border-width: 0 0 0 0;
 }
+
+.checkbox .box {
+    -fx-background-color: #6b3640;
+    -fx-background-radius: 5;
+    
+    -fx-border-width: 0 0 0 0;
+    -fx-border-color: transparent;
+    -fx-border-radius: 5;
+
+    -fx-mark-color: #e7d388;
+}
+
+.textarea {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-padding: 0 0 0 0;
+}
