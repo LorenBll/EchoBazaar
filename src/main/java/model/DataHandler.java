@@ -48,11 +48,8 @@ public class DataHandler {
 
         } 
         catch (Exception e) {
-            System.out.println("An error occurred.");
             e.printStackTrace();
         }
-
-
 
         //. legge i dati presenti nei file e li carica nelle liste
         try {
@@ -63,11 +60,13 @@ public class DataHandler {
 
         } 
         catch (Exception e) {
-            System.out.println("An error occurred.");
             e.printStackTrace();
         }
 
     }
+
+
+
 
 
 
@@ -206,6 +205,7 @@ public class DataHandler {
     }
 
     public boolean update_customer ( String ID , String newUsername , String newPassword ) {
+        //! metodo che aggiorna i dati relativi ad un customer
     
         //. controllo che non ci sia un customer con lo stesso username e ID diverso 
         for ( Customer c : customers ) {
@@ -265,13 +265,13 @@ public class DataHandler {
             writer.close();
         } 
         catch (Exception e) {
-            System.out.println("An error occurred.");
             e.printStackTrace();
         }
 
     }
 
     public void load_customers () {
+        //! metodo che carica i dati dei customer dal file
     
         try {
             File file = new File("src/main/resources/data/customers.txt");
@@ -284,7 +284,6 @@ public class DataHandler {
             scanner.close();
         } 
         catch (Exception e) {
-            System.out.println("An error occurred.");
             e.printStackTrace();
         }
     
@@ -335,6 +334,14 @@ public class DataHandler {
         //! metodo che rimuove un vendor dalla lista e aggiorna il file
         for ( Vendor v : vendors ) {
             if ( v.get_username().equals( username ) ) {
+                
+                ArrayList<String> productsID = v.get_productsID();
+                for ( Product p : products ) {
+                    if ( productsID.contains( p.get_ID() ) ) {
+                        delete_product( p.get_ID() );
+                    }
+                }
+
                 vendors.remove(v);
                 update_vendorFile();
                 return;
@@ -343,6 +350,7 @@ public class DataHandler {
     }
 
     public boolean update_vendor ( String ID , String newUsername , String newPassword ) {
+        //! metodo che aggiorna i dati relativi ad un vendor
     
         //. controllo che non ci sia un vendor con lo stesso username e ID diverso 
         for ( Vendor v : vendors ) {
@@ -399,7 +407,8 @@ public class DataHandler {
             }
             
             productsID = "[" + productsID;
-            productsID = productsID.substring(0, productsID.length() - 1); // rimuovo l'ultimo pipe, che si trova alla fine della stringa
+            if ( productsID.length() > 1 )
+                productsID = productsID.substring(0, productsID.length() - 1); // rimuovo l'ultimo pipe, che si trova alla fine della stringa
             productsID += "]";
             vendorMap.put("productsID", productsID);
             vendorsMap.add(vendorMap);
@@ -414,13 +423,13 @@ public class DataHandler {
             writer.close();
         } 
         catch (Exception e) {
-            System.out.println("An error occurred.");
             e.printStackTrace();
         }
 
     }
 
     public void load_vendors () {
+        //! metodo che carica i dati dei vendor dal file
     
         try {
             File file = new File("src/main/resources/data/vendors.txt");
@@ -449,7 +458,6 @@ public class DataHandler {
             scanner.close();
         } 
         catch (Exception e) {
-            System.out.println("An error occurred.");
             e.printStackTrace();
         }
     }
@@ -489,13 +497,48 @@ public class DataHandler {
 
     public void delete_product ( String ID ) { // non uso il nome perché non è per forza univoco
         //! metodo che rimuove un product dalla lista e aggiorna il file
+
+        // aggiorno i product clone
         for ( Product p : products ) {
-            if ( p.get_ID().equals( ID ) ) {
-                products.remove(p);
-                update_productFile();
-                return;
+            try {
+                if ( p.get_sourceID().equals( ID ) ) {
+                    p.set_autoRestock(false);
+                    p.set_minStock(0);
+                    p.set_restockAmount(0);
+                    p.set_isClone(false);
+                    p.set_sourceID(null);
+                    update_productFile();
+                }
+            } catch (Exception e) {
+                continue; // se si arriva qui, significa che il sourceID è null, quindi non c'è bisogno di fare nulla
             }
         }
+        
+        // rimuovo il product dai vendor
+        for ( Vendor v : vendors ) {
+            if ( v.get_productsID().contains( ID ) ) {
+                v.remove_productID(ID);
+                update_vendorFile();
+            }
+        }
+        
+        // rimuovo il product dalla lista
+        for ( Product p : products ) {
+            if ( p.get_ID().equals( ID ) ) {
+
+                // elimino il file dell'immagine
+                if ( !p.get_pathOf_image().equals("/main/resources/images/iconOf_noImage.png") ) {
+                    File file = new File("src/" + p.get_pathOf_image());
+                    file.delete();
+                }
+
+                products.remove(p);
+                update_productFile();
+                break;   
+            }
+        }
+        
+
     }
 
     public void update_product ( String ID , String newName , String newDescription , String newPathOf_image , float newSellingPrice , int newCurrentStock , boolean autoRestock , int newMinStock , int newRestockAmount , boolean isClone , String newSourceID ) {
@@ -505,37 +548,28 @@ public class DataHandler {
         for ( Product p : products ) {
             if ( p.get_ID().equals( ID ) ) {
                 
-                if ( !newName.equals("") ) 
-                    p.set_name(newName);
-                if ( !newDescription.equals("") )
-                    p.set_description(newDescription);
-                if ( !newPathOf_image.equals("") )
-                    p.set_pathOf_image(newPathOf_image);
-                if ( newSellingPrice != 0 )
-                    p.set_sellingPrice(newSellingPrice);
-                if ( newCurrentStock != 0 )
-                    p.set_currentStock(newCurrentStock);
+                p.set_name(newName);
+                p.set_description(newDescription);
+                p.set_pathOf_image(newPathOf_image);
+                p.set_sellingPrice(newSellingPrice);
+                p.set_currentStock(newCurrentStock);
                 
                 if ( autoRestock == true ) {
                     p.set_autoRestock(true);
                     p.set_minStock(newMinStock);
                     p.set_restockAmount(newRestockAmount);
+                    p.set_isClone(true);
+                    p.set_sourceID(newSourceID);
                 } else {
                     p.set_autoRestock(false);
                     p.set_minStock(0);
                     p.set_restockAmount(0);
-                }
-                
-                if ( isClone == true ) {
-                    p.set_isClone(true);
-                    p.set_sourceID(newSourceID);
-                } else {
                     p.set_isClone(false);
                     p.set_sourceID(null);
                 }
 
                 update_productFile();
-                return;
+                break;
             }
         }
 
@@ -555,9 +589,7 @@ public class DataHandler {
             productMap.put("vendorID", p.get_vendorID());
             productMap.put("name", p.get_name());
 
-            // rimuovo tutti gli acapo dalla stringa description
-            productMap.put("description", p.get_description());
-            productMap.get("description").replaceAll("\n", "\\|");
+            productMap.put("description", p.get_description().replaceAll("\n", "\\|")); // rimuovo tutti gli acapo dalla stringa description
 
             productMap.put("pathOf_image", p.get_pathOf_image());
             productMap.put("sellingPrice", String.valueOf( p.get_sellingPrice() ));
@@ -579,7 +611,6 @@ public class DataHandler {
             writer.close();
         } 
         catch (Exception e) {
-            System.out.println("An error occurred.");
             e.printStackTrace();
         }
 
@@ -618,7 +649,6 @@ public class DataHandler {
             scanner.close();
         } 
         catch (Exception e) {
-            System.out.println("An error occurred.");
             e.printStackTrace();
         }
 
@@ -632,6 +662,38 @@ public class DataHandler {
             }
         }
         return false;
+    }
+
+    public Product retrieve_productByID ( String productID ) {
+        //! metodo che restituisce un product in base all'ID
+        for ( Product p : products ) {
+            if ( p.get_ID().equals( productID ) ) {
+                return p;
+            }
+        }
+        return null;
+    } 
+
+    public ArrayList<Product> retrieve_productsByOwner ( String productOwner_vendorID ) {
+        //! metodo che restituisce tutti i product di un determinato venditore
+        ArrayList<Product> productsByOwner = new ArrayList<Product>();
+        for ( Product p : products ) {
+            if ( p.get_vendorID().equals( productOwner_vendorID ) ) {
+                productsByOwner.add(p);
+            }
+        }
+        return productsByOwner;
+    }
+
+    public ArrayList<Product> retrieve_productsByNotOwner ( String productOwner_vendorID ) {
+        //! metodo che restituisce tutti i product di tutti i venditori tranne quello specificato
+        ArrayList<Product> productsByNotOwner = new ArrayList<Product>();
+        for ( Product p : products ) {
+            if ( !p.get_vendorID().equals( productOwner_vendorID ) ) {
+                productsByNotOwner.add(p);
+            }
+        }
+        return productsByNotOwner;
     }
 
 }

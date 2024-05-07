@@ -33,10 +33,10 @@ public class CustomerPageController extends Controller {
     //. riquadro in cui verrano mostrate le varie viste
     @FXML private StackPane stackpaneOf_customerViews;
     
-    // vista di benvenuto
+    //. vista di benvenuto
     @FXML private FlowPane flowpaneOf_welcome;
 
-    // vista delle impostazioni
+    //. vista delle impostazioni
     boolean isCustomerPasswordShown = false;
     int counterOfDeleteAccount = 0;
     @FXML private FlowPane flowpaneOf_settings;
@@ -48,10 +48,11 @@ public class CustomerPageController extends Controller {
     @FXML private Label labelOf_settingsWarning;
     @FXML private Button buttonOf_settingsDeleteAccount;
 
-    // vista della ricarica del saldo
+    //. vista della ricarica del saldo
     @FXML private FlowPane flowpaneOf_depositInterface;
     @FXML private TextField textfieldOf_moneyQuantity;
     @FXML private Label labelOf_depositInterfaceWarning;
+
 
 
 
@@ -91,8 +92,13 @@ public class CustomerPageController extends Controller {
 
 
 
+
+
+
+    //. interfaccia delle impostazioni
     @FXML private void show_settings () {
         //! metodo che mostra la vista delle impostazioni
+
         counterOfDeleteAccount = 0;
         buttonOf_settingsDeleteAccount.setText("Delete Account");
         flowpaneOf_settings.toFront();
@@ -285,6 +291,7 @@ public class CustomerPageController extends Controller {
 
 
 
+    //. interfaccia della ricarica del saldo
     @FXML private void show_depositInterface () {
         //! metodo che mostra la vista della ricarica del saldo
         flowpaneOf_depositInterface.toFront();
@@ -361,13 +368,7 @@ public class CustomerPageController extends Controller {
 
     }
 
-
-
-
-
-
-
-    
+    //. === METODI DI UTILITÀ AKA DA NON MODIFICARE ===
     @FXML private void show_welcome () {
         //! metodo che mostra il riquadro di benvenuto
         flowpaneOf_welcome.toFront();

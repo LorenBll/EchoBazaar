@@ -36,6 +36,7 @@ public class RegistrationPageController extends Controller {
 
 
 
+    // metodo che viene chiamato automaticamente all'avvio del programma
     @Override @FXML public void initialize () {
 
         // se premo invio mentre sono nel campo di testo dello username, passo al campo di testo della password
@@ -86,21 +87,11 @@ public class RegistrationPageController extends Controller {
         labelOf_passwordShower.setText(passwordField.getText());
     }
 
-
-    
-    // usato da pulsante "X" e pulsante "Cancel"
-    @FXML private void close_window () {
-        //! metodo che chiude il programma
-        System.exit(0);
-    }
-
     // usato da pulsante "Go Back to Login"
     @FXML private void show_loginPage () {
         //! metodo che visualizza la pagina di login
         main.show_loginPage();
     }
-
-
     
     // usato da pulsante "Complete" (registration)
     @FXML private void register () {
@@ -200,6 +191,12 @@ public class RegistrationPageController extends Controller {
             );
         });
 
+    }
+
+    // usato da pulsante "X" e pulsante "Cancel"
+    @FXML private void close_window () {
+        //! metodo che chiude il programma
+        System.exit(0);
     }
 
 }

@@ -22,9 +22,9 @@ public class Product {
     private boolean autoRestock;    // se true, il prodotto viene automaticamente rifornito rifornito quando il numero di pezzi disponibili scende sotto minStock
     private int minStock;           // se autoRestock è true, minStock indica il numero minimo di pezzi che devono essere sempre disponibili
     private int restockAmount;      // se autoRestock è true, restockAmount indica il numero di pezzi che vengono acquistati ad ogni rifornimento
-
-    private boolean isClone;        // se true, il prodotto è un clone di un altro prodotto
     private String sourceID;        // ID del prodotto di origine (se il prodotto è un clone di un altro prodotto)
+
+    private boolean isClone;        // questo attributo originariamente rimpiazzava autoRestock, ma è stato mantenuto purché inutile per non dover modificare il codice in più punti
 
 
 
@@ -95,6 +95,10 @@ public class Product {
 
 
 
+
+
+
+    // === METODI DI UTILITÀ AKA DA NON MODIFICARE ===
     public String get_ID () {
         return this.ID;
     }
@@ -143,8 +147,6 @@ public class Product {
         return this.sourceID;
     }
 
-
-
     public void set_name ( String newName ) {
         this.name = newName;
     }
@@ -185,7 +187,15 @@ public class Product {
         this.sourceID = newSourceID;
     }
 
+    public void add_stock ( int quantity ) {
+        //! metodo che aggiunge stock al prodotto
+        this.currentStock += quantity;
+    }
 
+    public void remove_stock ( int quantity ) {
+        //! metodo che rimuove stock dal prodotto
+        this.currentStock -= quantity;
+    }
 
 
 }

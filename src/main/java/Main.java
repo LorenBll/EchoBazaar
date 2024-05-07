@@ -140,10 +140,7 @@ public class Main extends Application {
         } catch (Exception e) { e.printStackTrace(); }
     }
 
-
-
-
-
+    // funzione che mostra la pagina principale in base al tipo di utente loggato
     public void show_userPage () {
         //! metodo che visualizza la pagina principale
         if (loggedInCustomer != null) {
@@ -232,7 +229,7 @@ public class Main extends Application {
 
     public void enter_fullscreen () {
         //! metodo che massimizza la finestra
-        primaryStage.setFullScreenExitHint(""); // rimuove il messaggio di uscita dalla modalità fullscreen
+        primaryStage.setFullScreenExitHint(""); // rimuove il messaggio di uscita dalla modalità fullscreen (che altrimenti appare in mezzo allo schermo, e per di più non funziona)
         primaryStage.setFullScreen(true);
     }
 

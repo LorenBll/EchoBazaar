@@ -51,6 +51,10 @@ public class Customer {
 
 
 
+
+
+
+    // === METODI DI UTILITÀ AKA DA NON MODIFICARE ===
     public String get_ID () {
         return this.ID;
     }
@@ -78,8 +82,6 @@ public class Customer {
         }
         return false;
     }
-
-
 
     public void set_username ( String newUsername ) {
         this.username = newUsername;

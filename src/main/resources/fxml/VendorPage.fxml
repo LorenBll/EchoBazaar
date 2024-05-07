@@ -5,6 +5,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
@@ -15,6 +16,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
@@ -49,7 +51,7 @@
                         <Insets right="10.0" />
                      </FlowPane.margin>
                      <graphic>
-                        <ImageView fx:id="imageOf_fullscreenOperations" fitHeight="18.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imageviewOf_fullscreenOperations" fitHeight="18.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/iconOf_fullScreenEnter.png" />
                            </image>
@@ -72,7 +74,7 @@
             </FlowPane>
             <FlowPane alignment="CENTER_LEFT" columnHalignment="CENTER" prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#show_welcome" styleClass="buttonWithImage">
+                  <Button mnemonicParsing="false" onAction="#show_welcomeInterface" styleClass="buttonWithImage">
                      <graphic>
                         <ImageView fitHeight="18.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -87,7 +89,7 @@
                         <Tooltip text="Go Back to Welcome Screen" />
                      </tooltip>
                   </Button>
-                  <Label fx:id="labelOf_windowTitle" prefHeight="23.0" prefWidth="121.0" text="EchoBazaar" textFill="#6b3640">
+                  <Label prefHeight="23.0" prefWidth="121.0" text="EchoBazaar" textFill="#6b3640">
                      <font>
                         <Font name="Arial Bold" size="20.0" />
                      </font>
@@ -101,7 +103,7 @@
       </GridPane>
    </top>
    <left>
-      <GridPane fx:id="sidebar" maxWidth="225.0" minWidth="225.0" prefWidth="225.0" styleClass="sidebar" BorderPane.alignment="CENTER">
+      <GridPane maxWidth="225.0" minWidth="220.0" prefHeight="611.0" prefWidth="220.0" styleClass="sidebar" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
@@ -122,9 +124,9 @@
                 <RowConstraints maxHeight="107.0" minHeight="0.0" prefHeight="76.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <FlowPane fx:id="flowpaneOf_commonFunctions" alignment="CENTER" columnHalignment="CENTER" prefHeight="56.0" prefWidth="222.0" GridPane.rowIndex="1">
+                  <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="56.0" prefWidth="222.0" GridPane.rowIndex="1">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#show_settings" styleClass="buttonWithImage">
+                        <Button mnemonicParsing="false" onAction="#show_settingsInterface" styleClass="buttonWithImage">
                            <graphic>
                               <ImageView fitHeight="39.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -225,7 +227,15 @@
             </GridPane>
             <FlowPane alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#show_registrationPageOf_newProduct" prefHeight="35.0" prefWidth="206.0" styleClass="buttons" text="Register Product">
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#show_storageInterface" prefHeight="40.0" prefWidth="180.0" styleClass="buttons" text="View Storage">
+                     <font>
+                        <Font name="Arial Bold" size="20.0" />
+                     </font>
+                     <FlowPane.margin>
+                        <Insets bottom="20.0" />
+                     </FlowPane.margin>
+                  </Button>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#show_newProductInterface" prefHeight="40.0" prefWidth="180.0" styleClass="buttons" text="New Product">
                      <font>
                         <Font name="Arial Bold" size="20.0" />
                      </font>
@@ -238,7 +248,80 @@
    <center>
       <StackPane fx:id="stackpaneOf_vendorViews" BorderPane.alignment="CENTER">
          <children>
-            <FlowPane fx:id="flowpaneOf_welcome" alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" styleClass="view">
+            <FlowPane fx:id="flowpaneOf_depositInterface" alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" styleClass="view">
+               <children>
+                  <Label text="EchoBazaar ⛓️‍ Bank Connection">
+                     <font>
+                        <Font name="Arial Bold" size="30.0" />
+                     </font>
+                     <FlowPane.margin>
+                        <Insets bottom="35.0" />
+                     </FlowPane.margin>
+                  </Label>
+                  <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="57.0" prefWidth="477.0">
+                     <children>
+                        <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/iconOf_money.png" />
+                           </image>
+                           <FlowPane.margin>
+                              <Insets right="20.0" />
+                           </FlowPane.margin>
+                        </ImageView>
+                        <TextField fx:id="textfieldOf_moneyQuantity" prefHeight="23.0" prefWidth="344.0" promptText="Money Amount to Deposit/Withdraw" styleClass="textfields">
+                           <font>
+                              <Font name="Arial" size="20.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                     <FlowPane.margin>
+                        <Insets bottom="10.0" />
+                     </FlowPane.margin>
+                  </FlowPane>
+                  <Label fx:id="labelOf_depositInterfaceWarning" textFill="RED">
+                     <font>
+                        <Font name="Arial Bold" size="20.0" />
+                     </font>
+                     <FlowPane.margin>
+                        <Insets bottom="20.0" top="5.0" />
+                     </FlowPane.margin>
+                  </Label>
+                  <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="45.0" prefWidth="477.0">
+                     <FlowPane.margin>
+                        <Insets bottom="10.0" />
+                     </FlowPane.margin>
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#deposit" prefHeight="35.0" prefWidth="165.0" styleClass="buttons" text="⬆ Deposit ⬆">
+                           <FlowPane.margin>
+                              <Insets right="20.0" />
+                           </FlowPane.margin>
+                           <font>
+                              <Font name="Arial Bold" size="20.0" />
+                           </font>
+                           <tooltip>
+                              <Tooltip text="Deposit Money into EchoBazaar" />
+                           </tooltip>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#withdraw" prefHeight="35.0" prefWidth="165.0" styleClass="buttons" text="⬇ Withdraw ⬇">
+                           <font>
+                              <Font name="Arial Bold" size="20.0" />
+                           </font>
+                           <tooltip>
+                              <Tooltip text="Withdraw Money from EchoBazaar" />
+                           </tooltip>
+                        </Button>
+                     </children>
+                  </FlowPane>
+                  <Label text="Disclaimer: This Connection is, of course, Fake" textFill="RED">
+                     <font>
+                        <Font name="Arial Bold" size="20.0" />
+                     </font>
+                     <FlowPane.margin>
+                        <Insets bottom="30.0" top="20.0" />
+                     </FlowPane.margin>
+                  </Label>
+               </children></FlowPane>
+            <FlowPane fx:id="flowpaneOf_welcomeInterface" alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" styleClass="view">
                <children>
                   <ImageView fitHeight="450.0" fitWidth="650.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -250,7 +333,7 @@
                   </ImageView>
                </children>
             </FlowPane>
-            <FlowPane fx:id="flowpaneOf_settings" alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" styleClass="view">
+            <FlowPane fx:id="flowpaneOf_settingsInterface" alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" styleClass="view">
                <children>
                   <Label text="Vendor Settings and Informations">
                      <font>
@@ -382,80 +465,70 @@
                   </FlowPane>
                </children>
             </FlowPane>
-            <FlowPane fx:id="flowpaneOf_depositInterface" alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" styleClass="view">
+            <FlowPane fx:id="flowpaneOf_storageInterface" alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" styleClass="view">
                <children>
-                  <Label text="EchoBazaar ⛓️‍ Bank Connection">
+                  <Label text="Storage Management">
                      <font>
                         <Font name="Arial Bold" size="30.0" />
                      </font>
                      <FlowPane.margin>
-                        <Insets bottom="35.0" />
+                        <Insets bottom="15.0" />
                      </FlowPane.margin>
                   </Label>
-                  <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="57.0" prefWidth="477.0">
+                  <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="61.0" prefWidth="583.0">
                      <children>
-                        <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/iconOf_money.png" />
-                           </image>
+                        <HBox alignment="CENTER" prefHeight="44.0" prefWidth="334.0" styleClass="search-box">
+                           <children>
+                              <TextField fx:id="textfieldOf_storageSearchBar" onKeyTyped="#search_storage" prefHeight="32.0" prefWidth="306.0" promptText="Search Item" styleClass="textfields">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Arial" size="20.0" />
+                                 </font>
+                              </TextField>
+                           </children>
                            <FlowPane.margin>
-                              <Insets right="20.0" />
+                              <Insets right="10.0" />
                            </FlowPane.margin>
-                        </ImageView>
-                        <TextField fx:id="textfieldOf_moneyQuantity" prefHeight="23.0" prefWidth="344.0" promptText="Money Amount to Deposit/Withdraw" styleClass="textfields">
+                        </HBox>
+                        <CheckBox fx:id="checkboxOf_storageFinishing" mnemonicParsing="false" onAction="#search_storage" prefHeight="21.0" prefWidth="102.0" styleClass="checkbox" text="Finishing">
+                           <FlowPane.margin>
+                              <Insets right="10.0" />
+                           </FlowPane.margin>
                            <font>
-                              <Font name="Arial" size="20.0" />
+                              <Font name="Arial Bold" size="15.0" />
                            </font>
-                        </TextField>
+                           <tooltip>
+                              <Tooltip text="All Products With Stock &lt; 5">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Tooltip>
+                           </tooltip>
+                        </CheckBox>
+                        <CheckBox fx:id="checkboxOf_storageAutoRestock" mnemonicParsing="false" onAction="#search_storage" styleClass="checkbox" text="AutoRestock">
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                        </CheckBox>
                      </children>
+                  </FlowPane>
+                  <ScrollPane prefHeight="412.0" prefWidth="583.0">
+                     <content>
+                        <GridPane fx:id="gridpaneOf_storageProducts" alignment="CENTER" prefHeight="40.0" prefWidth="534.0" vgap="15.0">
+                          <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                        </GridPane>
+                     </content>
                      <FlowPane.margin>
                         <Insets bottom="10.0" />
                      </FlowPane.margin>
-                  </FlowPane>
-                  <Label fx:id="labelOf_depositInterfaceWarning" textFill="RED">
-                     <font>
-                        <Font name="Arial Bold" size="20.0" />
-                     </font>
-                     <FlowPane.margin>
-                        <Insets bottom="20.0" top="5.0" />
-                     </FlowPane.margin>
-                  </Label>
-                  <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="45.0" prefWidth="477.0">
-                     <FlowPane.margin>
-                        <Insets bottom="10.0" />
-                     </FlowPane.margin>
-                     <children>
-                        <Button mnemonicParsing="false" onAction="#deposit" prefHeight="35.0" prefWidth="165.0" styleClass="buttons" text="⬆ Deposit ⬆">
-                           <FlowPane.margin>
-                              <Insets right="20.0" />
-                           </FlowPane.margin>
-                           <font>
-                              <Font name="Arial Bold" size="20.0" />
-                           </font>
-                           <tooltip>
-                              <Tooltip text="Deposit Money into EchoBazaar" />
-                           </tooltip>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#withdraw" prefHeight="35.0" prefWidth="165.0" styleClass="buttons" text="⬇ Withdraw ⬇">
-                           <font>
-                              <Font name="Arial Bold" size="20.0" />
-                           </font>
-                           <tooltip>
-                              <Tooltip text="Withdraw Money from EchoBazaar" />
-                           </tooltip>
-                        </Button>
-                     </children>
-                  </FlowPane>
-                  <Label text="Disclaimer: This Connection is, of course, Fake" textFill="RED">
-                     <font>
-                        <Font name="Arial Bold" size="20.0" />
-                     </font>
-                     <FlowPane.margin>
-                        <Insets bottom="30.0" top="20.0" />
-                     </FlowPane.margin>
-                  </Label>
-               </children></FlowPane>
-            <FlowPane fx:id="flowpaneOf_newProduct" alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" styleClass="view">
+                  </ScrollPane>
+               </children>
+            </FlowPane>
+            <FlowPane fx:id="flowpaneOf_newProductInterface" alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" styleClass="view">
                <children>
                   <Label text="New Product Registration">
                      <font>
@@ -590,9 +663,9 @@
                               <Insets right="10.0" />
                            </FlowPane.margin>
                            <children>
-                              <TextArea fx:id="textAreaOf_descriptionOf_newProduct" prefHeight="148.0" prefWidth="232.0" styleClass="textarea" GridPane.rowIndex="1">
+                              <TextArea fx:id="textAreaOf_descriptionOf_newProduct" prefHeight="148.0" prefWidth="232.0" promptText="Product Description" styleClass="textarea" GridPane.rowIndex="1">
                                  <font>
-                                    <Font name="Arial" size="15.0" />
+                                    <Font name="Arial" size="20.0" />
                                  </font>
                               </TextArea>
                               <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="200.0" prefWidth="200.0">
@@ -639,7 +712,7 @@
                                           <Insets left="5.0" right="10.0" />
                                        </FlowPane.margin>
                                     </ImageView>
-                                    <TextField fx:id="textfieldOf_minStockOf_newProduct" prefHeight="25.0" prefWidth="225.0" promptText="Minimum Quantity" styleClass="textfields">
+                                    <TextField fx:id="textfieldOf_minStockOf_newProduct" prefHeight="25.0" prefWidth="250.0" promptText="Minimum Quantity" styleClass="textfields">
                                        <font>
                                           <Font name="Arial" size="20.0" />
                                        </font>
@@ -663,7 +736,7 @@
                                           <Insets left="5.0" right="10.0" />
                                        </FlowPane.margin>
                                     </ImageView>
-                                    <TextField fx:id="textfieldOf_restockAmountOf_newProduct" prefHeight="25.0" prefWidth="225.0" promptText="Restock Amount" styleClass="textfields">
+                                    <TextField fx:id="textfieldOf_restockAmountOf_newProduct" prefHeight="25.0" prefWidth="249.0" promptText="Restock Amount" styleClass="textfields">
                                        <font>
                                           <Font name="Arial" size="20.0" />
                                        </font>
@@ -671,7 +744,7 @@
                                           <Insets />
                                        </FlowPane.margin>
                                        <tooltip>
-                                          <Tooltip text="The Quantity of Products that Gets Bough when AutoRestocking">
+                                          <Tooltip text="The Quantity of Products that Gets Bought when Auto-Restocking">
                                              <font>
                                                 <Font name="Arial" size="15.0" />
                                              </font>
@@ -690,7 +763,7 @@
                                           <Insets left="5.0" right="10.0" />
                                        </FlowPane.margin>
                                     </ImageView>
-                                    <TextField fx:id="textfieldOf_sourceIDOf_newProduct" prefHeight="25.0" prefWidth="226.0" promptText="Source ID" styleClass="textfields">
+                                    <TextField fx:id="textfieldOf_sourceIDOf_newProduct" prefHeight="25.0" prefWidth="249.0" promptText="Source ID" styleClass="textfields">
                                        <font>
                                           <Font name="Arial" size="20.0" />
                                        </font>
@@ -734,6 +807,320 @@
                               <Font name="Arial Bold" size="20.0" />
                            </font>
                         </Button>
+                     </children>
+                  </FlowPane>
+               </children>
+            </FlowPane>
+            <FlowPane fx:id="flowpaneOf_productEditPage" alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" styleClass="view">
+               <children>
+                  <Label text="Product Edit Page">
+                     <font>
+                        <Font name="Arial Bold" size="30.0" />
+                     </font>
+                     <FlowPane.margin>
+                        <Insets bottom="35.0" />
+                     </FlowPane.margin>
+                  </Label>
+                  <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="38.0" prefWidth="633.0">
+                     <FlowPane.margin>
+                        <Insets bottom="15.0" />
+                     </FlowPane.margin>
+                     <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/iconOf_id.png" />
+                           </image>
+                           <FlowPane.margin>
+                              <Insets right="10.0" />
+                           </FlowPane.margin>
+                        </ImageView>
+                        <Label fx:id="labelOf_productID_productEdit" contentDisplay="CENTER" text="64ed3a99a00b57b6a6d6c09473008d1ffbece374">
+                           <font>
+                              <Font name="Arial" size="20.0" />
+                           </font>
+                           <tooltip>
+                              <Tooltip text="This Product's ID" />
+                           </tooltip>
+                        </Label>
+                     </children>
+                  </FlowPane>
+                  <GridPane prefHeight="46.0" prefWidth="633.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <FlowPane alignment="CENTER_LEFT" columnHalignment="CENTER" prefHeight="30.0" prefWidth="359.0">
+                           <children>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/iconOf_text.png" />
+                                 </image>
+                                 <FlowPane.margin>
+                                    <Insets left="10.0" />
+                                 </FlowPane.margin>
+                              </ImageView>
+                              <TextField fx:id="textfieldOf_nameOf_productEdit" prefHeight="25.0" prefWidth="259.0" promptText="Product Name" styleClass="textfields">
+                                 <FlowPane.margin>
+                                    <Insets left="10.0" />
+                                 </FlowPane.margin>
+                                 <font>
+                                    <Font name="Arial" size="20.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </FlowPane>
+                        <FlowPane alignment="CENTER_RIGHT" columnHalignment="CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                           <children>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/iconOf_image.png" />
+                                 </image>
+                                 <FlowPane.margin>
+                                    <Insets right="10.0" />
+                                 </FlowPane.margin>
+                              </ImageView>
+                              <TextField fx:id="textfiledOf_pathOfImageOf_productEdit" editable="false" prefHeight="25.0" prefWidth="256.0" promptText="Path To Image" styleClass="textfields">
+                                 <FlowPane.margin>
+                                    <Insets right="10.0" />
+                                 </FlowPane.margin>
+                                 <font>
+                                    <Font name="Arial" size="20.0" />
+                                 </font>
+                                 <tooltip>
+                                    <Tooltip text="Updating the Image of a Product is a feature that has not been implemented yet" />
+                                 </tooltip>
+                              </TextField>
+                           </children>
+                        </FlowPane>
+                     </children>
+                     <FlowPane.margin>
+                        <Insets bottom="15.0" />
+                     </FlowPane.margin>
+                  </GridPane>
+                  <GridPane prefHeight="46.0" prefWidth="633.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <FlowPane alignment="CENTER_LEFT" columnHalignment="CENTER" prefHeight="30.0" prefWidth="359.0">
+                           <children>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/iconOf_depositMoney.png" />
+                                 </image>
+                                 <FlowPane.margin>
+                                    <Insets left="10.0" />
+                                 </FlowPane.margin>
+                              </ImageView>
+                              <TextField fx:id="textfieldOf_priceOf_productEdit" prefHeight="25.0" prefWidth="259.0" promptText="Product Price" styleClass="textfields">
+                                 <FlowPane.margin>
+                                    <Insets left="10.0" />
+                                 </FlowPane.margin>
+                                 <font>
+                                    <Font name="Arial" size="20.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </FlowPane>
+                        <FlowPane alignment="CENTER_RIGHT" columnHalignment="CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                           <children>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/iconOf_stock.png" />
+                                 </image>
+                                 <FlowPane.margin>
+                                    <Insets right="10.0" />
+                                 </FlowPane.margin>
+                              </ImageView>
+                              <TextField fx:id="textfiledOf_currentStockOf_productEdit" prefHeight="25.0" prefWidth="256.0" promptText="Current Product Stock" styleClass="textfields">
+                                 <FlowPane.margin>
+                                    <Insets right="10.0" />
+                                 </FlowPane.margin>
+                                 <font>
+                                    <Font name="Arial" size="20.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </FlowPane>
+                     </children>
+                     <FlowPane.margin>
+                        <Insets bottom="15.0" />
+                     </FlowPane.margin>
+                  </GridPane>
+                  <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="186.0" prefWidth="633.0">
+                     <children>
+                        <GridPane prefHeight="196.0" prefWidth="300.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <FlowPane.margin>
+                              <Insets right="10.0" />
+                           </FlowPane.margin>
+                           <children>
+                              <TextArea fx:id="textAreaOf_descriptionOf_productEdit" prefHeight="148.0" prefWidth="232.0" promptText="Product Description" styleClass="textarea" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="Arial" size="20.0" />
+                                 </font>
+                              </TextArea>
+                              <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="144.0" text="Description">
+                                       <font>
+                                          <Font name="Arial Bold" size="21.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </FlowPane>
+                           </children>
+                        </GridPane>
+                        <GridPane prefHeight="180.0" prefWidth="300.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints maxHeight="61.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="118.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="120.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="120.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <FlowPane.margin>
+                              <Insets right="10.0" />
+                           </FlowPane.margin>
+                           <children>
+                              <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="41.0" prefWidth="300.0">
+                                 <children>
+                                    <CheckBox fx:id="checkboxOf_autoRestockOf_productEdit" mnemonicParsing="false" onAction="#hide_autoRestock_productEdit" prefHeight="18.0" prefWidth="161.0" styleClass="checkbox" text="AutoRestock">
+                                       <font>
+                                          <Font name="Arial Bold" size="20.0" />
+                                       </font>
+                                    </CheckBox>
+                                 </children>
+                              </FlowPane>
+                              <FlowPane fx:id="flowpaneOf_minimumQuantityOf_productEdit" alignment="CENTER" columnHalignment="CENTER" prefHeight="58.0" prefWidth="300.0" GridPane.rowIndex="1">
+                                 <children>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/iconOf_minimum.png" />
+                                       </image>
+                                       <FlowPane.margin>
+                                          <Insets left="5.0" right="10.0" />
+                                       </FlowPane.margin>
+                                    </ImageView>
+                                    <TextField fx:id="textfieldOf_minStockOf_productEdit" prefHeight="25.0" prefWidth="250.0" promptText="Minimum Quantity" styleClass="textfields">
+                                       <font>
+                                          <Font name="Arial" size="20.0" />
+                                       </font>
+                                       <tooltip>
+                                          <Tooltip text="The Quantity at which the Product gets Automatically Restocked">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </Tooltip>
+                                       </tooltip>
+                                    </TextField>
+                                 </children>
+                              </FlowPane>
+                              <FlowPane fx:id="flowpaneOf_restockAmountOf_productEdit" alignment="CENTER" columnHalignment="CENTER" prefHeight="37.0" prefWidth="300.0" GridPane.rowIndex="2">
+                                 <children>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/iconOf_restockAmount.png" />
+                                       </image>
+                                       <FlowPane.margin>
+                                          <Insets left="5.0" right="10.0" />
+                                       </FlowPane.margin>
+                                    </ImageView>
+                                    <TextField fx:id="textfieldOf_restockAmountOf_productEdit" prefHeight="25.0" prefWidth="249.0" promptText="Restock Amount" styleClass="textfields">
+                                       <font>
+                                          <Font name="Arial" size="20.0" />
+                                       </font>
+                                       <FlowPane.margin>
+                                          <Insets />
+                                       </FlowPane.margin>
+                                       <tooltip>
+                                          <Tooltip text="The Quantity of Products that Gets Bought when Auto-Restocking">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </Tooltip>
+                                       </tooltip>
+                                    </TextField>
+                                 </children>
+                              </FlowPane>
+                              <FlowPane fx:id="flowpaneOf_sourceIDOf_productEdit" alignment="CENTER" columnHalignment="CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+                                 <children>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/iconOf_id.png" />
+                                       </image>
+                                       <FlowPane.margin>
+                                          <Insets left="5.0" right="10.0" />
+                                       </FlowPane.margin>
+                                    </ImageView>
+                                    <TextField fx:id="textfieldOf_sourceIDOf_productEdit" prefHeight="25.0" prefWidth="249.0" promptText="Source ID" styleClass="textfields">
+                                       <font>
+                                          <Font name="Arial" size="20.0" />
+                                       </font>
+                                       <FlowPane.margin>
+                                          <Insets />
+                                       </FlowPane.margin>
+                                       <tooltip>
+                                          <Tooltip text="The ID of the source product">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </Tooltip>
+                                       </tooltip>
+                                    </TextField>
+                                 </children>
+                              </FlowPane>
+                           </children>
+                        </GridPane>
+                     </children>
+                     <FlowPane.margin>
+                        <Insets bottom="15.0" />
+                     </FlowPane.margin>
+                  </FlowPane>
+                  <Label fx:id="labelOf_productEdit_warning" textFill="RED">
+                     <font>
+                        <Font name="Arial Bold" size="20.0" />
+                     </font>
+                     <FlowPane.margin>
+                        <Insets bottom="15.0" />
+                     </FlowPane.margin>
+                  </Label>
+                  <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="54.0" prefWidth="633.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#save_changes_productEdit" prefHeight="40.0" prefWidth="200.0" styleClass="buttons" text="Save Changes">
+                           <font>
+                              <Font name="Arial Bold" size="20.0" />
+                           </font>
+                           <FlowPane.margin>
+                              <Insets right="15.0" />
+                           </FlowPane.margin></Button>
+                        <Button mnemonicParsing="false" onAction="#reset_productEditPage" prefHeight="40.0" prefWidth="160.0" styleClass="buttons" text="Go Back">
+                           <FlowPane.margin>
+                              <Insets right="15.0" />
+                           </FlowPane.margin>
+                           <font>
+                              <Font name="Arial Bold" size="20.0" />
+                           </font></Button>
+                        <Button fx:id="buttonOf_productEditDeleteProduct" mnemonicParsing="false" onAction="#delete_product" prefHeight="40.0" prefWidth="200.0" styleClass="buttons" text="Delete Product">
+                           <font>
+                              <Font name="Arial Bold" size="20.0" />
+                           </font></Button>
                      </children>
                   </FlowPane>
                </children>

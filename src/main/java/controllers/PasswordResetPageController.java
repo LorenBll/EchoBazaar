@@ -30,6 +30,7 @@ public class PasswordResetPageController extends Controller {
 
 
 
+    // metodo che viene chiamato automaticamente all'avvio del programma
     @Override @FXML public void initialize () {
 
         // se premo invio mentre sono nel campo di testo dell'ID, passo al campo di testo della password
@@ -80,20 +81,6 @@ public class PasswordResetPageController extends Controller {
         labelOf_passwordShower.setText(passwordField.getText());
     }
 
-
-
-    // usato da pulsante "X" e pulsante "Cancel"
-    @FXML private void close_window () {
-        //! metodo che chiude il programma
-        System.exit(0);
-    }
-
-    // usato da pulsante "Back To Login"
-    @FXML private void show_loginPage () {
-        //! metodo che mostra la pagina di login
-        main.show_loginPage();
-    }
-
     // usato da pulsante "Confirm Reset"
     @FXML private void reset () {
         //! metodo che effettua il reset della password dell'utente
@@ -125,7 +112,14 @@ public class PasswordResetPageController extends Controller {
         show_error("Wrong ID used.");
         
     }
-        
+    
+    // usato da pulsante "Back To Login"
+    @FXML private void show_loginPage () {
+        //! metodo che mostra la pagina di login
+        main.show_loginPage();
+    }
+
+
 
 
 
@@ -150,6 +144,12 @@ public class PasswordResetPageController extends Controller {
             );
         });
 
+    }
+    
+    // usato da pulsante "X" e pulsante "Cancel"
+    @FXML private void close_window () {
+        //! metodo che chiude il programma
+        System.exit(0);
     }
 
 }

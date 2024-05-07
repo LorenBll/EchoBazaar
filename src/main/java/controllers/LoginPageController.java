@@ -30,6 +30,7 @@ public class LoginPageController extends Controller {
 
 
 
+    // metodo che viene chiamato automaticamente all'avvio del programma
     @Override @FXML public void initialize () {
 
         // se premo invio mentre sono nel campo di testo dello username, passo al campo di testo della password
@@ -48,6 +49,11 @@ public class LoginPageController extends Controller {
 
     }
 
+
+
+
+
+    
     // usato da pulsante "Show/Hide Password" (occhio/occhio sbarrato)
     @FXML private void showOrHide_password () {
         //! metodo che mostra o nasconde la password a seconda dello stato attuale della password (mostrata o non mostrata)        
@@ -78,20 +84,6 @@ public class LoginPageController extends Controller {
     @FXML private void update_labelOf_passwordShower () {
         //! metodo che aggiorna il testo della label che mostra la password
         labelOf_passwordShower.setText(passwordField.getText());
-    }
-
-
-
-    // usato da pulsante "X" e pulsante "Cancel"
-    @FXML private void close_window () {
-        //! metodo che chiude il programma
-        System.exit(0);
-    }
-
-    // usato da pulsante "Register"
-    @FXML private void show_registrationPage () {
-        //! metodo che mostra la pagina di registrazione
-        main.show_registrationPage();
     }
 
     // usato da pulsante "Login"
@@ -127,6 +119,12 @@ public class LoginPageController extends Controller {
     
     }
 
+    // usato da pulsante "Register"
+    @FXML private void show_registrationPage () {
+        //! metodo che mostra la pagina di registrazione
+        main.show_registrationPage();
+    }
+
     // usato da pulsante "Forgot Password?"
     @FXML private void show_passwordRecoveryPage () {
         //! metodo che mostra la pagina di recupero password
@@ -159,6 +157,12 @@ public class LoginPageController extends Controller {
             );
         });
 
+    }
+
+    // usato da pulsante "X" e pulsante "Cancel"
+    @FXML private void close_window () {
+        //! metodo che chiude il programma
+        System.exit(0);
     }
 
 }

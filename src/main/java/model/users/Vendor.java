@@ -58,6 +58,10 @@ public class Vendor {
 
 
 
+
+
+
+    // === METODI DI UTILITÀ AKA DA NON MODIFICARE ===
     public String get_ID () {
         return this.ID;
     }
@@ -78,8 +82,6 @@ public class Vendor {
         return this.productsID;
     }
 
-
-
     public void deposit ( float amount ) {
         this.balance += amount;
     }
@@ -92,8 +94,6 @@ public class Vendor {
         return false;
     }
 
-    
-
     public void set_username ( String newUsername ) {
         this.username = newUsername;
     }
@@ -102,10 +102,12 @@ public class Vendor {
         this.encryptedPassword = newPassword;
     }
 
-
-
     public void add_productID ( String productID ) {
         this.productsID.add( productID );
+    }
+
+    public void remove_productID ( String productID ) {
+        this.productsID.remove( productID );
     }
 
 

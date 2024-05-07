@@ -1,4 +1,7 @@
-/* classe per i tooltip */
+/* automatico = stile che si applica automaticamente a tutti gli elementi di quel tipo */
+/* non automatico = stile che si applica solo agli elementi con lo stile specificato */
+
+/* automatico */
 .tooltip {
     -fx-background-color: #6b3640;
     -fx-text-fill: #e7d388;
@@ -6,13 +9,13 @@
     -fx-font-family: "Arial";
 }
 
+/* non automatico */
 .textfields {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-border-width: 0;
     -fx-padding: 0 0 0 0;
 }
-
 .textfields:focused {
     -fx-background-color: transparent;
     -fx-border-color: transparent;;
@@ -21,6 +24,7 @@
     -fx-padding: 0 0 0 0;
 }
 
+/* non automatico */
 .buttons {
     -fx-background-color: #6b3640;
     -fx-border-color: transparent;
@@ -31,11 +35,7 @@
 
     -fx-text-fill: #e7d388;
 }
-
-.inputlines {
-    -fx-stroke: #6b3640;
-}
-
+/* non automatico */
 .buttonWithImage {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
@@ -50,31 +50,33 @@
     -fx-mark-color: #e7d388;
 }
 
-/* la barra di gestione della finestra (minimizza, massimizza, chiudi) deve avere il bordo inferiore di colore #6b3640 */
+/* la barra di gestione della finestra (minimizza, massimizza, chiudi) */
 .window-handling-bar {
     -fx-border-color: lightgray;
     -fx-border-width: 0 0 3 0;
 }
 
-/* bordo laterale destro di colore #6b3640 */
+/* bordo laterale destro */
 .sidebar {
     -fx-border-color: lightgray;
     -fx-border-width: 0 3 0 0;
 }
 
-
+/* non automatico */
 .view {
     -fx-background-color: #f4f4f4;
     -fx-border-color: lightgray;
     -fx-border-width: 0 0 0 0;
 }
 
+/* non automatico */
 .stackpane {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-border-width: 0 0 0 0;
 }
 
+/* non automatico */
 .checkbox .box {
     -fx-background-color: #6b3640;
     -fx-background-radius: 5;
@@ -86,9 +88,77 @@
     -fx-mark-color: #e7d388;
 }
 
+/* non automatico */
 .textarea {
+    -fx-text-fill: black;
+    -fx-prompt-text-fill: #b6b8c0;
+    -fx-background-color: transparent;
+    -fx-control-inner-background: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-padding: 0;
+}
+.textarea:focused {
+    -fx-background-color: #f4f4f4;
+    -fx-border-width: 2.5 2.5 2.5 2.5;
+    -fx-border-color: #6b3640;
+    -fx-padding: 0;
+}
+
+/* automatico */
+.scroll-pane {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-border-width: 0;
-    -fx-padding: 0 0 0 0;
+    -fx-padding: 0;
+}
+
+/* automatico */
+.scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-padding: 0;
+}
+.scroll-bar:vertical .thumb { /* (.thumb è il cursore della scrollbar) */
+    -fx-background-color: #6b3640;
+}
+/* automatico : rimuovo le frecce dello scrollpane */
+.scroll-bar:vertical .increment-arrow,
+.scroll-bar:vertical .decrement-arrow,
+.scroll-bar:vertical .increment-button,
+.scroll-bar:vertical .decrement-button {
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+    -fx-shape: "";
+}
+
+/* non automatico */
+.search-box {
+    -fx-border-color: lightgray;
+    -fx-border-width: 3 3 3 3;
+    -fx-border-radius: 100;
+}
+
+/* non automatico */
+.spinner {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-padding: 0;
+}
+.spinner > .text-field {
+    -fx-background-color: transparent;
+}
+.spinner > .increment-arrow-button,
+.spinner > .decrement-arrow-button {
+    -fx-background-color: transparent;
+}
+.spinner > .increment-arrow-button > .increment-arrow,
+.spinner > .decrement-arrow-button > .decrement-arrow {
+    -fx-background-color: #6b3640;
+}
+.spinner:focused {
+    -fx-border-color: #6b3640;
+    -fx-border-width: 0 0 2.5 0;
 }

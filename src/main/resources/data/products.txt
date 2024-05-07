@@ -1,0 +1,1 @@
+99d4153c21079e4ae742532b599835d2f8bf3db9,64ed3a99a00b57b6a6d6c09473008d1ffbece374,maglietta rossa,"maglietta rossa;|cotone;|Made in China",/main/resources/user_images/64ed3a99a00b57b6a6d6c09473008d1ffbece374_fb1bf80d6e5331c9ee4e280363c512a9055636c6.png,4.0,500,false,0,0,false,null

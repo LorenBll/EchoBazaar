@@ -2,8 +2,12 @@ package main.java.auth;
 
 import java.security.MessageDigest;
 
-// PER CHI LEGGE : NOTARE CHE I METODI SONO STATICI IN MODO TALE DA NON DOVER ISTANZIARE UN OGGETTO CryptingEngine PER USARLI (metodi di classe)
 
+
+
+
+
+// PER CHI LEGGE : NOTARE CHE I METODI SONO STATICI IN MODO TALE DA NON DOVER ISTANZIARE UN OGGETTO CryptingEngine PER USARLI (metodi di classe)
 public class CryptingEngine {
     
     public static String encrypt_string ( String string ) {
