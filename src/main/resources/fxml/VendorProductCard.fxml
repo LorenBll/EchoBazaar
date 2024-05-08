@@ -55,7 +55,7 @@
             </ImageView>
          </graphic>
          <tooltip>
-            <Tooltip text="Regster Stock Arrival">
+            <Tooltip text="Register Stock Arrival / Buy Stock (if AutoRestock is On)">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>

@@ -91,4 +91,8 @@ public class Customer {
         this.encryptedPassword = newPassword;
     }
 
+    public void pay ( float amount ) {
+        this.balance -= amount;
+    }
+
 }

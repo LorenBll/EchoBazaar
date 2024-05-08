@@ -75,10 +75,7 @@ public class CustomerPageController extends Controller {
     private String shorten_balance ( float balance ) {
         //! metodo che accorcia il balance se è troppo lungo, ma non lo arrotonda
         String shortenedBalance = "";
-        if (balance >= 1000000000) {
-            shortenedBalance = String.format("%.2fB", balance / 1000000000);
-        }
-        else if (balance >= 1000000) {
+        if (balance >= 1000000) {
             shortenedBalance = String.format("%.2fM", balance / 1000000);
         }
         else if (balance >= 1000) {

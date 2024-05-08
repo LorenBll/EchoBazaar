@@ -110,6 +110,14 @@ public class Vendor {
         this.productsID.remove( productID );
     }
 
+    public void pay ( float amount ) {
+        this.balance -= amount;
+    }
+
+    public void get_paid ( float amount ) {
+        this.balance += amount;
+    }
+
 
 
 }

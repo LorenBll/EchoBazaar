@@ -91,6 +91,8 @@ public class VendorPageController extends Controller {
     @FXML private TextField textfieldOf_storageSearchBar;
     @FXML private CheckBox checkboxOf_storageFinishing;
     @FXML private CheckBox checkboxOf_storageAutoRestock;
+    
+    @FXML private Label labelOf_storageWarning;
 
     //. vista di update di un prodotto
     @FXML private FlowPane flowpaneOf_productEditPage;
@@ -149,15 +151,17 @@ public class VendorPageController extends Controller {
 
     }
 
+    public void update_balance () {
+        //! metodo che aggiorna il balance del vendor
+        labelOf_balance.setText( shorten_balance( main.loggedInVendor.get_balance() ) + "$" );
+    }   
+
     public void update () { setup(); }
 
     private String shorten_balance ( float balance ) {
         //! metodo che accorcia il balance se è troppo lungo, ma non lo arrotonda
         String shortenedBalance = "";
-        if (balance >= 1000000000) {
-            shortenedBalance = String.format("%.2fB", balance / 1000000000);
-        }
-        else if (balance >= 1000000) {
+        if (balance >= 1000000) {
             shortenedBalance = String.format("%.2fM", balance / 1000000);
         }
         else if (balance >= 1000) {
@@ -720,6 +724,11 @@ public class VendorPageController extends Controller {
                 show_registrationOf_newProduct_warning("Invalid Source ID.");
                 return;
             }
+            // controllo che il sourceID non indichi un mio prodotto
+            if ( main.dataHandler.retrieve_productByID(sourceID).get_vendorID().equals( main.loggedInVendor.get_ID() ) ) {
+                show_registrationOf_newProduct_warning("Source ID can't be one of your products.");
+                return;
+            }
 
         }
         else {
@@ -905,6 +914,28 @@ public class VendorPageController extends Controller {
 
         }
         catch (Exception e) { e.printStackTrace(); }
+
+    }
+
+    public void show_storageWarning ( String warningText ) {
+        //! metodo che mostra un messaggio di warning
+
+        labelOf_storageWarning.setText( warningText );
+
+        // faccio partire un timer di 5 al termine del quale l'operazione viene annullata
+        Platform.runLater( () -> {
+            new java.util.Timer().schedule(
+                    new java.util.TimerTask() {
+                        @Override
+                        public void run() {
+                            Platform.runLater(() -> {
+                                labelOf_storageWarning.setText("");
+                            });
+                        }
+                    },
+                    3000
+            );
+        });
 
     }
 
@@ -1165,6 +1196,11 @@ public class VendorPageController extends Controller {
             // controllo che il sourceID non sia uguale all'ID del prodotto che si sta modificando
             if (newSourceID.equals( labelOf_productID_productEdit.getText() )) {
                 show_productEdit_warning("Source ID can't be the same as the Product ID.");
+                return;
+            }
+            // controllo che il sourceID non indichi un mio prodotto
+            if ( main.dataHandler.retrieve_productByID(newSourceID).get_vendorID().equals( main.loggedInVendor.get_ID() ) ) {
+                show_productEdit_warning("Source ID can't be one of your products.");
                 return;
             }
         

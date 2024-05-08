@@ -47,9 +47,7 @@ public class DataHandler {
             }
 
         } 
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        catch (Exception e) { e.printStackTrace(); }
 
         //. legge i dati presenti nei file e li carica nelle liste
         try {
@@ -59,9 +57,7 @@ public class DataHandler {
             load_products();
 
         } 
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        catch (Exception e) { e.printStackTrace(); }
 
     }
 
@@ -264,9 +260,7 @@ public class DataHandler {
             }
             writer.close();
         } 
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        catch (Exception e) { e.printStackTrace(); }
 
     }
 
@@ -283,10 +277,18 @@ public class DataHandler {
             }
             scanner.close();
         } 
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        catch (Exception e) { e.printStackTrace(); }
     
+    }
+
+    public Customer retrieve_customerByID ( String customerID ) {
+        //! metodo che restituisce un customer in base all'ID
+        for ( Customer c : customers ) {
+            if ( c.get_ID().equals( customerID ) ) {
+                return c;
+            }
+        }
+        return null;
     }
 
 
@@ -332,21 +334,30 @@ public class DataHandler {
 
     public void delete_vendor ( String username ) {
         //! metodo che rimuove un vendor dalla lista e aggiorna il file
+
+        // identifico il vendor da eliminare
+        Vendor vendorToDelete = null;
         for ( Vendor v : vendors ) {
             if ( v.get_username().equals( username ) ) {
-                
-                ArrayList<String> productsID = v.get_productsID();
-                for ( Product p : products ) {
-                    if ( productsID.contains( p.get_ID() ) ) {
-                        delete_product( p.get_ID() );
-                    }
-                }
-
-                vendors.remove(v);
-                update_vendorFile();
-                return;
+                vendorToDelete = v;
+                break;
             }
         }
+
+        // rimuovo il vendor dalla lista
+        vendors.remove(vendorToDelete);
+        update_vendorFile();
+
+        String vendorID = vendorToDelete.get_ID();
+        
+        // rimuovo i product del vendor : creo una copia dell'ArrayList per evitare ConcurrentModificationException
+        ArrayList<Product> productsCopy = new ArrayList<Product>(products);
+        for ( Product p : productsCopy ) {
+            if ( p.get_vendorID().equals( vendorID ) ) {
+                delete_product(p.get_ID());
+            }
+        }
+
     }
 
     public boolean update_vendor ( String ID , String newUsername , String newPassword ) {
@@ -422,9 +433,7 @@ public class DataHandler {
             }
             writer.close();
         } 
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        catch (Exception e) { e.printStackTrace(); }
 
     }
 
@@ -457,9 +466,7 @@ public class DataHandler {
             }
             scanner.close();
         } 
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        catch (Exception e) { e.printStackTrace(); }
     }
 
     public Vendor retrieve_vendorByID ( String vendorID ) {
@@ -507,7 +514,15 @@ public class DataHandler {
 
     public void delete_product ( String ID ) { // non uso il nome perché non è per forza univoco
         //! metodo che rimuove un product dalla lista e aggiorna il file
-
+        
+        // rimuovo il product dai vendor
+        for ( Vendor v : vendors ) {
+            if ( v.get_productsID().contains( ID ) ) {
+                v.remove_productID(ID);
+            }
+        }
+        update_vendorFile();
+        
         // aggiorno i product clone
         for ( Product p : products ) {
             try {
@@ -517,18 +532,9 @@ public class DataHandler {
                     p.set_restockAmount(0);
                     p.set_isClone(false);
                     p.set_sourceID(null);
-                    update_productFile();
                 }
             } catch (Exception e) {
                 continue; // se si arriva qui, significa che il sourceID è null, quindi non c'è bisogno di fare nulla
-            }
-        }
-        
-        // rimuovo il product dai vendor
-        for ( Vendor v : vendors ) {
-            if ( v.get_productsID().contains( ID ) ) {
-                v.remove_productID(ID);
-                update_vendorFile();
             }
         }
         
@@ -543,11 +549,10 @@ public class DataHandler {
                 }
 
                 products.remove(p);
-                update_productFile();
                 break;   
             }
         }
-        
+        update_productFile();
 
     }
 
@@ -620,9 +625,7 @@ public class DataHandler {
             }
             writer.close();
         } 
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        catch (Exception e) { e.printStackTrace(); }
 
     }
 
@@ -658,9 +661,7 @@ public class DataHandler {
             }
             scanner.close();
         } 
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        catch (Exception e) { e.printStackTrace(); }
 
     }
 
@@ -704,6 +705,48 @@ public class DataHandler {
             }
         }
         return productsByNotOwner;
+    }
+
+
+
+
+
+
+    public boolean vendorBuy_product ( ProductOrder productOrder , String vendorID , Product productToRestock ) {  
+        //! metodo che permette ad un venditore di acquistare un product per il restock : productToRestock ha come sourceID productOrder.get_product().get_ID()
+
+        Vendor buyer = retrieve_vendorByID(vendorID);
+        Vendor seller = retrieve_vendorByID(productOrder.get_product().get_vendorID());
+        Product buyed_product = productOrder.get_product();
+        float totalCost = buyed_product.get_sellingPrice() * productOrder.get_quantity();
+
+        //. controllo che la quantità richiesta sia disponibile
+        if ( buyed_product.get_currentStock() < productOrder.get_quantity() ) {
+            return false;
+        }
+
+        //. controllo che il venditore abbia abbastanza soldi
+        if ( buyer.get_balance() < totalCost ) {
+            return false;
+        }
+
+        //. effettuo l'acquisto
+        buyer.pay(totalCost);
+        seller.get_paid(totalCost);
+        buyed_product.set_currentStock( buyed_product.get_currentStock() - productOrder.get_quantity() );
+        productToRestock.set_currentStock( productToRestock.get_currentStock() + productOrder.get_quantity() );
+        update_vendorFile();
+        update_productFile();
+
+        //. effettuo le operazioni di autorestock su buyed_product ( non su productToRestock perché non è stato acquistato )
+        if ( buyed_product.get_autoRestock() ) {
+            if ( buyed_product.get_currentStock() < buyed_product.get_minStock() ) {
+                ProductOrder newOrder = new ProductOrder ( retrieve_productByID(buyed_product.get_sourceID()) , buyed_product.get_restockAmount() );
+                vendorBuy_product(newOrder, buyed_product.get_vendorID() , buyed_product);
+            }
+        }
+
+        return true;
     }
 
 }
