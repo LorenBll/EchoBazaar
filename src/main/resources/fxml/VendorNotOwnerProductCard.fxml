@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="175.0" prefWidth="565.0" stylesheets="@../css/commonStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.VendorNotOwnerProductCardController">
+   <children>
+      <ImageView fx:id="productImage" fitHeight="136.0" fitWidth="187.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.910934448242188" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="378.0" AnchorPane.topAnchor="29.0">
+         <image>
+            <Image url="@../images/iconOf_noImage.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="productName" layoutX="202.0" layoutY="55.0" text="Product Name">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="productPrice" layoutX="202.0" layoutY="80.0" text="Product Price">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="productOwner" layoutX="202.0" layoutY="107.0" text="Product Owner Username">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </Label>
+      <Button layoutX="499.0" layoutY="68.0" mnemonicParsing="false" onAction="#show_productDetails" styleClass="buttonWithImage">
+         <graphic>
+            <ImageView fitHeight="82.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/iconOf_showPassword.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="View Product Details">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Tooltip>
+         </tooltip>
+      </Button>
+      <Button layoutX="446.0" layoutY="66.0" mnemonicParsing="false" onAction="#copy_ID" prefHeight="43.0" prefWidth="34.0" styleClass="buttonWithImage">
+         <graphic>
+            <ImageView fitHeight="37.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/iconOf_id.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="ID Copied!" />
+         </tooltip>
+      </Button>
+   </children>
+</AnchorPane>

@@ -462,6 +462,16 @@ public class DataHandler {
         }
     }
 
+    public Vendor retrieve_vendorByID ( String vendorID ) {
+        //! metodo che restituisce un vendor in base all'ID
+        for ( Vendor v : vendors ) {
+            if ( v.get_ID().equals( vendorID ) ) {
+                return v;
+            }
+        }
+        return null;
+    }
+
 
 
 

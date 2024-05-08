@@ -114,6 +114,21 @@ public class VendorPageController extends Controller {
     int counterOfDeleteProduct = 0;
     @FXML private Button buttonOf_productEditDeleteProduct;
 
+    //. vista di visualizzazione degli altri prodotti
+    @FXML private FlowPane flowpaneOf_otherProductsInterface;
+    @FXML private GridPane gridpaneOf_otherProducts;
+
+    @FXML private TextField textfieldOf_otherProductsSearchBar;
+
+    //. vista di visualizzazione dei prodotti di un altro venditore
+    @FXML private FlowPane flowpaneOf_otherProductsDetailsInterface;
+    @FXML private ImageView imageviewOf_otherProductsDetailsImage;
+    @FXML private Label labelOf_otherProductsDetailsID;
+    @FXML private Label labelOf_otherProductsDetailsName;
+    @FXML private Label labelOf_otherProductsDetailsPrice;
+    @FXML private Label labelOf_otherProductsDetailsOwner;
+    @FXML private TextArea textAreaOf_otherProductsDetailsDescription;
+
 
 
 
@@ -826,7 +841,7 @@ public class VendorPageController extends Controller {
             
                 for (Product currentProduct : productsToView) {
             
-                    if ( !currentProduct.get_name().toLowerCase().contains(search) ) {
+                    if ( !(currentProduct.get_name().toLowerCase().contains(search) || currentProduct.get_description().toLowerCase().contains(search)) ) {
                         productsToRemove.add(currentProduct);
                     }
                 
@@ -1147,6 +1162,11 @@ public class VendorPageController extends Controller {
                 show_productEdit_warning("Invalid Source ID.");
                 return;
             }
+            // controllo che il sourceID non sia uguale all'ID del prodotto che si sta modificando
+            if (newSourceID.equals( labelOf_productID_productEdit.getText() )) {
+                show_productEdit_warning("Source ID can't be the same as the Product ID.");
+                return;
+            }
         
         }
         else {
@@ -1229,5 +1249,100 @@ public class VendorPageController extends Controller {
 
 
     //. interfaccia in cui vengono mostrati i prodotti degli altri venditori (serve per trovare gli ID dei prodotti da clonare)
+    @FXML private void show_otherVendorsProducts () {
+        //! metodo che mostra la vista dei prodotti degli altri venditori
+        flowpaneOf_otherProductsInterface.toFront();
+        fill_otherVendorsProductsGrid();
+    }
+
+    @FXML private void search_otherVendorsProducts () {
+        //! metodo che riempie la griglia dei prodotti degli altri venditori in base alla stringa di ricerca
+        fill_otherVendorsProductsGrid();
+    }
+
+    public void fill_otherVendorsProductsGrid () {
+        //! metodo che riempie la griglia dei prodotti degli altri venditori
+
+        int currentRow = 1;
+        try {
+            
+            gridpaneOf_otherProducts.getChildren().clear(); // pulisco la griglia dei prodotti (per evitare sovrapposizioni o prodotti fantasma aka. eliminati ma ancora visualizzati)
+            ArrayList<Product> productsToView = main.dataHandler.retrieve_productsByNotOwner( main.loggedInVendor.get_ID() );
+            if (productsToView.size() == 0) {
+                return;
+            }
+
+            //. pulisco la lista "productsToView" da tutti i prodotti in base alla stringa "search"
+            // parola chiave per la ricerca
+            String search = textfieldOf_otherProductsSearchBar.getText().toLowerCase();
+            if (!search.equals("")) {
+                ArrayList<Product> productsToRemove = new ArrayList<>();
+            
+                for (Product currentProduct : productsToView) {
+            
+                    if ( !(currentProduct.get_name().toLowerCase().contains(search) || currentProduct.get_description().toLowerCase().contains(search)) ) {
+                        productsToRemove.add(currentProduct);
+                    }
+                
+                }
+
+                for (Product currentProduct : productsToRemove) {
+                    productsToView.remove(currentProduct);
+                }
+            
+            }
+
+            //. visualizzazione dei prodotti
+            for ( Product currentProduct : productsToView ) { // visualizzo i prodotti
+                
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/main/resources/fxml/VendorNotOwnerProductCard.fxml"));
+                AnchorPane productCard = loader.load();
+                VendorNotOwnerProductCardController productCardController = loader.getController();
+                productCardController.set_main(main);
+                productCardController.setup(currentProduct , this);
+                
+                gridpaneOf_otherProducts.add(productCard, 0, currentRow);
+                currentRow++;
+            }
+
+        }
+        catch (Exception e) { e.printStackTrace(); }
+
+    }
+
+
+
+
+
+
+
+    //. interfaccia di visualizzazione dei dettagli di un prodotto
+    public void show_productDetailsPage ( Product product ) {
+        //! metodo che mostra la vista dei dettagli di un prodotto
+        flowpaneOf_otherProductsDetailsInterface.toFront();
+
+        imageviewOf_otherProductsDetailsImage.setImage( new Image( product.get_pathOf_image() ) );
+        labelOf_otherProductsDetailsID.setText( product.get_ID() );
+        labelOf_otherProductsDetailsName.setText( product.get_name() );
+        labelOf_otherProductsDetailsPrice.setText( String.valueOf(product.get_sellingPrice()) );
+        labelOf_otherProductsDetailsOwner.setText( main.dataHandler.retrieve_vendorByID( product.get_vendorID() ).get_username() );
+        textAreaOf_otherProductsDetailsDescription.setText( product.get_description() );
+
+    }
+
+    @FXML public void copy_productID () {
+        //! metodo che copia l'ID del prodotto nella clipboard
+
+        ClipboardContent content = new ClipboardContent();
+        content.putString( labelOf_otherProductsDetailsID.getText() );
+        Clipboard.getSystemClipboard().setContent(content);
+    
+    }
+
+    @FXML public void close_otherProductsDetails () {
+        //! metodo che chiude la vista dei dettagli di un prodotto
+        flowpaneOf_otherProductsInterface.toFront();
+    }
 
 }
