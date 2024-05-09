@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="175.0" prefWidth="565.0" stylesheets="@../css/commonStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.CustomerProductCardController">
+   <children>
+      <ImageView fx:id="productImage" fitHeight="136.0" fitWidth="187.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.910934448242188" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="378.0" AnchorPane.topAnchor="29.0">
+         <image>
+            <Image url="@../images/iconOf_noImage.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="productName" layoutX="202.0" layoutY="55.0" text="Product Name">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="productPrice" layoutX="202.0" layoutY="81.0" text="Product Price">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="productOwner" layoutX="202.0" layoutY="107.0" text="Product Owner Username">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

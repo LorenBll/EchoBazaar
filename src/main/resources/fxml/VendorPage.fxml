@@ -1247,46 +1247,6 @@
                   </FlowPane>
                </children>
             </FlowPane>
-            <FlowPane fx:id="flowpaneOf_otherProductsInterface" alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" styleClass="view">
-               <children>
-                  <Label text="Other Products on EchoBazaar">
-                     <font>
-                        <Font name="Arial Bold" size="30.0" />
-                     </font>
-                     <FlowPane.margin>
-                        <Insets bottom="15.0" />
-                     </FlowPane.margin>
-                  </Label>
-                  <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="61.0" prefWidth="583.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="44.0" prefWidth="463.0" styleClass="search-box">
-                           <children>
-                              <TextField fx:id="textfieldOf_otherProductsSearchBar" onKeyTyped="#search_otherVendorsProducts" prefHeight="32.0" prefWidth="419.0" promptText="Search Item" styleClass="textfields">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Arial" size="20.0" />
-                                 </font>
-                              </TextField>
-                           </children>
-                           <FlowPane.margin>
-                              <Insets right="10.0" />
-                           </FlowPane.margin>
-                        </HBox>
-                     </children>
-                  </FlowPane>
-                  <ScrollPane prefHeight="412.0" prefWidth="583.0">
-                     <content>
-                        <GridPane fx:id="gridpaneOf_otherProducts" alignment="CENTER" prefHeight="40.0" prefWidth="534.0" vgap="15.0">
-                           <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                        </GridPane>
-                     </content>
-                  </ScrollPane>
-               </children>
-            </FlowPane>
             <FlowPane fx:id="flowpaneOf_storageInterface" alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" styleClass="view">
                <children>
                   <Label text="Storage Management">
@@ -1353,6 +1313,46 @@
                         <Font name="Arial Bold" size="20.0" />
                      </font>
                   </Label>
+               </children>
+            </FlowPane>
+            <FlowPane fx:id="flowpaneOf_otherProductsInterface" alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" styleClass="view">
+               <children>
+                  <Label text="Global Bazaar">
+                     <font>
+                        <Font name="Arial Bold" size="30.0" />
+                     </font>
+                     <FlowPane.margin>
+                        <Insets bottom="15.0" />
+                     </FlowPane.margin>
+                  </Label>
+                  <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="61.0" prefWidth="583.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="44.0" prefWidth="463.0" styleClass="search-box">
+                           <children>
+                              <TextField fx:id="textfieldOf_searchbarOf_vendorProducts" onKeyTyped="#search_otherVendorsProducts" prefHeight="32.0" prefWidth="419.0" promptText="Search Item" styleClass="textfields">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Arial" size="20.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                           <FlowPane.margin>
+                              <Insets right="10.0" />
+                           </FlowPane.margin>
+                        </HBox>
+                     </children>
+                  </FlowPane>
+                  <ScrollPane prefHeight="412.0" prefWidth="583.0">
+                     <content>
+                        <GridPane fx:id="gridpaneOf_otherProducts" alignment="CENTER" prefHeight="40.0" prefWidth="534.0" vgap="15.0">
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                        </GridPane>
+                     </content>
+                  </ScrollPane>
                </children>
             </FlowPane>
          </children></StackPane>

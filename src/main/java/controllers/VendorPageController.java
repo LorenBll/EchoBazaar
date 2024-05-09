@@ -1311,8 +1311,7 @@ public class VendorPageController extends Controller {
             }
 
             //. pulisco la lista "productsToView" da tutti i prodotti in base alla stringa "search"
-            // parola chiave per la ricerca
-            String search = textfieldOf_otherProductsSearchBar.getText().toLowerCase();
+            String search = textfieldOf_otherProductsSearchBar.getText().toLowerCase(); // parola chiave per la ricerca
             if (!search.equals("")) {
                 ArrayList<Product> productsToRemove = new ArrayList<>();
             
@@ -1342,6 +1341,7 @@ public class VendorPageController extends Controller {
                 
                 gridpaneOf_otherProducts.add(productCard, 0, currentRow);
                 currentRow++;
+            
             }
 
         }

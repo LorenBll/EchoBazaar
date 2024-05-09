@@ -749,4 +749,8 @@ public class DataHandler {
         return true;
     }
 
+    public ArrayList<Product> get_products () {
+        return products;
+    }
+
 }

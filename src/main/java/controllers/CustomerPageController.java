@@ -1,10 +1,12 @@
 package main.java.controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.Label;
@@ -12,6 +14,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Button;
 import javafx.application.Platform;
+import javafx.scene.layout.GridPane;
+import main.java.model.Product;
+import java.util.ArrayList;
 
 
 
@@ -45,13 +50,22 @@ public class CustomerPageController extends Controller {
     @FXML private PasswordField passwordfieldOf_customerPassword;
     @FXML private ImageView imageOf_showOrHide_customerPassword;
     @FXML private Label labelOf_customerPasswordShower;
-    @FXML private Label labelOf_settingsWarning;
     @FXML private Button buttonOf_settingsDeleteAccount;
+    
+    @FXML private Label labelOf_settingsWarning;
 
     //. vista della ricarica del saldo
     @FXML private FlowPane flowpaneOf_depositInterface;
     @FXML private TextField textfieldOf_moneyQuantity;
+    
     @FXML private Label labelOf_depositInterfaceWarning;
+    
+    //. vista dei prodotti dei vendor
+    @FXML private FlowPane flowpaneOf_vendorProducts;
+    @FXML private GridPane gridpaneOf_vendorProducts;
+    @FXML private TextField textfieldOf_searchbarOf_vendorProducts;
+
+    @FXML private Label labelOf_vendorProductWarning;
 
 
 
@@ -86,6 +100,57 @@ public class CustomerPageController extends Controller {
         }
         return shortenedBalance;
     }
+
+
+
+
+
+    //. === METODI DI UTILITÀ AKA DA NON MODIFICARE ===
+    @FXML private void show_welcome () {
+        //! metodo che mostra il riquadro di benvenuto
+        flowpaneOf_welcome.toFront();
+    }
+    
+    @FXML private void logout () {
+        //! metodo che effettua il logout
+        main.loggedInCustomer = null;
+        main.show_loginPage();
+    }
+    
+    // usato da pulsante "X"
+    @FXML private void close_window () {
+        //! metodo che chiude la finestra
+        System.exit(0);
+    }
+
+    // usato da pulsante "Fullscreen" (due freccie in diagonale opposte e puntanti verso l'esterno, oppure due freccie in diagonale opposte e puntanti verso l'interno)
+    @FXML private void enterOrExit_fullscreen () {
+        //! metodo che massimizza o minimizza la finestra, e effettua le operazioni necessarie per adattare il layout alla modalità fullscreen
+        
+        //. passaggio a fullscreen
+        if (!isFullscreen) {
+
+            isFullscreen = true;
+            main.enter_fullscreen();
+            imageOf_fullscreenOperations.setImage(new javafx.scene.image.Image("/main/resources/images/iconOf_fullScreenExit.png"));
+
+            return;
+        }
+
+        //. passaggio a windowed (non fullscreen)
+        isFullscreen = false;
+        main.exit_fullscreen();
+        imageOf_fullscreenOperations.setImage(new javafx.scene.image.Image("/main/resources/images/iconOf_fullScreenEnter.png"));
+        
+    }
+    
+    // usato da pulsante "Minimize" (linea orizzontale)
+    @FXML private void minimize_window () {
+        //! metodo che minimizza la finestra
+        main.minimize_window();
+    }
+
+    public void update () { setup(); }
 
 
 
@@ -365,51 +430,94 @@ public class CustomerPageController extends Controller {
 
     }
 
-    //. === METODI DI UTILITÀ AKA DA NON MODIFICARE ===
-    @FXML private void show_welcome () {
-        //! metodo che mostra il riquadro di benvenuto
-        flowpaneOf_welcome.toFront();
-    }
-    
-    @FXML private void logout () {
-        //! metodo che effettua il logout
-        main.loggedInCustomer = null;
-        main.show_loginPage();
-    }
-    
-    // usato da pulsante "X"
-    @FXML private void close_window () {
-        //! metodo che chiude la finestra
-        System.exit(0);
+
+
+
+
+
+    //. interfaccia dei prodotti dei vendor
+    @FXML private void show_vendorProducts () {
+        //! metodo che mostra la vista dei prodotti dei vendor
+        flowpaneOf_vendorProducts.toFront();
+        fill_vendorProducts();
     }
 
-    // usato da pulsante "Fullscreen" (due freccie in diagonale opposte e puntanti verso l'esterno, oppure due freccie in diagonale opposte e puntanti verso l'interno)
-    @FXML private void enterOrExit_fullscreen () {
-        //! metodo che massimizza o minimizza la finestra, e effettua le operazioni necessarie per adattare il layout alla modalità fullscreen
+    @FXML private void search_vendorProducts () {
+        //! metodo che riempie la griglia dei prodotti dei vendor
+        fill_vendorProducts();
+    }
+
+    public void fill_vendorProducts () {
+        //! metodo che riempie la griglia dei prodotti dei vendor
+
+        int currentRow = 0;
+        try {
         
-        //. passaggio a fullscreen
-        if (!isFullscreen) {
+            gridpaneOf_vendorProducts.getChildren().clear();
+            ArrayList<Product> productsToView = main.dataHandler.get_products();
+            if (productsToView.size() == 0) {
+                return;
+            }
 
-            isFullscreen = true;
-            main.enter_fullscreen();
-            imageOf_fullscreenOperations.setImage(new javafx.scene.image.Image("/main/resources/images/iconOf_fullScreenExit.png"));
+            //. pulisco la lista "productsToView" da tutti i prodotti in base alla stringa di "search"
+            String search = textfieldOf_searchbarOf_vendorProducts.getText().toLowerCase(); // parola chiave per la ricerca
+            if ( !search.equals("") ) {
+                ArrayList<Product> productsToRemove = new ArrayList<>();
+                
+                for (Product currentProduct : productsToView) {
+                    
+                    if ( !(currentProduct.get_name().toLowerCase().contains(search) || currentProduct.get_description().toLowerCase().contains(search)) ) {
+                        productsToRemove.add(currentProduct);
+                    }
 
-            return;
+                }
+
+                for (Product productToRemove : productsToRemove) {
+                    productsToView.remove(productToRemove);
+                }
+
+            }
+
+            //. visualizzazione dei prodotti
+            for ( Product currentProduct : productsToView ) { // visualizzo i prodotti
+                
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/main/resources/fxml/CustomerProductCard.fxml"));
+                AnchorPane productCard = loader.load();
+                CustomerProductCardController productCardController = loader.getController();
+                productCardController.set_main(main);
+                productCardController.setup(currentProduct , this);
+                
+                gridpaneOf_vendorProducts.add(productCard, 0, currentRow);
+                currentRow++;
+
+            }
+
         }
+        catch (Exception e) { e.printStackTrace(); }
 
-        //. passaggio a windowed (non fullscreen)
-        isFullscreen = false;
-        main.exit_fullscreen();
-        imageOf_fullscreenOperations.setImage(new javafx.scene.image.Image("/main/resources/images/iconOf_fullScreenEnter.png"));
-        
-    }
-    
-    // usato da pulsante "Minimize" (linea orizzontale)
-    @FXML private void minimize_window () {
-        //! metodo che minimizza la finestra
-        main.minimize_window();
     }
 
-    public void update () { setup(); }
+    @FXML private void show_vendorProductWarning ( String warningText ) {
+        //! metodo che mostra un messaggio di warning
+
+        labelOf_vendorProductWarning.setText( warningText );
+
+        // faccio partire un timer di 5 al termine del quale l'operazione viene annullata
+        Platform.runLater( () -> {
+            new java.util.Timer().schedule(
+                    new java.util.TimerTask() {
+                        @Override
+                        public void run() {
+                            Platform.runLater(() -> {
+                                labelOf_vendorProductWarning.setText("");
+                            });
+                        }
+                    },
+                    3000
+            );
+        });
+
+    }
 
 }
