@@ -774,6 +774,7 @@ public class VendorPageController extends Controller {
     
         main.dataHandler.register_product( newProduct , this.main );
         reset_configurationOf_registrationOf_newProduct();
+        show_registrationOf_newProduct_warning("Product Registered.");
 
     }
 
@@ -1224,6 +1225,7 @@ public class VendorPageController extends Controller {
 
         main.dataHandler.update_product( labelOf_productID_productEdit.getText() , newNameOf_updatedProduct , newDescriptionOf_updatedProduct , textfiledOf_pathOfImageOf_productEdit.getText() , newPriceFloatOf_updatedProduct , newCurrentStockIntOf_updatedProduct , newProductAutoRestockStatusOf_updatedProduct , newMinStockIntOf_updatedProduct , newRestockAmountIntOf_updatedProduct , isClone , newSourceIDOF_updatedProduct );
         reset_productEditPage();
+        show_storageInterface();
 
     }
 
@@ -1364,6 +1366,13 @@ public class VendorPageController extends Controller {
         labelOf_otherProductsDetailsPrice.setText( String.valueOf(product.get_sellingPrice()) );
         labelOf_otherProductsDetailsOwner.setText( main.dataHandler.retrieve_vendorByID( product.get_vendorID() ).get_username() );
         textAreaOf_otherProductsDetailsDescription.setText( product.get_description() );
+
+        // se premo ESC chiudo la vista dei dettagli del prodotto e torno alla vista dei prodotti degli altri venditori
+        flowpaneOf_otherProductsDetailsInterface.setOnKeyPressed( e -> {
+            if (e.getCode().toString().equals("ESCAPE")) {
+                close_otherProductsDetails();
+            }
+        });
 
     }
 
