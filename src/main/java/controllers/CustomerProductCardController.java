@@ -60,7 +60,7 @@ public class CustomerProductCardController extends Controller implements Initial
         
         productImage.setImage( new javafx.scene.image.Image(myProduct.get_pathOf_image()) );
         productName.setText(myProduct.get_name());
-        productPrice.setText( myProduct.get_sellingPrice() + " $" );
+        productPrice.setText( myProduct.get_sellingPrice() + " €" );
         productOwner.setText( "By " + main.dataHandler.retrieve_vendorByID( myProduct.get_vendorID()).get_username() );
 
     }
@@ -83,13 +83,6 @@ public class CustomerProductCardController extends Controller implements Initial
 
         //. se è già stato premuto il bottone, allora aggiungo il prodotto al carrello
         int quantity = quantitySpinner.getValue();
-        if ( quantity == 0 ) {
-            // resetto
-            quantitySpinner.setVisible(false);
-            addToCartButton.setImage( new javafx.scene.image.Image("/main/resources/images/iconOf_shop.png") );
-            isAddToCartVisible = false;
-            return;
-        }
         if ( myProduct.get_currentStock() < quantity ) {
             customerPageController.show_vendorProductWarning("Not enough stock.");
             // resetto

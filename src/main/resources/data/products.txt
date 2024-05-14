@@ -1,2 +1,2 @@
-b535bbe5752b927d86978a8ab7f43f679769f509,69331af829081b5f072a7aedc24a786d0bdecc83,maglietta,"ciao",/main/resources/images/iconOf_noImage.png,1.0,498,false,0,0,false,null
-dccee027b4033124b3865bf8e37c45a871c2ba90,b9d97347df46fb367ecf511105103f993985e52e,maglietta,"ciao",/main/resources/images/iconOf_noImage.png,1.0,6,true,5,2,true,b535bbe5752b927d86978a8ab7f43f679769f509
+a839f6c0b6a0e89ab7d479c120cac9f818990aab,554afe542e6e3bf44260bf97439eafa7a90fc3e2,maglietta rossa,"maglietta rossa",/main/resources/user_images/554afe542e6e3bf44260bf97439eafa7a90fc3e2_d48abb1a6348c7a13e857d1c2063fba6c49cc6dd.png,5.0,6,true,5,10,true,9006293c8c8915df6424a88421ce03c77d881f75
+9006293c8c8915df6424a88421ce03c77d881f75,39fb520f4a7422b896ca9743e92ae1c658ad4a53,t-shirt rossa,"t-shirt rossa|Made in Taiwan",/main/resources/user_images/39fb520f4a7422b896ca9743e92ae1c658ad4a53_84fa3fa229079603d0d787d597cc2a9f2f168603.png,1.0,500,false,0,0,false,null

@@ -110,7 +110,7 @@ public class CustomerPageController extends Controller implements Initializable 
 
         // setto le informazioni del customer loggato
         labelOf_username.setText( main.loggedInCustomer.get_username() );
-        labelOf_balance.setText( shortenedBalance + "$" );
+        labelOf_balance.setText( shortenedBalance + "€" );
 
         main.get_primaryStage().setFullScreenExitKeyCombination(null); // rimuove la combinazione di tasti per uscire dalla modalità fullscreen
         show_welcome();
@@ -136,6 +136,7 @@ public class CustomerPageController extends Controller implements Initializable 
 
 
 
+
     //. === METODI DI UTILITÀ AKA DA NON MODIFICARE ===
     @FXML private void show_welcome () {
         //! metodo che mostra il riquadro di benvenuto
@@ -145,6 +146,7 @@ public class CustomerPageController extends Controller implements Initializable 
     @FXML private void logout () {
         //! metodo che effettua il logout
         main.loggedInCustomer = null;
+        this.productsInCart.clear(); // svuoto il carrello del customer loggato (non dovrebbe servire, ma per un errore capitato, anche se solo una volta, è meglio farlo)
         main.show_loginPage();
     }
     
@@ -185,7 +187,7 @@ public class CustomerPageController extends Controller implements Initializable 
 
     public void update_balance () {
         //! metodo che aggiorna il balance
-        labelOf_balance.setText( shorten_balance( main.loggedInCustomer.get_balance() ) + "$" );
+        labelOf_balance.setText( shorten_balance( main.loggedInCustomer.get_balance() ) + "€" );
     }   
 
 
@@ -358,6 +360,7 @@ public class CustomerPageController extends Controller implements Initializable 
         main.dataHandler.delete_customer( main.loggedInCustomer.get_username() );
         counterOfDeleteAccount = 0;
         main.loggedInCustomer = null;
+        this.productsInCart.clear(); // svuoto il carrello del customer loggato (non dovrebbe servire, ma per un errore capitato, anche se solo una volta, è meglio farlo)
         main.show_loginPage();
 
     }
@@ -412,7 +415,7 @@ public class CustomerPageController extends Controller implements Initializable 
         main.loggedInCustomer.deposit( money );
 
         textfieldOf_moneyQuantity.setText("");  
-        labelOf_balance.setText( shorten_balance( main.loggedInCustomer.get_balance() ) + "$" );
+        labelOf_balance.setText( shorten_balance( main.loggedInCustomer.get_balance() ) + "€" );
 
         main.dataHandler.update_customerFile();
 
@@ -438,7 +441,7 @@ public class CustomerPageController extends Controller implements Initializable 
         }
 
         textfieldOf_moneyQuantity.setText("");
-        labelOf_balance.setText( shorten_balance( main.loggedInCustomer.get_balance() ) + "$" );
+        labelOf_balance.setText( shorten_balance( main.loggedInCustomer.get_balance() ) + "€" );
 
         main.dataHandler.update_customerFile();
 
@@ -608,6 +611,7 @@ public class CustomerPageController extends Controller implements Initializable 
 
         ProductOrder productOrder = new ProductOrder( main.dataHandler.retrieve_productByID( labelOf_productDetailsID.getText() ) , quantity );
         add_productToCart(productOrder);
+        show_productDetailsPageWarning("Product Added to Cart.");
 
     }
 

@@ -143,7 +143,7 @@ public class VendorPageController extends Controller {
 
         // setto le informazioni del vendor loggato
         labelOf_username.setText( main.loggedInVendor.get_username() );
-        labelOf_balance.setText( shortenedBalance + "$" );
+        labelOf_balance.setText( shortenedBalance + "€" );
 
         main.get_primaryStage().setFullScreenExitKeyCombination(null); // rimuove la combinazione di tasti per uscire dalla modalità fullscreen
         hide_autoRestock(); // nascondo i campi per il restock automatico perché di default non è selezionato (si potrebbe fare dall'fxml ma è meglio tenere tutto visualizzato in fase di sviluppo)
@@ -153,7 +153,7 @@ public class VendorPageController extends Controller {
 
     public void update_balance () {
         //! metodo che aggiorna il balance del vendor
-        labelOf_balance.setText( shorten_balance( main.loggedInVendor.get_balance() ) + "$" );
+        labelOf_balance.setText( shorten_balance( main.loggedInVendor.get_balance() ) + "€" );
     }   
 
     public void update () { setup(); }
@@ -447,7 +447,7 @@ public class VendorPageController extends Controller {
         main.loggedInVendor.deposit( money );
 
         textfieldOf_moneyQuantity.setText("");  
-        labelOf_balance.setText( shorten_balance( main.loggedInVendor.get_balance() ) + "$" );
+        labelOf_balance.setText( shorten_balance( main.loggedInVendor.get_balance() ) + "€" );
 
         main.dataHandler.update_vendorFile();
 
@@ -473,7 +473,7 @@ public class VendorPageController extends Controller {
         }
 
         textfieldOf_moneyQuantity.setText("");
-        labelOf_balance.setText( shorten_balance( main.loggedInVendor.get_balance() ) + "$" );
+        labelOf_balance.setText( shorten_balance( main.loggedInVendor.get_balance() ) + "€" );
 
         main.dataHandler.update_vendorFile();
 

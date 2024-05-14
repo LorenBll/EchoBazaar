@@ -35,7 +35,7 @@ public class VendorNotOwnerProductCardController extends Controller {
 
         productImage.setImage( new javafx.scene.image.Image(myProduct.get_pathOf_image()) );
         productName.setText(myProduct.get_name());
-        productPrice.setText( myProduct.get_sellingPrice() + " $" );
+        productPrice.setText( myProduct.get_sellingPrice() + " €" );
         productOwner.setText( "By " + main.dataHandler.retrieve_vendorByID( myProduct.get_vendorID()).get_username() );
         
     }

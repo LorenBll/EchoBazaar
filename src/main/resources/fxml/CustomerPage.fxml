@@ -513,6 +513,58 @@
                      </FlowPane.margin>
                   </Label>
                </children></FlowPane>
+            <FlowPane fx:id="flowpaneOf_cart" alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" styleClass="view">
+               <children>
+                  <Label text="Your Cart">
+                     <font>
+                        <Font name="Arial Bold" size="30.0" />
+                     </font>
+                     <FlowPane.margin>
+                        <Insets bottom="15.0" />
+                     </FlowPane.margin>
+                  </Label>
+                  <ScrollPane prefHeight="412.0" prefWidth="583.0">
+                     <content>
+                        <GridPane fx:id="gridpaneOf_cart" alignment="CENTER" prefHeight="40.0" prefWidth="534.0" vgap="15.0">
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                        </GridPane>
+                     </content>
+                  </ScrollPane>
+                  <Label fx:id="labelOf_cartWarning" textFill="RED">
+                     <font>
+                        <Font name="Arial Bold" size="20.0" />
+                     </font>
+                     <FlowPane.margin>
+                        <Insets bottom="20.0" top="5.0" />
+                     </FlowPane.margin>
+                  </Label>
+                  <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="50.0" prefWidth="583.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#empty_cart" prefHeight="40.0" prefWidth="210.0" styleClass="buttons" text="Delete All Orders">
+                           <font>
+                              <Font name="Arial Bold" size="20.0" />
+                           </font>
+                           <FlowPane.margin>
+                              <Insets right="25.0" />
+                           </FlowPane.margin>
+                           <tooltip>
+                              <Tooltip text="Delete All the Orders Inside the Cart" />
+                           </tooltip>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#buy_everythingInCart" prefHeight="40.0" prefWidth="210.0" styleClass="buttons" text="Confirm All Orders">
+                           <font>
+                              <Font name="Arial Bold" size="20.0" />
+                           </font>
+                           <tooltip>
+                              <Tooltip text="Confirm All the Orders and Buy Everything" />
+                           </tooltip>
+                        </Button>
+                     </children>
+                  </FlowPane>
+               </children>
+            </FlowPane>
             <FlowPane fx:id="flowpaneOf_productDetails" alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" styleClass="view">
                <children>
                   <Label text="Product Details">
@@ -655,7 +707,7 @@
                         <Insets bottom="10.0" />
                      </FlowPane.margin>
                   </GridPane>
-                  <Label fx:id="labelOf_productDetailsWarning" alignment="CENTER" prefHeight="23.0" prefWidth="150.0" textFill="RED">
+                  <Label fx:id="labelOf_productDetailsWarning" alignment="CENTER" textFill="RED">
                      <font>
                         <Font name="Arial Bold" size="20.0" />
                      </font>
@@ -687,58 +739,6 @@
                      <FlowPane.margin>
                         <Insets />
                      </FlowPane.margin>
-                  </FlowPane>
-               </children>
-            </FlowPane>
-            <FlowPane fx:id="flowpaneOf_cart" alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" styleClass="view">
-               <children>
-                  <Label text="Your Cart">
-                     <font>
-                        <Font name="Arial Bold" size="30.0" />
-                     </font>
-                     <FlowPane.margin>
-                        <Insets bottom="15.0" />
-                     </FlowPane.margin>
-                  </Label>
-                  <ScrollPane prefHeight="412.0" prefWidth="583.0">
-                     <content>
-                        <GridPane fx:id="gridpaneOf_cart" alignment="CENTER" prefHeight="40.0" prefWidth="534.0" vgap="15.0">
-                           <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                        </GridPane>
-                     </content>
-                  </ScrollPane>
-                  <Label fx:id="labelOf_cartWarning" textFill="RED">
-                     <font>
-                        <Font name="Arial Bold" size="20.0" />
-                     </font>
-                     <FlowPane.margin>
-                        <Insets bottom="20.0" top="5.0" />
-                     </FlowPane.margin>
-                  </Label>
-                  <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="50.0" prefWidth="583.0">
-                     <children>
-                        <Button mnemonicParsing="false" onAction="#empty_cart" prefHeight="40.0" prefWidth="210.0" styleClass="buttons" text="Delete All Orders">
-                           <font>
-                              <Font name="Arial Bold" size="20.0" />
-                           </font>
-                           <FlowPane.margin>
-                              <Insets right="25.0" />
-                           </FlowPane.margin>
-                           <tooltip>
-                              <Tooltip text="Delete All the Orders Inside the Cart" />
-                           </tooltip>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#buy_everythingInCart" prefHeight="40.0" prefWidth="210.0" styleClass="buttons" text="Confirm All Orders">
-                           <font>
-                              <Font name="Arial Bold" size="20.0" />
-                           </font>
-                           <tooltip>
-                              <Tooltip text="Confirm All the Orders and Buy Everything" />
-                           </tooltip>
-                        </Button>
-                     </children>
                   </FlowPane>
                </children>
             </FlowPane>

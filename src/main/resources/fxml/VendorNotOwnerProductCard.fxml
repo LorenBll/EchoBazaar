@@ -55,7 +55,7 @@
             </ImageView>
          </graphic>
          <tooltip>
-            <Tooltip text="ID Copied!" />
+            <Tooltip onShowing="#copy_ID" text="ID Copied!" />
          </tooltip>
       </Button>
    </children>

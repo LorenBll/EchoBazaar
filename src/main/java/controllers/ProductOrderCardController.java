@@ -57,7 +57,7 @@ public class ProductOrderCardController extends Controller {
         this.customerPageController = customerPageController;
         
         productImage.setImage( new javafx.scene.image.Image(myProductOrder.get_product().get_pathOf_image()) );
-        productName.setText( myProductOrder.get_product().get_name() );
+        productName.setText( myProductOrder.get_product().get_name() + " ( " + myProductOrder.get_quantity() + " )");
         orderPrice.setText( myProductOrder.get_totalPrice() + " €" );
 
         // il valore di default dello spinner è la quantità corrente dell'ordine
