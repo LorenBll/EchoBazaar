@@ -715,6 +715,8 @@ public class DataHandler {
     public boolean vendorBuy_product ( ProductOrder productOrder , String vendorID , Product productToRestock ) {  
         //! metodo che permette ad un venditore di acquistare un product per il restock : productToRestock ha come sourceID productOrder.get_product().get_ID()
 
+        // productToRestock è il product che deve essere restockato, mentre productOrder.get_product() è il product che deve essere acquistato, ovvero quello indicato dal sourceID di productToRestock
+
         Vendor buyer = retrieve_vendorByID(vendorID);
         Vendor seller = retrieve_vendorByID(productOrder.get_product().get_vendorID());
         Product buyed_product = productOrder.get_product();
@@ -744,6 +746,48 @@ public class DataHandler {
                 ProductOrder newOrder = new ProductOrder ( retrieve_productByID(buyed_product.get_sourceID()) , buyed_product.get_restockAmount() );
                 vendorBuy_product(newOrder, buyed_product.get_vendorID() , buyed_product);
             }
+        }
+
+        return true;
+    }
+
+    public boolean customerBuy_cart ( ArrayList<ProductOrder> rawCart , Customer buyer ) {
+        //! metodo che permette ad un customer di acquistare il contenuto del carrello
+        
+        ArrayList<ProductOrder> cart = new ArrayList<>(rawCart); // creo una copia dell'ArrayList per evitare ConcurrentModificationException
+        ArrayList<Product> productsToRestock = new ArrayList<Product>();
+
+        // viene data la priorità al customer : se possibile si effettua tutti gli acquisti
+        for ( ProductOrder currentProductOrder : cart ) {
+            
+            Vendor seller = retrieve_vendorByID(currentProductOrder.get_product().get_vendorID());
+
+            // non controllo se la quantità richiesta è disponibile, perché è già stato fatto in precedenza
+
+            float totalProductOrderPrice = currentProductOrder.get_product().get_sellingPrice() * currentProductOrder.get_quantity();
+            // non controllo se il customer ha abbastanza soldi, perché è già stato fatto in precedenza
+
+            //. effettuo l'acquisto
+            buyer.pay(totalProductOrderPrice);
+            seller.get_paid(totalProductOrderPrice);
+            currentProductOrder.get_product().set_currentStock( currentProductOrder.get_product().get_currentStock() - currentProductOrder.get_quantity() );
+            
+            update_customerFile();
+            update_vendorFile();
+            update_productFile();
+
+            if (currentProductOrder.get_product().get_autoRestock()) {
+                if (currentProductOrder.get_product().get_currentStock() < currentProductOrder.get_product().get_minStock()) {
+                    productsToRestock.add(currentProductOrder.get_product());
+                }
+            }
+
+        }
+
+        //. effettuo le operazioni di autorestock
+        for ( Product currentProductToRestock : productsToRestock ) {
+            ProductOrder newOrder = new ProductOrder ( retrieve_productByID(currentProductToRestock.get_sourceID()) , currentProductToRestock.get_restockAmount() );
+            vendorBuy_product(newOrder, currentProductToRestock.get_vendorID() , currentProductToRestock);
         }
 
         return true;

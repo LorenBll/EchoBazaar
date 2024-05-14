@@ -26,8 +26,15 @@ public class ProductOrder {
         return this.quantity;
     }
 
+    public int set_quantity ( int newQuantity ) {
+        //! metodo che setta la quantità
+        this.quantity = newQuantity;
+        return this.quantity;
+    }
 
-
-    
+    public double get_totalPrice () {
+        //! metodo che restituisce il prezzo totale
+        return this.product.get_sellingPrice() * this.quantity;
+    }
 
 }

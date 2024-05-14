@@ -2,6 +2,7 @@ package main.java.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
@@ -12,18 +13,22 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.Button;
 import javafx.application.Platform;
 import javafx.scene.layout.GridPane;
 import main.java.model.Product;
 import java.util.ArrayList;
+import main.java.model.ProductOrder;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 
 
 
 
 
 
-public class CustomerPageController extends Controller {
+public class CustomerPageController extends Controller implements Initializable {
 
     //. barra di gestione della finestra (minimizza, chiudi e fullscreen)
     public boolean isFullscreen = false; // indica se la finestra è in modalità fullscreen o no
@@ -64,13 +69,39 @@ public class CustomerPageController extends Controller {
     @FXML private FlowPane flowpaneOf_vendorProducts;
     @FXML private GridPane gridpaneOf_vendorProducts;
     @FXML private TextField textfieldOf_searchbarOf_vendorProducts;
-
+    
     @FXML private Label labelOf_vendorProductWarning;
+    
+    //. vista dei dettagli del prodotto
+    @FXML private FlowPane flowpaneOf_productDetails;
+    @FXML private ImageView imageviewOf_productDetailsImage;
+    @FXML private Label labelOf_productDetailsID;
+    @FXML private Label labelOf_productDetailsName;
+    @FXML private Label labelOf_productDetailsPrice;
+    @FXML private Label labelOf_productDetailsOwner;
+    @FXML private TextArea textAreaOf_productDetailsDescription;
+    @FXML private Spinner<Integer> spinnerOf_productDetailsQuantity;
+    
+    @FXML private Label labelOf_productDetailsWarning;
+    
+    //. vista del carrello
+    ArrayList<ProductOrder> productsInCart = new ArrayList<>();
+    @FXML private FlowPane flowpaneOf_cart;
+    @FXML private GridPane gridpaneOf_cart;
+
+    @FXML private Label labelOf_cartWarning;
 
 
 
 
 
+    // inizializzazione del controller
+    public void initialize ( java.net.URL location , java.util.ResourceBundle resources ) {
+        //! metodo che inizializza il controller
+
+        spinnerOf_productDetailsQuantity.setValueFactory( new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1) );
+
+    }
 
     public void setup () {
         //! metodo che viene chiamato dal main quando la finestra è stata caricata ed il main settato >>> con l'initialize non funziona perché il main non è ancora settato 
@@ -151,6 +182,11 @@ public class CustomerPageController extends Controller {
     }
 
     public void update () { setup(); }
+
+    public void update_balance () {
+        //! metodo che aggiorna il balance
+        labelOf_balance.setText( shorten_balance( main.loggedInCustomer.get_balance() ) + "$" );
+    }   
 
 
 
@@ -254,15 +290,15 @@ public class CustomerPageController extends Controller {
             return;
         }
 
-        // controllo se lo username contiene spazi oppure è più lungo di 15 caratteri
-        if ( newUsername.contains(" ") || newUsername.length() > 15 ) {
-            show_settingsWarning("Username must be less than 15 characters and contain no spaces.");
+        // controllo se lo username contiene spazi oppure è più lungo di 12 caratteri
+        if ( newUsername.contains(" ") || newUsername.length() > 12 ) {
+            show_settingsWarning("Username must be less than 12 characters and contain no spaces.");
             return;
         }
 
-        // controllo se la password è più lunga di 15 caratteri
-        if ( newPassword.length() > 15 ) {
-            show_settingsWarning("Password must be less than 15 characters and contain no spaces.");
+        // controllo se la password è più lunga di 12 caratteri
+        if ( newPassword.length() > 12 ) {
+            show_settingsWarning("Password must be less than 12 characters and contain no spaces.");
             return;
         }
 
@@ -373,7 +409,7 @@ public class CustomerPageController extends Controller {
             show_depositInterfaceWarning("Invalid Input.");
             return;
         }
-        main.loggedInVendor.deposit( money );
+        main.loggedInCustomer.deposit( money );
 
         textfieldOf_moneyQuantity.setText("");  
         labelOf_balance.setText( shorten_balance( main.loggedInCustomer.get_balance() ) + "$" );
@@ -396,7 +432,7 @@ public class CustomerPageController extends Controller {
             show_depositInterfaceWarning("Invalid Input.");
             return;
         }
-        if ( !main.loggedInVendor.withdraw( money ) ) {
+        if ( !main.loggedInCustomer.withdraw( money ) ) {
             show_depositInterfaceWarning("Not Enough Balance.");
             return;
         }
@@ -450,11 +486,12 @@ public class CustomerPageController extends Controller {
     public void fill_vendorProducts () {
         //! metodo che riempie la griglia dei prodotti dei vendor
 
-        int currentRow = 0;
+        int currentRow = 1;
         try {
         
             gridpaneOf_vendorProducts.getChildren().clear();
-            ArrayList<Product> productsToView = main.dataHandler.get_products();
+            // copio la lista dei prodotti dei vendor
+            ArrayList<Product> productsToView = new ArrayList<>(main.dataHandler.get_products());
             if (productsToView.size() == 0) {
                 return;
             }
@@ -466,7 +503,7 @@ public class CustomerPageController extends Controller {
                 
                 for (Product currentProduct : productsToView) {
                     
-                    if ( !(currentProduct.get_name().toLowerCase().contains(search) || currentProduct.get_description().toLowerCase().contains(search)) ) {
+                    if ( ! (currentProduct.get_name().toLowerCase().contains(search) || currentProduct.get_description().toLowerCase().contains(search)) ) {
                         productsToRemove.add(currentProduct);
                     }
 
@@ -498,7 +535,7 @@ public class CustomerPageController extends Controller {
 
     }
 
-    @FXML private void show_vendorProductWarning ( String warningText ) {
+    @FXML public void show_vendorProductWarning ( String warningText ) {
         //! metodo che mostra un messaggio di warning
 
         labelOf_vendorProductWarning.setText( warningText );
@@ -511,6 +548,200 @@ public class CustomerPageController extends Controller {
                         public void run() {
                             Platform.runLater(() -> {
                                 labelOf_vendorProductWarning.setText("");
+                            });
+                        }
+                    },
+                    3000
+            );
+        });
+
+    }
+
+    public void add_productToCart ( ProductOrder productOrder ) {
+        //! metodo che aggiunge un prodotto al carrello
+        productsInCart.add(productOrder);
+    }
+
+
+
+
+
+
+    //. interfaccia della visualizzazione dei dettagli del prodotto
+    public void show_productDetailsPage ( Product product ) {
+        //! metodo che mostra la vista dei dettagli del prodotto
+        flowpaneOf_productDetails.toFront();
+        flowpaneOf_productDetails.requestFocus();
+
+        imageviewOf_productDetailsImage.setImage( new Image( product.get_pathOf_image() ) );
+        labelOf_productDetailsID.setText( product.get_ID() );
+        labelOf_productDetailsName.setText( product.get_name() );
+        labelOf_productDetailsPrice.setText( String.valueOf(product.get_sellingPrice()) );
+        labelOf_productDetailsOwner.setText( main.dataHandler.retrieve_vendorByID( product.get_vendorID() ).get_username() );
+        textAreaOf_productDetailsDescription.setText( product.get_description() );
+
+        // se premo ESC, torno alla vista dei prodotti dei vendor
+        flowpaneOf_productDetails.setOnKeyPressed( e -> {
+            if (e.getCode().toString().equals("ESCAPE")) {
+                show_vendorProducts();
+            }
+        });
+
+    }
+
+    @FXML public void add_productToCart_fromProductDetailsInterface () {
+        //! metodo che aggiunge il prodotto al carrello dalla vista dei dettagli del prodotto
+
+        int quantity = spinnerOf_productDetailsQuantity.getValue();
+        if ( quantity == 0 ) {
+            show_productDetailsPageWarning("Quantity must be greater than 0.");
+            return;
+        }
+        if ( main.dataHandler.retrieve_productByID( labelOf_productDetailsID.getText() ).get_currentStock() < quantity ) {
+            show_productDetailsPageWarning("Not enough stock.");
+            return;
+        }
+        if ( main.loggedInCustomer.get_balance() < main.dataHandler.retrieve_productByID( labelOf_productDetailsID.getText() ).get_sellingPrice() * quantity ) {
+            show_productDetailsPageWarning("Not enough balance.");
+            return;
+        }
+
+        ProductOrder productOrder = new ProductOrder( main.dataHandler.retrieve_productByID( labelOf_productDetailsID.getText() ) , quantity );
+        add_productToCart(productOrder);
+
+    }
+
+    public void show_productDetailsPageWarning ( String warningText ) {
+        //! metodo che mostra un messaggio di warning
+
+        labelOf_productDetailsWarning.setText( warningText );
+
+        // faccio partire un timer di 5 al termine del quale l'operazione viene annullata
+        Platform.runLater( () -> {
+            new java.util.Timer().schedule(
+                    new java.util.TimerTask() {
+                        @Override
+                        public void run() {
+                            Platform.runLater(() -> {
+                                labelOf_productDetailsWarning.setText("");
+                            });
+                        }
+                    },
+                    3000
+            );
+        });
+
+    }
+
+
+
+
+
+
+    //. interfaccia del carrello
+    @FXML private void show_cart () {
+        //! metodo che mostra la vista del carrello
+        flowpaneOf_cart.toFront();
+        fill_cart();
+    }
+
+    public void fill_cart () {
+        //! metodo che riempie la griglia del carrello
+
+        int currentRow = 1;
+        try {
+        
+            gridpaneOf_cart.getChildren().clear();
+            // copio la lista dei prodotti dei vendor
+            ArrayList<ProductOrder> productsToView = new ArrayList<>(productsInCart);
+            if (productsToView.size() == 0) {
+                return;
+            }
+
+            //. visualizzazione dei prodotti
+            for ( ProductOrder currentProductOrder : productsToView ) { // visualizzo i prodotti
+                
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/main/resources/fxml/ProductOrderCard.fxml"));
+                AnchorPane productCard = loader.load();
+                ProductOrderCardController productCardController = loader.getController();
+                productCardController.set_main(main);
+                productCardController.setup(currentProductOrder , this);
+                
+                gridpaneOf_cart.add(productCard, 0, currentRow);
+                currentRow++;
+
+            }
+
+        }
+        catch (Exception e) { e.printStackTrace(); }
+
+    }
+
+    public void delete_productOrderFromCart ( ProductOrder productOrder ) {
+        //! metodo che elimina un prodotto dal carrello
+        productsInCart.remove(productOrder);
+        fill_cart();
+    }
+
+    public void empty_cart_fromCode () {
+        //! metodo che svuota il carrello
+        productsInCart.clear();
+        fill_cart();
+    }
+
+    @FXML public void empty_cart () {
+        empty_cart_fromCode();
+    }
+
+    public float calculate_totalOrdersPrice () {
+        //! metodo che calcola il prezzo totale degli ordini nel carrello
+        float totalOrdersPrice = 0;
+        for (ProductOrder currentProductOrder : productsInCart) {
+            totalOrdersPrice += currentProductOrder.get_product().get_sellingPrice() * currentProductOrder.get_quantity();
+        }
+        return totalOrdersPrice;
+    }
+
+    @FXML public void buy_everythingInCart () {
+        //! metodo che compra tutto ciò che è nel carrello
+
+        if (productsInCart.size() == 0) {
+            show_cartWarning("Cart is Empty.");
+            return;
+        }
+
+        //. controllo che il customer abbia abbastanza saldo per comprare tutto ciò che è nel carrello
+        float totalOrdersPrice = calculate_totalOrdersPrice();
+        if ( main.loggedInCustomer.get_balance() < totalOrdersPrice ) {
+            show_cartWarning("Not enough balance to Buy Everything in the Cart.");
+            return;
+        }
+
+        if ( main.dataHandler.customerBuy_cart(productsInCart, main.loggedInCustomer) ) {
+            empty_cart_fromCode();
+            update_balance();
+            return;
+        }
+
+        // se siamo arrivati qui, l'acquisto non è andato a buon fine
+        show_cartWarning("Something Went Wrong.");
+
+    }
+
+    public void show_cartWarning ( String warningText ) {
+        //! metodo che mostra un messaggio di warning
+
+        labelOf_cartWarning.setText( warningText );
+
+        // faccio partire un timer di 5 al termine del quale l'operazione viene annullata
+        Platform.runLater( () -> {
+            new java.util.Timer().schedule(
+                    new java.util.TimerTask() {
+                        @Override
+                        public void run() {
+                            Platform.runLater(() -> {
+                                labelOf_cartWarning.setText("");
                             });
                         }
                     },

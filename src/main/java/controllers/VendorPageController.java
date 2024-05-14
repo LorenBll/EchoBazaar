@@ -325,15 +325,15 @@ public class VendorPageController extends Controller {
             return;
         }
 
-        // controllo se lo username contiene spazi oppure è più lungo di 15 caratteri
-        if ( newUsername.contains(" ") || newUsername.length() > 15 ) {
-            show_settingsWarning("Username must be less than 15 characters and contain no spaces.");
+        // controllo se lo username contiene spazi oppure è più lungo di 12 caratteri
+        if ( newUsername.contains(" ") || newUsername.length() > 12 ) {
+            show_settingsWarning("Username must be less than 12 characters and contain no spaces.");
             return;
         }
 
-        // controllo se la password è più lunga di 15 caratteri
-        if ( newPassword.length() > 15 ) {
-            show_settingsWarning("Password must be less than 15 characters and contain no spaces.");
+        // controllo se la password è più lunga di 12 caratteri
+        if ( newPassword.length() > 12 ) {
+            show_settingsWarning("Password must be less than 12 characters and contain no spaces.");
             return;
         }
 
@@ -715,7 +715,7 @@ public class VendorPageController extends Controller {
             }
             for (char c : "\\|!@#$%^&*()+{}:\"<>?|[];',.".toCharArray()) {
                 if (textfieldOf_vendorUsername.getText().contains(String.valueOf(c))) {
-                    show_registrationOf_newProduct_warning("Source ID can't contain special characters.");
+                    show_registrationOf_newProduct_warning("Invalid Source ID.");
                     return;
                 }
             }
@@ -1359,6 +1359,7 @@ public class VendorPageController extends Controller {
     public void show_productDetailsPage ( Product product ) {
         //! metodo che mostra la vista dei dettagli di un prodotto
         flowpaneOf_otherProductsDetailsInterface.toFront();
+        flowpaneOf_otherProductsDetailsInterface.requestFocus();
 
         imageviewOf_otherProductsDetailsImage.setImage( new Image( product.get_pathOf_image() ) );
         labelOf_otherProductsDetailsID.setText( product.get_ID() );

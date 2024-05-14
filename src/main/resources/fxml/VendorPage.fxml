@@ -185,7 +185,7 @@
                      <children>
                         <Label alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="98.0" text="Username:">
                            <font>
-                              <Font name="Arial Bold" size="17.0" />
+                              <Font name="Arial Bold" size="15.0" />
                            </font>
                            <GridPane.margin>
                               <Insets left="6.5" right="7.5" />
@@ -193,7 +193,7 @@
                         </Label>
                         <Label alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="187.0" text="Balance:" GridPane.rowIndex="1">
                            <font>
-                              <Font name="Arial Bold" size="17.0" />
+                              <Font name="Arial Bold" size="15.0" />
                            </font>
                            <GridPane.margin>
                               <Insets left="6.5" right="7.5" />
@@ -201,7 +201,7 @@
                         </Label>
                         <Label fx:id="labelOf_username" prefHeight="23.0" prefWidth="187.0" text="username" GridPane.columnIndex="1">
                            <font>
-                              <Font name="Arial Bold" size="17.0" />
+                              <Font name="Arial Bold" size="15.0" />
                            </font>
                            <GridPane.margin>
                               <Insets left="7.5" right="7.5" />
@@ -212,7 +212,7 @@
                         </Label>
                         <Label fx:id="labelOf_balance" prefHeight="23.0" prefWidth="126.0" text="balance" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
-                              <Font name="Arial Bold" size="17.0" />
+                              <Font name="Arial Bold" size="15.0" />
                            </font>
                            <GridPane.margin>
                               <Insets left="7.5" right="7.5" />
@@ -1070,6 +1070,114 @@
                   </FlowPane>
                </children>
             </FlowPane>
+            <FlowPane fx:id="flowpaneOf_storageInterface" alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" styleClass="view">
+               <children>
+                  <Label text="Storage Management">
+                     <font>
+                        <Font name="Arial Bold" size="30.0" />
+                     </font>
+                     <FlowPane.margin>
+                        <Insets bottom="15.0" />
+                     </FlowPane.margin>
+                  </Label>
+                  <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="61.0" prefWidth="583.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="44.0" prefWidth="334.0" styleClass="search-box">
+                           <children>
+                              <TextField fx:id="textfieldOf_storageSearchBar" onKeyTyped="#search_storage" prefHeight="32.0" prefWidth="306.0" promptText="Search Item" styleClass="textfields">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Arial" size="20.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                           <FlowPane.margin>
+                              <Insets right="10.0" />
+                           </FlowPane.margin>
+                        </HBox>
+                        <CheckBox fx:id="checkboxOf_storageFinishing" mnemonicParsing="false" onAction="#search_storage" prefHeight="21.0" prefWidth="102.0" styleClass="checkbox" text="Finishing">
+                           <FlowPane.margin>
+                              <Insets right="10.0" />
+                           </FlowPane.margin>
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                           <tooltip>
+                              <Tooltip text="All Products With Stock &lt; 5">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Tooltip>
+                           </tooltip>
+                        </CheckBox>
+                        <CheckBox fx:id="checkboxOf_storageAutoRestock" mnemonicParsing="false" onAction="#search_storage" styleClass="checkbox" text="AutoRestock">
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                        </CheckBox>
+                     </children>
+                  </FlowPane>
+                  <ScrollPane prefHeight="412.0" prefWidth="583.0">
+                     <content>
+                        <GridPane fx:id="gridpaneOf_storageProducts" alignment="CENTER" prefHeight="40.0" prefWidth="534.0" vgap="15.0">
+                          <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                        </GridPane>
+                     </content>
+                     <FlowPane.margin>
+                        <Insets bottom="15.0" />
+                     </FlowPane.margin>
+                  </ScrollPane>
+                  <Label fx:id="labelOf_storageWarning" textFill="RED">
+                     <font>
+                        <Font name="Arial Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </FlowPane>
+            <FlowPane fx:id="flowpaneOf_otherProductsInterface" alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" styleClass="view">
+               <children>
+                  <Label text="Global Bazaar">
+                     <font>
+                        <Font name="Arial Bold" size="30.0" />
+                     </font>
+                     <FlowPane.margin>
+                        <Insets bottom="15.0" />
+                     </FlowPane.margin>
+                  </Label>
+                  <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="61.0" prefWidth="583.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="44.0" prefWidth="463.0" styleClass="search-box">
+                           <children>
+                              <TextField fx:id="textfieldOf_otherProductsSearchBar" onKeyTyped="#search_otherVendorsProducts" prefHeight="32.0" prefWidth="419.0" promptText="Search Item" styleClass="textfields">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Arial" size="20.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                           <FlowPane.margin>
+                              <Insets right="10.0" />
+                           </FlowPane.margin>
+                        </HBox>
+                     </children>
+                  </FlowPane>
+                  <ScrollPane prefHeight="412.0" prefWidth="583.0">
+                     <content>
+                        <GridPane fx:id="gridpaneOf_otherProducts" alignment="CENTER" prefHeight="40.0" prefWidth="534.0" vgap="15.0">
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                        </GridPane>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </FlowPane>
             <FlowPane fx:id="flowpaneOf_otherProductsDetailsInterface" alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" styleClass="view">
                <children>
                   <Label text="Product Details">
@@ -1230,7 +1338,7 @@
                   </GridPane>
                   <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="62.0" prefWidth="633.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#close_otherProductsDetails" prefHeight="45.0" prefWidth="180.0" styleClass="buttons" text="Go Back">
+                        <Button mnemonicParsing="false" onAction="#close_otherProductsDetails" prefHeight="40.0" prefWidth="180.0" styleClass="buttons" text="Go Back">
                            <FlowPane.margin>
                               <Insets right="25.0" />
                            </FlowPane.margin>
@@ -1238,121 +1346,13 @@
                               <Font name="Arial Bold" size="20.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#copy_productID" prefHeight="45.0" prefWidth="180.0" styleClass="buttons" text="Copy ID">
+                        <Button mnemonicParsing="false" onAction="#copy_productID" prefHeight="40.0" prefWidth="180.0" styleClass="buttons" text="Copy ID">
                            <font>
                               <Font name="Arial Bold" size="20.0" />
                            </font>
                         </Button>
                      </children>
                   </FlowPane>
-               </children>
-            </FlowPane>
-            <FlowPane fx:id="flowpaneOf_storageInterface" alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" styleClass="view">
-               <children>
-                  <Label text="Storage Management">
-                     <font>
-                        <Font name="Arial Bold" size="30.0" />
-                     </font>
-                     <FlowPane.margin>
-                        <Insets bottom="15.0" />
-                     </FlowPane.margin>
-                  </Label>
-                  <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="61.0" prefWidth="583.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="44.0" prefWidth="334.0" styleClass="search-box">
-                           <children>
-                              <TextField fx:id="textfieldOf_storageSearchBar" onKeyTyped="#search_storage" prefHeight="32.0" prefWidth="306.0" promptText="Search Item" styleClass="textfields">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Arial" size="20.0" />
-                                 </font>
-                              </TextField>
-                           </children>
-                           <FlowPane.margin>
-                              <Insets right="10.0" />
-                           </FlowPane.margin>
-                        </HBox>
-                        <CheckBox fx:id="checkboxOf_storageFinishing" mnemonicParsing="false" onAction="#search_storage" prefHeight="21.0" prefWidth="102.0" styleClass="checkbox" text="Finishing">
-                           <FlowPane.margin>
-                              <Insets right="10.0" />
-                           </FlowPane.margin>
-                           <font>
-                              <Font name="Arial Bold" size="15.0" />
-                           </font>
-                           <tooltip>
-                              <Tooltip text="All Products With Stock &lt; 5">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Tooltip>
-                           </tooltip>
-                        </CheckBox>
-                        <CheckBox fx:id="checkboxOf_storageAutoRestock" mnemonicParsing="false" onAction="#search_storage" styleClass="checkbox" text="AutoRestock">
-                           <font>
-                              <Font name="Arial Bold" size="15.0" />
-                           </font>
-                        </CheckBox>
-                     </children>
-                  </FlowPane>
-                  <ScrollPane prefHeight="412.0" prefWidth="583.0">
-                     <content>
-                        <GridPane fx:id="gridpaneOf_storageProducts" alignment="CENTER" prefHeight="40.0" prefWidth="534.0" vgap="15.0">
-                          <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                        </GridPane>
-                     </content>
-                     <FlowPane.margin>
-                        <Insets bottom="15.0" />
-                     </FlowPane.margin>
-                  </ScrollPane>
-                  <Label fx:id="labelOf_storageWarning" textFill="RED">
-                     <font>
-                        <Font name="Arial Bold" size="20.0" />
-                     </font>
-                  </Label>
-               </children>
-            </FlowPane>
-            <FlowPane fx:id="flowpaneOf_otherProductsInterface" alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" styleClass="view">
-               <children>
-                  <Label text="Global Bazaar">
-                     <font>
-                        <Font name="Arial Bold" size="30.0" />
-                     </font>
-                     <FlowPane.margin>
-                        <Insets bottom="15.0" />
-                     </FlowPane.margin>
-                  </Label>
-                  <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="61.0" prefWidth="583.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="44.0" prefWidth="463.0" styleClass="search-box">
-                           <children>
-                              <TextField fx:id="textfieldOf_searchbarOf_vendorProducts" onKeyTyped="#search_otherVendorsProducts" prefHeight="32.0" prefWidth="419.0" promptText="Search Item" styleClass="textfields">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Arial" size="20.0" />
-                                 </font>
-                              </TextField>
-                           </children>
-                           <FlowPane.margin>
-                              <Insets right="10.0" />
-                           </FlowPane.margin>
-                        </HBox>
-                     </children>
-                  </FlowPane>
-                  <ScrollPane prefHeight="412.0" prefWidth="583.0">
-                     <content>
-                        <GridPane fx:id="gridpaneOf_otherProducts" alignment="CENTER" prefHeight="40.0" prefWidth="534.0" vgap="15.0">
-                           <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                        </GridPane>
-                     </content>
-                  </ScrollPane>
                </children>
             </FlowPane>
          </children></StackPane>

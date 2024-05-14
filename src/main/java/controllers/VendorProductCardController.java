@@ -37,6 +37,7 @@ public class VendorProductCardController extends Controller implements Initializ
     // metodo che viene chiamato automaticamente quando il controller viene inizializzato
     @Override public void initialize ( java.net.URL location , java.util.ResourceBundle resources ) {
         //! metodo che viene chiamato automaticamente quando il controller viene inizializzato
+
         this.arrivalQuantity.setValueFactory( new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10000, 5) );
         this.arrivalQuantity.setVisible(false);
 

@@ -9,54 +9,45 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="175.0" prefWidth="565.0" stylesheets="@../css/commonStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.CustomerProductCardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="175.0" prefWidth="565.0" stylesheets="@../css/commonStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.ProductOrderCardController">
    <children>
       <ImageView fx:id="productImage" fitHeight="136.0" fitWidth="187.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.910934448242188" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="378.0" AnchorPane.topAnchor="29.0">
          <image>
             <Image url="@../images/iconOf_noImage.png" />
          </image>
       </ImageView>
-      <Label fx:id="productName" layoutX="202.0" layoutY="55.0" text="Product Name">
+      <Label fx:id="productName" layoutX="202.0" layoutY="68.0" text="Product Name">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="productPrice" layoutX="202.0" layoutY="81.0" text="Product Price">
+      <Label fx:id="orderPrice" layoutX="202.0" layoutY="94.0" text="Order Price">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="productOwner" layoutX="202.0" layoutY="107.0" text="Product Owner Username">
-         <font>
-            <Font name="Arial" size="15.0" />
-         </font>
-      </Label>
-      <Button layoutX="511.0" layoutY="39.0" mnemonicParsing="false" onAction="#show_productDetails" prefHeight="17.0" prefWidth="32.0" styleClass="buttonWithImage">
+      <Button layoutX="511.0" layoutY="39.0" mnemonicParsing="false" onAction="#delete_order" prefHeight="17.0" prefWidth="32.0" styleClass="buttonWithImage">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/iconOf_showPassword.png" />
+                  <Image url="@../images/iconOf_trash.png" />
                </image>
             </ImageView>
          </graphic>
          <tooltip>
-            <Tooltip text="Show Product Details">
-               <font>
-                  <Font name="Arial" size="15.0" />
-               </font>
-            </Tooltip>
+            <Tooltip text="Delete Order" />
          </tooltip>
       </Button>
-      <Button layoutX="513.0" layoutY="100.0" mnemonicParsing="false" onAction="#add_toCart" prefHeight="40.0" prefWidth="31.0" styleClass="buttonWithImage">
+      <Button layoutX="513.0" layoutY="100.0" mnemonicParsing="false" onAction="#add_orderAmount" prefHeight="40.0" prefWidth="31.0" styleClass="buttonWithImage">
          <graphic>
-            <ImageView fx:id="addToCartButton" fitHeight="41.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="addAmountButton" fitHeight="41.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/iconOf_shop.png" />
+                  <Image url="@../images/iconOf_addStock.png" />
                </image>
             </ImageView>
          </graphic>
          <tooltip>
-            <Tooltip text="Add To Cart" />
+            <Tooltip text="Change Ordered Amount" />
          </tooltip>
       </Button>
       <Spinner fx:id="quantitySpinner" editable="true" layoutX="392.0" layoutY="112.0" prefHeight="25.0" prefWidth="110.0" />
