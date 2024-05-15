@@ -16,7 +16,7 @@ public class CryptingEngine {
         try {
             
             //. digestione (aka hashing) della password in input
-            MessageDigest messageDigester = MessageDigest.getInstance("SHA-1"); // crea un oggetto MessageDigest che implementa l'algoritmo di hashing SHA-256
+            MessageDigest messageDigester = MessageDigest.getInstance("SHA-1"); // crea un oggetto MessageDigest che implementa l'algoritmo di hashing SHA-1
             messageDigester.update(string.getBytes()); // aggiorna il messaggio digester con la password in input
             byte[] binaryArrayOf_cryptedPassword = messageDigester.digest(); // array di byte che rappresenta la password criptata
             

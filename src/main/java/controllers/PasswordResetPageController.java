@@ -96,6 +96,11 @@ public class PasswordResetPageController extends Controller {
             show_error("New Password cannot be empty.");
             return;
         }
+        //. controllo che la password non sia più lunga di 12 caratteri
+        if (passwordField.getText().length() > 12) {
+            show_error("Password cannot be longer than 12 characters.");
+            return;
+        }
 
         String inputtedID = textFieldOf_ID.getText();
         String inputtedPassword = passwordField.getText();

@@ -128,13 +128,13 @@ public class RegistrationPageController extends Controller {
             return;
         }
 
-        // controllo che lo username non sia più lungo di 15 caratteri
+        // controllo che lo username non sia più lungo di 12 caratteri
         if (textFieldOf_username.getText().length() > 12) {
             show_error("Username cannot be longer than 12 characters.");
             return;
         }
 
-        // controllo che la password non sia più lunga di 15 caratteri
+        // controllo che la password non sia più lunga di 12 caratteri
         if (passwordField.getText().length() > 12) {
             show_error("Password cannot be longer than 12 characters.");
             return;
