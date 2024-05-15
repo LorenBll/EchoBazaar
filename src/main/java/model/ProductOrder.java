@@ -32,7 +32,7 @@ public class ProductOrder {
         return this.quantity;
     }
 
-    public double get_totalPrice () {
+    public float get_totalPrice () {
         //! metodo che restituisce il prezzo totale
         return this.product.get_sellingPrice() * this.quantity;
     }

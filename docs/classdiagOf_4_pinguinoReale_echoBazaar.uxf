@@ -1,0 +1,987 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>2</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>878</x>
+      <y>190</y>
+      <w>44</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>/+ Controller/
+Package::controllers
+--
+# main : Main
+--
++ @FXML initialize () : void
++ set_main (main:Main) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>480</x>
+      <y>320</y>
+      <w>78</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>+ CryptingEngine
+Package::auth
+--
+_+ encrypt_string (string:String) : String_
+_+ compare (rawString:String , hashedString:String) : boolean_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>324</x>
+      <y>674</y>
+      <w>118</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>+ Customer
+Package::model.users
+--
+- ID : String
+- username : String
+- encryptedPassword : String
+- balance : float
+--
+- generate_ID () : void
++ Customer (username:String , encryptedPassword:String)
++ Customer (username:String , ID:String , encryptedPassword:String , balance:float)
+
++ get_ID () : String
++ get_username () : String
++ get_encryptedPassword () : String
++ get_balance () : float
++ deposit (amount:float) : void
++ withdraw (amount:float) : boolean
++ set_username (newUsername:String) : void
++ set_encrypredPassword (newPassword:String) : void
++ pay (amount:float) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>448</x>
+      <y>674</y>
+      <w>142</w>
+      <h>82</h>
+    </coordinates>
+    <panel_attributes>+ Vendor
+Package::model.users
+--
+- ID : String
+- username : String
+- encryptedPassword : String
+- balance : float
+- productsID : ArrayList&lt;String&gt;
+--
+- generate_ID () : String
++ Vendor (username:String , encryptedPassword:String)
++ Vendor (username:String , ID:String , encryptedPassword:String , balance:float , productsID:ArrayList&lt;String&gt;)
+
++ get_ID () : String
++ get_username () : String
++ get_encryptedPassword () : String
++ get_balance () : float
++ get_getProductsID () : ArrayList&lt;String&gt;
++ deposit (amount:float) : void
++ withdraw (amount:float) : boolean
++ set_username (newUsername:String) : void
++ set_encryptedPassword (newPassword:String) : void
++ add_productID (productID:String) : void
++ remove_productID (productID:String) : void
++ pay (amount:float) : void
++ get_paid (amount:float) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>596</x>
+      <y>674</y>
+      <w>280</w>
+      <h>146</h>
+    </coordinates>
+    <panel_attributes>+ Product
+Package::model
+--
+- vendorID : String
+- ID : String
+- name : String
+- description : String
+- pathOf_image : String
+- sellingPrice : float
+- currentStock : int
+
+- autoRestock : boolean
+- isClone : boolean
+- minStock : int
+- restockAmount : int
+- sourceID : String
+--
+- generate_ID () : String
++ Product (vendorID:String , name:String , description:String , pathOf_image:String , sellingPrice:float , currentStock:int , autoRestock:boolean , minStock:int , restockAmount:int , isClone:boolean , souruceID:String)
++ Product (ID:String , vendorID:String , name:String , description:String , pathOf_image:String , sellingPrice:float , currentStock:int , autoRestock:boolean , minStock:int , restockAmount:int , isClone:boolean , sourceID:String)
+
++ get_ID () : String
++ get_vendorID () : String
++ get_name () : String
++ get_description () : String
++ get_pathOf_image () : String
++ get_sellingPrice () : float
++ get_currentStock () : int
++ get_autoRestock () : boolean
++ get_minStock () : int
++ get_restockAmount () : int
++ get_isClone () : boolean
++ get_sourceID () : String
+
++ set_name (newName:String) : void
++ set_description (newDescription:String) : void
++ set_pathOf_image (newPathOf_image:String) : void
++ set_sellingPrice (newSellingPrice:String) : void
++ set_currentStock (newStock:String) : void
++ set_autoRestock (newAutoRestock:boolean) : void
++ set_minStock (newMinStock:int) : void
++ set_restockAmount (newRestockAmount:int) : void
++ set_isClone (newIsClone:boolean) : void
++ set_sourceID (newSourceID:String) : void
++ add_stock (quantity:int) : void
++ remove_stock (quantity:int) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>686</x>
+      <y>850</y>
+      <w>102</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>+ ProductOrder
+Package::model
+--
++ product:Product
++ quantity:int
+--
++ ProductOrder (product:Product , quantity:int)
+
++ get_product () : Product
++ get_quantity () : int
++ set_quantity () : int
++ get_totalPrice () : float</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>466</x>
+      <y>388</y>
+      <w>110</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>Main
+--
+- primaryStage : Stage
+- mainLayout : BorderPane
++ dataHandler : DataHandler
++ loggedInCustomer : Customer
++ loggedInVendor : Vendor
+--
+_+ main (args:String[]) : void_
++ start (primaryStage:Stage) : void
+
++ show_loginPage () : void
++ show_registrationPage () : void
++ show_passwordResetPage () : void
++ show_userPage () : void
++ show_customerPage () : void
++ show_vendorPage () : void
+
++ get_primaryStage () : Stage
++ get_mainLayout () : BorderPane
++ minimize_window () : void
++ enter_fullscreen () : void
++ exit_fullscreen () : void
++ start_defaultFocusCancelerListener () : void
++ set_keybinds () : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>358</x>
+      <y>524</y>
+      <w>324</w>
+      <h>122</h>
+    </coordinates>
+    <panel_attributes>+ DataHandler
+Package::model
+--
+- customers : ArrayList&lt;Customer&gt;
+- vendors : ArrayList&lt;Vendor&gt;
+- products : ArrayList&lt;Product&gt;
+--
++ DataHandler ()
++ login (username:String , inputtedPassword:String , main:Main) : boolean
++ reset_password (ID:string , inputtedPassword:String) : boolean
+
++ register_customer (newCustomer:Customer) : boolean
++ delete_customer (username:String) : void
++ update_customer (ID:String , newUsername:String , newPassword:String) : boolean
++ update_customerFile () : void
++ load_customers () : void
++ retrieve_customerByID (customerID:String) : Customer
+
++ register_vendor (newVendor:Vendor) : boolean
++ delete_vendor (username:String) : void
++ update_vendor (ID:String , newUsername:String , newPassword:String) : boolean
++ update_vendorFile () : void
++ load_vendors () : void
++ retrieve_vendorByID (vendorID:String) : Vendor
+
++ register_product (newProduct:Product , main:Main) : void
++ delete_product (ID:String) : void
++ update_product (ID:String , newName:String , newDescription:String , newPathOf_image:String , newSellingPrice:float , newCurrentStock:int , autoRestock:boolean , newMinStock:int , newRestockAmount:int , isClone:boolean , newSourceID:String) : void
++ update_productFile () : void
++ load_products () : void
++ isProductIDValid (ID:String) : boolean
++ retrieve_productByID (productID:String) : Product
++ retrieve_productsByOwner (productOwner_vendorID:String) : ArrayList&lt;Product&gt;
++ retrieve_productsByNotOwner (productOwner_vendorID:String) : ArrayList&lt;Product&gt;
+
++ vendorBuy_product (productOrder:ProductOrder , vendorID:String , productToRestock:Product) : boolean
++ customerBuy_cart (rawCart:ArrayList&lt;ProductOrder&gt; , buyer:Customer) : boolean
++ get_products () : ArrayList&lt;Product&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>704</x>
+      <y>232</y>
+      <w>98</w>
+      <h>218</h>
+    </coordinates>
+    <panel_attributes>+ CustomerPageController
+Package::controllers
+--
++ isFullScreen : boolean
+
+- @FXML labelOf_username : Label
+- @FXML labelOf_balance : Label
+
++ isCustomerPasswordShown : boolean
++ counterOfDeleteAccount : int
+- @FXML labelOf_customerID : Label
+- @FXML textfieldOf_customerUsername : TextField
+- @FXML passwordfieldOf_customerPassword : PasswordField
+- @FXML buttonOf_settingsDeleteAccount : Button
+
+- @FXML textfieldOf_moneyQuantity : TextField
+
+- @FXML gridpaneOf_vendorProducts : GridPane
+- @FXML textfieldOf_searchbarOf_vendorProducts : TextField
+
+- @FXML imageviewOf_productDetailsImage : ImageView
+- @FXML labelOf_productDetailsID : Label
+- @FXML labelOf_producutDetailsName : Label
+- @FXML labelOf_productDetailsPrice : Label
+- @FXML labelOf_productDetailsOwner : Label
+- @FXML textAreaOf_productDetailsDescription : TextArea
+- @FXML spinnerOf_productDetailsQuantity : Spinner&lt;Integer&gt;
+
++ productsInCart : ArrayList&lt;ProductOrder&gt;
+- @FXML gridpaneOf_cart : GridPane
+--
++ initialize (location:java.net.URL , resources:java.util.ResourceBundle) : void
++ setup () : void
++ shorten_balance (balance:float) : String
+
+- @FXML show_welcome () : void
+- @FXML logout () : void
+- @FXML close_window () : void
+- @FXML enterOrExit_fullscreen () : void
+- @FXML minimize_window () : void
++ update () : void
++ update_balance () : void
+
+- @FXML show_settings () : void
+- @FXML copy_ID () : void
+- @FXML showOrHide_password () : void
+- @FXML save_settings () : void
+- @FXML reset_settingsView () : void
+- @FXML delete_account () : void
+
+- @FXML show_depositInterface () : void
+- @FXML deposit () : void
+- @FXML withdraw () : void
+
+- @FXML show_vendorProducts () : void
++ fill_vendorProducts () : void
++ add_productToCart (productOrder:ProductOrder) : void
+
++ show_productDetailsPage (product:Product) : void
++ @FXML add_productToCart_fromProductDetailsInterface () : void
+
+- @FXML show_cart () : void
++ fill_cart () : void
++ delete_productOrderFromCart (productOrder:ProductOrder) : void
++ empty_cart_fromCode () : void
++ @FXML empty_cart () : void
++ calculate_totalOrdersPrice () : float
++ @FXML buy_everythingInCart () : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>892</x>
+      <y>232</y>
+      <w>110</w>
+      <h>58</h>
+    </coordinates>
+    <panel_attributes>+ CustomerProductCardController
+Package::controllers
+--
+- myProduct : Product
+- customerPageController : CustomerPageController
+
+- @FXML productImage : ImageView
+- @FXML productName : Label
+- @FXML productPrice : Label
+- @FXML productOwner : Label
+
++ isAddToCartVisible : boolean
+- @FXML addToCartButton : ImageView
+- @FXML quantitySpinner : Spinner&lt;Integer&gt;
+--
++ initialize (location:java.net.URL , resources:java.util.ResourceBundle) : void
++ setup (myProduct:Product , customerPageController:CustomerPageController) : void
++ @FXML show_productDetails () : void
++ @FXML add_toCart () : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>488</x>
+      <y>232</y>
+      <w>64</w>
+      <h>52</h>
+    </coordinates>
+    <panel_attributes>+ LoginPageController
+Package::controllers
+--
+- @FXML textFieldOf_username : TextField
+- @FXML labelOf_error : Label
+
++ isPasswordShown : boolean
+- @FXML passwordField : PasswordField
+- @FXML labelOf_wrongPassword : Label
+--
++ @Override @FXML initialize () : void
+- @FXML showOrHide_password () : void
+- @FXML login () : void
+- @FXML show_registrationPage () : void
+- @FXML show_passwordRecoveryPage () : void
+- show_error (error:String) : void
+- @FXML close_window () : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>648</x>
+      <y>232</y>
+      <w>54</w>
+      <h>46</h>
+    </coordinates>
+    <panel_attributes>+ PasswordResetPageController
+Package::controllers
+--
+- @FXML textFieldOf_ID : TextField
+- @FXML labelOf_error : Label
+
++ isPasswordShown : boolean
+- @FXML passwordField : PasswordField
+--
++ @Override @FXML initialize () : void
+- @FXML showOrHide_password () : void
+- @FXML reset () : void
+- @FXML show_loginPage () : void
+- show_error (error:String) : void
+- @FXML close_window () : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1210</x>
+      <y>232</y>
+      <w>126</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>+ ProductOrderCardController
+Package::controllers
+--
++ myProductOrder : ProductOrder
++ customerPageController : CustomerPageController
+
+- @FXML productImage : ImageView
+- @FXML productName : Label
+- @FXML orderPrice : Label
+
++ isAddAmountVisible : boolean
+- @FXML addAmountButton : ImageView
+- @FXML quantitySpinner : Spinner&lt;Integer&gt;
+--
++ initialize () : void
++ setup (myProductOrder:ProductOrder , customerPageController:CustomerPageController) : void
++ @FXML delete_order () : void
++ @FXML add_orderAmount () : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>554</x>
+      <y>232</y>
+      <w>92</w>
+      <h>52</h>
+    </coordinates>
+    <panel_attributes>+ RegistrationPageController 
+Package::controllers
+--
+- @FXML textFieldOf_username : TextField
+- @FXML labelOf_error : Label
+
++ isPasswordShown : boolean
+- @FXML passwordField : PasswordField
+- @FXML radioButtonOf_accountTypeSelection_customer : RadioButton
+- @FXML radioButtonOf_accoutnTypeSelection_vendor : RadioButton
+--
++ @Override @FXML initialize () : void
+- @FXML showOrHide_password () : void
+- @FXML show_loginpage () : void
+- @FXML register () : void
+- show_error (error:String) : void
+- @FXML close_window () : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1104</x>
+      <y>232</y>
+      <w>104</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>+ VendorNotOwnerProductCardController
+Package::controllers
+--
+- myProduct : Product
+- vendorPageController : VendorPageController
+
+- @FXML productImage : ImageView
+- @FXML productName : Label
+- @FXML productPrice : Label
+- @FXML productOwner : Label
+--
++ setup (myProduct:Product , vendorPageController:VendorPageController) : void
++ @FXML show_productDetails () : void
++ @FXML copy_ID () : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1004</x>
+      <y>232</y>
+      <w>98</w>
+      <h>58</h>
+    </coordinates>
+    <panel_attributes>+ VendorProductCardController 
+Package::controllers
+--
++ myProduct : Product
++ vendorPageController : VendorPageController
+
+- @FXML productImage : ImageView
+- @FXML productName : Label
+- @FXML productStock : Label
+- @FXML autoRestock : Label
+
++ isAddStockVisible : boolean
+- @FXML imageviewOf_add_stock : ImageView
+- @FXML arrivalQuantity : Spinner&lt;Integer&gt;
+--
++ initialize (location:java.net.URL , resources:java.util.ResourceBundle) : void
++ setup (myProduct:Product , vendorPageController:VendorPageController)
++ @FXML handle_stockAddition () : void
++ @FXML handle_productEdit () : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>806</x>
+      <y>232</y>
+      <w>84</w>
+      <h>314</h>
+    </coordinates>
+    <panel_attributes>+ VendorPageController
+Package::controllers
+--
++ isFullScreen : boolean
+
+- @FXML labelOf_username : Label
+- @FXML labelOf_balance : Label
+
++ isVendorPasswordShown : boolean
++ counterOfDeleteAccount : int
+- @FXML labelOf_vendorID : Label
+- @FXML textfieldOf_vendorUsername : TextField
+- @FXML passwordfieldOf_vendorPassword : PasswordField
+- @FXML buttonOf_settingsDeleteAccount : Button
+
+- @FXML textfieldOf_moneyQuantity : TextField
+
+- @FXML textfieldOf_nameOf_newProduct : TextField
+- @FXML textfieldOf_pathOfImageOf_newProduct : TextField
+- @FXML textfieldOf_priceOf_newProduct : TextField
+- @FXML textfiledOf_currentStockOf_newProduct : TextField
+- @FXML textAreaOf_descriptionOf_newProduct : TextArea
+- @FXML checkboxOf_autoRestockOf_newProduct : CheckBox
+- @FXML textfieldOf_minStockOf_newProduct : TextField
+- @FXML textfieldOf_restockAmountOf_newProduct : TextField
+- @FXML textfieldOf_sourceIDOf_newProduct : TextField
+
+- @FXML gridpaneOf_storageProducts : GridPane
+- @FXML textfieldOf_storageSearchBar : TextField
+- @FXML checkboxOf_storageFinishing : CheckBox
+- @FXML checkboxOf_storageAutoRestock : CheckBox
+
+- @FXML labelOf_productID_productEdit : Label
+- @FXML textfieldOf_nameOf_productEdit : TextField
+- @FXML textfiledOf_pathOfImageOf_productEdit : TextField
+- @FXML textfiledOf_currentStockOf_productEdit : TextField
+- @FXML textfieldOf_priceOf_productEdit : TextField
+- @FXML textAreaOf_descriptionOf_productEdit : TextArea
+- @FXML checkboxOf_autoRestockOf_productEdit : CheckBox
+- @FXML textfieldOf_minStockOf_productEdit : TextField
+- @FXML textfieldOf_restockAmountOf_productEdit : TextField
+- @FXML textfieldOf_sourceIDOf_productEdit : TextField
++ counterOfDeleteProduct : int
+- @FXML buttonOf_productEditDeleteProduct : Button
+
+- @FXML gridpaneOf_otherProducts : GridPane
+- @FXML textfieldOf_otherProductsSearchBar : TextField
+
+- @FXML imageviewOf_otherProductsDetailsImage : ImageView
+- @FXML labelOf_otherProductsDetailsID : Label
+- @FXMl labelOf_otherProductsDetailsName : Label
+- @FXML labelOf_otherProductsDetailsPrice : Label
+- @FXML labelOf_otherProductsDetailsOwner : Label
+- @FXML textAreaOf_otherProductsDetailsDescription : Label
+--
++ setup () : void
++ update_balance () : void
++ update () : void
++ shorten_balance (balance:float) : String
+
+- @FXML show_welcomeInterface () : void
+- @FXML close_window () : void
+- @FXML enterOrExit_fullscreen () : void
+- @FXML minimize_window () : void
+- @FXML logout () : void
+
+- @FXML show_settingsInterface () : void
+- @FXML copy_ID () : void
+- @FXML showOorHide_password () : void
+- @FXML save_settings () : void
+- @FXML reset_settingsView () : void
+- @FXML delete_account () : void
+
+- @FXML show_deposiitInterface () : void
+- @FXML deposit () : void
+- @FXML withdraw () : void
+
+- @FXML show_newProductInterface () : void
++ @FXML choose_image () : void
+- @FXML register_newProduct () : void
+- @FXML reset_configurationOf_registrationOf_newProduct () : void
+
+- @FXML show_storageInterface () : void
+- @FXML search_storage () : void
++ fill_storageGrid () : void
+
++ show_productEditPage (product:Product) : void
+- @FXML save_changes_productEdit () : void
+- @FXML reset_productEditPage () : void
+- @FXML delete_product () : void
+
+- @FXML show_otherVendorsProducts () : void
+- @FXML search_otheVendorsProducts () : void
++ fill_otherVendorsProductsGrid () : void
+
++ show_productDetailsPage (product:Product) : void
+- @FXML copy_productID () : void
+- @FXML close_otherProductsDetails () : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>518</x>
+      <y>208</y>
+      <w>386</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>1910.0;10.0;1910.0;50.0;10.0;50.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>898</x>
+      <y>208</y>
+      <w>378</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0;1870.0;50.0;1870.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>898</x>
+      <y>208</y>
+      <w>262</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0;1290.0;50.0;1290.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>898</x>
+      <y>208</y>
+      <w>156</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0;760.0;50.0;760.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>898</x>
+      <y>208</y>
+      <w>52</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0;240.0;50.0;240.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>844</x>
+      <y>208</y>
+      <w>60</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>280.0;10.0;280.0;50.0;10.0;50.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>752</x>
+      <y>208</y>
+      <w>152</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>740.0;10.0;740.0;50.0;10.0;50.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>674</x>
+      <y>208</y>
+      <w>230</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>1130.0;10.0;1130.0;50.0;10.0;50.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>596</x>
+      <y>208</y>
+      <w>308</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>1520.0;10.0;1520.0;50.0;10.0;50.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>380</x>
+      <y>738</y>
+      <w>310</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;660.0;1530.0;660.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>734</x>
+      <y>818</y>
+      <w>10</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=0..*</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;160.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>516</x>
+      <y>754</y>
+      <w>84</w>
+      <h>26</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=0..*</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0;400.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>874</x>
+      <y>288</y>
+      <w>78</w>
+      <h>468</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>360.0;10.0;360.0;2310.0;10.0;2310.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>874</x>
+      <y>288</y>
+      <w>184</w>
+      <h>468</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>890.0;10.0;890.0;120.0;360.0;120.0;360.0;2310.0;10.0;2310.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>874</x>
+      <y>272</y>
+      <w>288</w>
+      <h>484</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>1410.0;10.0;1410.0;200.0;360.0;200.0;360.0;2390.0;10.0;2390.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>786</x>
+      <y>286</y>
+      <w>492</w>
+      <h>590</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>2430.0;10.0;2430.0;2920.0;10.0;2920.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>516</x>
+      <y>644</y>
+      <w>10</w>
+      <h>34</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=0..*</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>516</x>
+      <y>644</y>
+      <w>228</w>
+      <h>34</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=0..*</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0;1100.0;110.0;1100.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>380</x>
+      <y>644</y>
+      <w>144</w>
+      <h>34</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=0..*</panel_attributes>
+    <additional_attributes>690.0;10.0;690.0;110.0;10.0;110.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>754</x>
+      <y>174</y>
+      <w>200</w>
+      <h>62</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;290.0;10.0;10.0;980.0;10.0;980.0;290.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>848</x>
+      <y>160</y>
+      <w>210</w>
+      <h>76</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;360.0;10.0;10.0;1030.0;10.0;1030.0;360.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>848</x>
+      <y>160</y>
+      <w>316</w>
+      <h>76</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;360.0;10.0;10.0;1560.0;10.0;1560.0;360.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>754</x>
+      <y>174</y>
+      <w>526</w>
+      <h>62</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;290.0;10.0;10.0;2610.0;10.0;2610.0;290.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>518</x>
+      <y>282</y>
+      <w>6</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;190.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>518</x>
+      <y>282</y>
+      <w>84</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;190.0;10.0;110.0;400.0;110.0;400.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>518</x>
+      <y>276</y>
+      <w>162</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;220.0;10.0;140.0;790.0;140.0;790.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>574</x>
+      <y>426</y>
+      <w>134</w>
+      <h>6</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;650.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>574</x>
+      <y>426</y>
+      <w>236</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;320.0;10.0;320.0;370.0;1160.0;370.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>574</x>
+      <y>302</y>
+      <w>28</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;630.0;120.0;630.0;120.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>518</x>
+      <y>464</y>
+      <w>6</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;300.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>

@@ -39,11 +39,11 @@ public class CryptingEngine {
     
     }
     
-    public static boolean compare ( String password , String hashedPassword ) {
+    public static boolean compare ( String rawString , String hashedString ) {
         //! metodo che confronta la password in input con la password criptata in input
         
-        boolean isPasswordCorrect = encrypt_string(password).equals(hashedPassword);
-        return isPasswordCorrect;
+        boolean areStringsEqual = encrypt_string(rawString).equals(hashedString);
+        return areStringsEqual;
     
     }
 
