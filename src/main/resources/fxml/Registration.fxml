@@ -131,7 +131,7 @@
                   <Font name="Arial Bold" size="20.0" />
                </font>
             </Label>
-            <Label fx:id="labelOf_error" alignment="CENTER" layoutX="35.0" layoutY="416.0" prefHeight="23.0" prefWidth="441.0" textFill="RED" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0">
+            <Label fx:id="labelOf_error" alignment="CENTER" contentDisplay="CENTER" layoutX="36.0" layoutY="402.0" prefHeight="29.0" prefWidth="441.0" textFill="RED" AnchorPane.leftAnchor="36.0" AnchorPane.rightAnchor="34.0">
                <font>
                   <Font name="Arial Bold" size="17.0" />
                </font>
