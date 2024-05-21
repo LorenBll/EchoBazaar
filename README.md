@@ -13,6 +13,7 @@ The working group, composed by two people, chose to develop a Management Softwar
 
 ## Warning/Disclaimer
 This project was developed as a school project and it's not meant to be used in a real-world scenario. It was developed in a short period of time and it's not optimized. The code is not clean and it's not meant to be used as a reference for best practices. The project was developed for educational purposes only.
+Being italian, the comments in the code, the text inside the PowerPoint File (in the ./docs/ folder) and the Use Case Graph (always in the ./docs/) are in italian.
 
 ## Technologies
 The project was developed using the following technologies:
@@ -52,7 +53,7 @@ Assuming that Vendor A has a product X, and that a Vendor B has a product Y, whi
 ### Login
 ![Login](docs/images/login.png)
 ### Registration
-![Register](docs/images/register.png)
+![Register](docs/images/registration.png)
 ### Password Reset
 ![Password Reset](docs/images/password_reset.png)
 ### Deposit/Withdrawal

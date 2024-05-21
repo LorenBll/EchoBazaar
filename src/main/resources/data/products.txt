@@ -1,0 +1,3 @@
+7c25942112fc0390ba6068f5fd21b5d31dc0c303,31c3ab7b456ede5afb71753aef370b0d45f0e051,example,"example",/main/resources/images/iconOf_noImage.png,10.0,10,false,0,0,false,null
+4227912c0c792f277eceaea3c3abbc1de2bd6361,31c3ab7b456ede5afb71753aef370b0d45f0e051,example2,"example2",/main/resources/images/iconOf_noImage.png,10.0,10,false,0,0,false,null
+96ca56c05da76c0f78869c2ab5a697965fa8f882,31c3ab7b456ede5afb71753aef370b0d45f0e051,example3,"example3",/main/resources/images/iconOf_noImage.png,10.0,10,false,0,0,false,null
