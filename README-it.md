@@ -1,5 +1,7 @@
 # EchoBazaar
 
+[![back](https://img.shields.io/badge/back-red.svg)](https://github.com/LorenBll/EchoBazaar/blob/master/README.md)
+
 EchoBazaar è stato concepito come un Software di Gestione generico che non doveva necessariamente salvare i dati su un database e, naturalmente, non doveva funzionare realmente (questo è solo un progetto scolastico, non una startup). Il gruppo di lavoro, composto da due persone, ha scelto di sviluppare un Software di Gestione che avrebbe permesso ai venditori di gestire il loro magazzino. Nel corso dello sviluppo, abbiamo deciso di trasformarlo in una Piattaforma di E-Commerce, dove i venditori potevano vendere i loro prodotti e i clienti potevano acquistarli.
 
 ## Indice
