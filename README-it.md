@@ -13,8 +13,6 @@ EchoBazaar è stato concepito come un Software di Gestione generico che non dove
 ## Avviso/Disclaimer
 Questo progetto è stato sviluppato come progetto scolastico e non è destinato ad essere utilizzato in uno scenario reale. È stato sviluppato in un breve periodo di tempo e non è ottimizzato. Il codice non è pulito e non è destinato ad essere utilizzato come riferimento per le migliori pratiche. Il progetto è stato sviluppato solo a scopo educativo.
 
-Essendo italiani, i commenti nel codice, il File PowerPoint (nella cartella ./docs/) e il Diagramma dei Casi d'Uso (sempre nella cartella ./docs/) sono scritti in italiano.
-
 ## Tecnologie
 Il progetto è stato sviluppato utilizzando le seguenti tecnologie:
 - Java
