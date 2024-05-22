@@ -74,4 +74,4 @@ Assuming that Vendor A has a product X, and that a Vendor B has a product Y, whi
 
 ## Authors
 - [LorenBll](https://github.com/LorenBll) ;
-- [Giovanni](https://github.com/ilcifa)
+- [Giovanni](https://github.com/ilcifa) .
