@@ -1,5 +1,7 @@
 # EchoBazaar
 
+[![back](https://img.shields.io/badge/back-red.svg)](https://github.com/LorenBll/EchoBazaar/blob/master/README.md)
+
 EchoBazaar was asked to be a generic Management Software that didn't necessarily had to save data on a database and, of course, actually work (this is just a school project, not a startup). 
 The working group, composed by two people, chose to develop a Management Software that would have allowed vendors to manage their storage. In course of the development, we decided to transform it into a E-Commerce Platform, where vendors could sell their products and customers could buy them.
 
