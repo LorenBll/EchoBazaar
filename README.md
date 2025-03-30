@@ -1,7 +1,7 @@
 # EchoBazaar
 
 EchoBazaar was asked to be a generic Management Software that didn't necessarily had to save data on a database and, of course, actually work (this is just a school project, not a startup). 
-The working group, composed by two people, chose to develop a Management Software that would have allowed vendors to manage their storage. In course of the development, we decided to transform it into a E-Commerce Platform, where vendors could sell their products and customers could buy them.
+I chose to develop a Management Software that would have allowed vendors to manage their storage. In course of the development, I decided to transform it into a E-Commerce Platform, where vendors could sell their products and customers could buy them.
 
 ## Table of Contents
 
@@ -16,7 +16,7 @@ The working group, composed by two people, chose to develop a Management Softwar
 
 This project was developed as a school project and it's not meant to be used in a real-world scenario. It was developed in a short period of time and it's not optimized. The code is not clean and it's not meant to be used as a reference for best practices. The project was developed for educational purposes only. 
 
-Being italian, the comments in the code, the PowerPoint File (in the ./docs/ folder) and the Use Case Graph (always in the ./docs/) are written in italian.
+Being Italian, the comments in the code, the PowerPoint File (in the ./docs/ folder) and the Use Case Graph (always in the ./docs/) are written in Italian.
 
 ## Technologies
 
