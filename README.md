@@ -104,7 +104,6 @@ Assuming that Vendor A has a product X, and that a Vendor B has a product Y, whi
 
 ![View Cart](docs/images/view_cart.png)
 
-## Authors
+## Author
 
-- [LorenBll](https://github.com/LorenBll) ;
-- [Giovanni](https://github.com/ilcifa) .
+- [LorenBll](https://github.com/LorenBll) .
