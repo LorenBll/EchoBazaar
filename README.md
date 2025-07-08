@@ -10,12 +10,17 @@ Traditional inventory management systems often lack seamless integration between
 
 ## Table of Contents
 
+- [Warning](#warning)
 - [Features](#features)
 - [Screenshots](#screenshots)
 - [Technologies](#technologies)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Developer](#developer)
+
+## Warning
+
+EchoBazaar is just a school project. While I am proud of the result, it is not meant to be actually used nor to be taken as an example in application of programming best practices.
 
 ## Features
 
