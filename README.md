@@ -1,106 +1,106 @@
 # EchoBazaar
 
-JavaFX desktop application that combines vendor inventory management with customer shopping in a unified marketplace, featuring automated restocking and inter-vendor product sourcing.
+JavaFX desktop application combining vendor inventory management with customer shopping in a unified marketplace, featuring automated restocking and inter-vendor product sourcing.
 
-## Table of contents
+## Table of Contents
 
-- [Why this project](#why-this-project)
+- [About](#about)
 - [Features](#features)
-- [Tech stack](#tech-stack)
-- [Project structure](#project-structure)
+- [Project Structure](#project-structure)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Screenshots](#screenshots)
-- [Notes](#notes)
-- [Developer](#developer)
+- [Tech Stack](#tech-stack)
+- [License](#license)
 
-## Why this project
+## About
 
 Traditional inventory management systems often lack seamless integration between vendors and customers, making it difficult to create a unified marketplace where vendors can efficiently manage their storage while customers can easily discover and purchase products.
 
-EchoBazaar solves this by providing a combined platform where vendors manage inventory and customers shop, with automated restocking, inter-vendor sourcing, and a shared "Global Bazaar" marketplace.
+EchoBazaar solves this by providing a combined platform where vendors manage inventory and customers shop, with automated restocking, inter-vendor sourcing, and a shared "Global Bazaar" marketplace accessible to all participants.
 
 ## Features
 
-- Secure login with encrypted password storage
-- Vendor and customer account registration
-- Password reset via private ID verification
-- Account management: username, password, and deletion
-- Financial management: deposit and withdraw account balance
-- Product registration with detailed specs and pricing
-- Inventory search, modify, and restock
-- Global Bazaar: browsable marketplace shared across all vendors
-- Automated restocking with configurable minimum stock thresholds
-- Inter-vendor trading: source products directly from other vendors
-- Shopping cart with add, remove, and checkout
-- Order processing with integrated payment
+- **Authentication:** Secure login with encrypted password storage and account recovery
+- **Dual Accounts:** Separate vendor and customer registration and workflows
+- **Account Management:** Username and password modification, balance management with deposit/withdraw
+- **Vendor Features:**
+  - Product registration with detailed specifications and pricing
+  - Inventory search, modification, and restocking management
+  - Automated restocking with configurable minimum stock thresholds
+  - Inter-vendor trading: source products directly from other vendors
+- **Customer Features:**
+  - Browse Global Bazaar marketplace shared across all vendors
+  - Shopping cart with add, remove, and checkout
+  - Order processing with integrated payment system
+- **Global Bazaar:** Unified marketplace accessible to vendors and customers for product discovery
 
-## Tech stack
-
-- Java 21
-- JavaFX
-- FXML + CSS (MVC architecture)
-- SceneBuilder
-
-## Project structure
+## Project Structure
 
 ```text
-.
-├─ src/
-│  └─ main/
-│     ├─ java/
-│     │  ├─ auth/                   # Password encryption
-│     │  ├─ controllers/            # JavaFX MVC controllers
-│     │  ├─ model/                  # Data models and business logic
-│     │  │  └─ users/               # Vendor and Customer models
-│     │  └─ Main.java               # Application entry point
-│     └─ resources/
-│        ├─ css/                    # UI stylesheets
-│        ├─ data/                   # Persistent text-file storage
-│        ├─ fxml/                   # FXML view layouts
-│        └─ images/                 # Application icons and assets
-├─ docs/
-│  └─ images/                       # UI screenshots
-├─ LICENSE
-└─ README.md
+EchoBazaar/
+├── src/
+│   └── main/
+│       ├── java/
+│       │   ├── auth/                   # Password encryption utilities
+│       │   ├── controllers/            # JavaFX MVC controllers
+│       │   ├── model/                  # Data models and business logic
+│       │   │   └── users/              # Vendor and Customer models
+│       │   └── Main.java               # Application entry point
+│       └── resources/
+│           ├── css/                    # UI stylesheets
+│           ├── data/                   # Persistent text-file storage
+│           ├── fxml/                   # FXML view layouts
+│           └── images/                 # Application icons and assets
+├── docs/
+│   ├── classdiagOf_4_pinguinoReale_echoBazaar.uxf    # Class diagram
+│   ├── usecaseOf_4_pinguinoReale_echoBazaar.uxf      # Use case diagram
+│   └── images/                         # UI screenshots
+├── LICENSE
+└── README.md
 ```
 
-The project follows a clean organizational structure:
-- **src/main/java/**: Application source code organized by layer
-- **src/main/resources/**: Runtime assets (layouts, styles, data, images)
-- **docs/**: Documentation assets
+The project follows a clean layered architecture:
+- **auth/**: Password encryption and security utilities
+- **controllers/**: JavaFX controller classes implementing MVC pattern
+- **model/**: Data models, business logic, and user types
+- **resources/**: Runtime assets (layouts, styles, data storage)
+- **docs/**: Documentation and design diagrams
 
 ## Installation
 
 ### Prerequisites
 
-- Java 21 or newer ([Oracle](https://www.java.com/it/download/manual.jsp) or [OpenJDK](https://openjdk.org/))
-- JavaFX runtime libraries ([Gluon](https://gluonhq.com/products/javafx/))
+- Java 21 or newer
+  - [Oracle](https://www.java.com/it/download/manual.jsp) or [OpenJDK](https://openjdk.org/)
+- JavaFX runtime libraries
+  - [Gluon JavaFX](https://gluonhq.com/products/javafx/)
 - A Java IDE (IntelliJ IDEA, Eclipse, or VS Code recommended)
 
-### Quick start
+### Quick Start
 
-1. Clone the repository:
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/LorenBll/EchoBazaar.git
    cd EchoBazaar
    ```
 
-2. Open the project in your IDE
+2. **Open in your IDE**
 
-3. Configure the JavaFX SDK in your IDE's classpath/module path settings
+3. **Configure JavaFX SDK:**
+   Add the JavaFX SDK to your IDE's classpath/module path settings
 
-4. Run `src/main/java/Main.java`
+4. **Run the application:**
+   Execute `src/main/java/Main.java`
 
-### Manual execution
+### Manual Execution
 
-1. Ensure Java 21 and JavaFX are configured in your system PATH
+1. **Ensure Java 21 and JavaFX are available:**
+   - Add both to your system PATH
+   - Add JavaFX libraries to project classpath
 
-2. Add JavaFX libraries to the project classpath
+2. **Set module path for JavaFX**
 
-3. Set the module path to include JavaFX modules
-
-4. Run the application:
+3. **Run from terminal:**
    ```bash
    java --module-path /path/to/javafx/lib --add-modules javafx.controls,javafx.fxml -cp out Main
    ```
@@ -108,37 +108,24 @@ The project follows a clean organizational structure:
 ## Usage
 
 1. Launch the application via `Main.java`
-2. Log in with existing credentials or register a new account
-3. Vendors can register products, manage inventory, and configure automated restocking
-4. Customers can browse the Global Bazaar, add items to cart, and complete purchases
+2. Log in with existing credentials or register a new account (vendor or customer)
+3. **For Vendors:**
+   - Register products with specifications and pricing
+   - Manage inventory and configure automated restocking
+   - Browse and source products from other vendors
+4. **For Customers:**
+   - Browse the Global Bazaar to discover products
+   - Add items to shopping cart and complete purchases
 
-## Screenshots
+## Tech Stack
 
-![Login](docs/images/login.png)
+- **Language:** Java 21
+- **UI Framework:** JavaFX with FXML
+- **Architecture:** MVC (Model-View-Controller)
+- **Build Tool:** IDE-based (IntelliJ, Eclipse, or similar)
+- **UI Design:** SceneBuilder, CSS styling
+- **Data Storage:** Plain text files
 
-![Registration](docs/images/registration.png)
+## License
 
-![Password Reset](docs/images/password_reset.png)
-
-![Deposit/Withdrawal](docs/images/deposit_withdrawal.png)
-
-![Modify User Information](docs/images/modify_user.png)
-
-![Product Registration](docs/images/product_registration.png)
-
-![Storage Management](docs/images/storage_management.png)
-
-![Global Bazaar (Vendor)](docs/images/view_global_bazaar_vendor.png)
-
-![Global Bazaar (Customer)](docs/images/view_global_bazaar_customer.png)
-
-![Cart](docs/images/view_cart.png)
-
-## Notes
-
-- This is a school project and is not intended for production use.
-- Data is stored in plain text files under `src/main/resources/data/`.
-
-## Developer
-
-Created by [LorenBll](https://github.com/LorenBll)
+This project is licensed under the terms specified in [LICENSE](LICENSE).
