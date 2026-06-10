@@ -6,6 +6,7 @@ JavaFX desktop application combining vendor inventory management with customer s
 
 - [About](#about)
 - [Features](#features)
+- [Screenshots](#screenshots)
 - [Project Structure](#project-structure)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -33,6 +34,38 @@ EchoBazaar solves this by providing a combined platform where vendors manage inv
   - Shopping cart with add, remove, and checkout
   - Order processing with integrated payment system
 - **Global Bazaar:** Unified marketplace accessible to vendors and customers for product discovery
+
+## Screenshots
+
+### Login
+![Login screen](docs/images/login.png)
+
+### Registration
+![Registration screen](docs/images/registration.png)
+
+### Password Reset
+![Password reset screen](docs/images/password_reset.png)
+
+### Modify User
+![Modify user screen](docs/images/modify_user.png)
+
+### Deposit / Withdrawal
+![Deposit and withdrawal screen](docs/images/deposit_withdrawal.png)
+
+### Product Registration
+![Product registration screen](docs/images/product_registration.png)
+
+### Storage Management
+![Storage management screen](docs/images/storage_management.png)
+
+### View Cart
+![Shopping cart screen](docs/images/view_cart.png)
+
+### Global Bazaar (Customer)
+![Global Bazaar customer view](docs/images/view_global_bazaar_customer.png)
+
+### Global Bazaar (Vendor)
+![Global Bazaar vendor view](docs/images/view_global_bazaar_vendor.png)
 
 ## Project Structure
 
