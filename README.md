@@ -160,5 +160,7 @@ The project follows a clean layered architecture:
 - **Data Storage:** Plain text files
 
 ## License
+- [LICENSE](LICENSE)
 
-This project is licensed under the terms specified in [LICENSE](LICENSE).
+## Author
+- [LorenBll](https://github.com/LorenBll)
