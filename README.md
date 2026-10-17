@@ -11,7 +11,7 @@ JavaFX desktop application combining vendor inventory management with customer s
 - [Installation](#installation)
 - [Usage](#usage)
 - [Tech Stack](#tech-stack)
-- [License](#license)
+- [Licence](#licence)
 
 ## About
 
@@ -159,7 +159,7 @@ The project follows a clean layered architecture:
 - **UI Design:** SceneBuilder, CSS styling
 - **Data Storage:** Plain text files
 
-## License
+## Licence
 - [LICENSE](LICENSE)
 
 ## Author
